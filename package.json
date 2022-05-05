@@ -3,9 +3,10 @@
 	"version": "0.0.1",
 	"scripts": {
 		"dev": "svelte-kit dev",
-		"build": "svelte-kit build",
+		"build": "npm run updateprisma && svelte-kit build",
 		"package": "svelte-kit package",
 		"preview": "svelte-kit preview",
+		"updateprisma": "prisma generate",
 		"prepare": "svelte-kit sync",
 		"test": "playwright test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
@@ -36,6 +37,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"firebase": "^9.7.0"
+		"@prisma/client": "^3.13.0"
 	}
 }
