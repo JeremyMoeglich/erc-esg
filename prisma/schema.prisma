@@ -1,5 +1,10 @@
 // For testing
 
+datasource db {
+    provider = "postgresql"
+    url = "postgresql://postgres:postgres@localhost:5432/postgres"
+}
+
 model Item {
     id Int @id @default(autoincrement())
     name String
