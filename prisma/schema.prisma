@@ -2,41 +2,64 @@
 
 datasource db {
     provider = "postgresql"
-    url      = env("PRISMA_DATABASE_URL")
+    url      = env("DATABASE_URL")
 }
 
 generator client {
-    provider = "prisma-client-js"
+    provider        = "prisma-client-js"
+    previewFeatures = ["fullTextSearch"]
+}
+
+model PageVariant {
+    id         Int        @id @default(autoincrement())
+    name       String     @unique
+    categories Category[]
 }
 
 model Item {
     id            Int         @id @default(autoincrement())
-    name          String
+    name          String      @unique
     description   String
     price         Int
     subcategory   SubCategory @relation(fields: [subcategoryId], references: [id])
     subcategoryId Int
+    image         String
 }
 
 model Category {
     id            Int           @id @default(autoincrement())
-    name          String
+    name          String        @unique
     description   String
     subcategories SubCategory[]
+    page_variants PageVariant[]
 }
 
 model SubCategory {
-    id          Int      @id @default(autoincrement())
-    name        String
+    id          Int        @id @default(autoincrement())
+    name        String     @unique
     description String
     items       Item[]
-    category    Category @relation(fields: [categoryId], references: [id])
+    category    Category[]
     categoryId  Int
 }
 
 model User {
     id            Int    @id @default(autoincrement())
     name          String
-    email         String
+    email         String @unique
     password_hash String
+    role          Role   @default(user)
+}
+
+model LoginToken {
+    id     Int      @id @default(autoincrement())
+    userId Int      @unique
+    time   DateTime @default(now())
+    value  String   @unique
+}
+
+enum Role {
+    root
+    admin
+    user
 }
