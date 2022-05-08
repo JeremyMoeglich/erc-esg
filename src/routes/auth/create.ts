@@ -1,15 +1,38 @@
+import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { RequestHandler } from '@sveltejs/kit';
 import { hash } from 'bcrypt';
 import { v4 } from 'uuid';
 
 export const post: RequestHandler<
-	{ email: string; password: string; name: string },
+	Record<string, never>,
 	{ token?: string; error?: string }
-> = async ({ params }) => {
-	const { email, password, name } = params;
+> = async ({ request }) => {
+	const body = await get_request_body(request, ['email', 'password', 'name']);
+	if (!body) {
+		return {
+			body: {
+				error: 'Missing email, password, or name'
+			},
+			status: 400
+		};
+	}
+	const { email, password, name } = body;
 	if (!email || !password || !name) {
-		return { error: 'Missing email, password or name' };
+		return {
+			body: {
+				error: 'Missing email, password, or name'
+			},
+			status: 400
+		};
+	}
+	if (typeof email !== 'string' || typeof password !== 'string' || typeof name !== 'string') {
+		return {
+			body: {
+				error: 'Invalid email, password, or name'
+			},
+			status: 400
+		};
 	}
 	const user_exists = await prisma_client.user.findUnique({
 		where: { email: email },

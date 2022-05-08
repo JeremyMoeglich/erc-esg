@@ -19,6 +19,7 @@ model PageVariant {
 model Item {
     id            Int         @id @default(autoincrement())
     name          String      @unique
+    text          String
     description   String
     price         Int
     subcategory   SubCategory @relation(fields: [subcategoryId], references: [id])
@@ -29,6 +30,7 @@ model Item {
 model Category {
     id            Int           @id @default(autoincrement())
     name          String        @unique
+    text          String        @default("Neue Kategorie")
     description   String
     subcategories SubCategory[]
     page_variants PageVariant[]
@@ -37,6 +39,7 @@ model Category {
 model SubCategory {
     id          Int        @id @default(autoincrement())
     name        String     @unique
+    text        String     @default("Neue Unterkategorie")
     description String
     items       Item[]
     category    Category[]

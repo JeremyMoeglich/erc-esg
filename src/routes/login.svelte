@@ -2,8 +2,11 @@
 	import { goto } from '$app/navigation';
 
 	import Button from '$lib/components/elements/button.svelte';
-	import { login } from '$lib/scripts/frontend/login';
-	import { register } from '$lib/scripts/frontend/register';
+	import { current_auth_state } from '$lib/scripts/frontend/auth/auth_state';
+	import { login } from '$lib/scripts/frontend/auth/login';
+	import { register } from '$lib/scripts/frontend/auth/register';
+	import { is_loading } from '$lib/scripts/frontend/loading_store';
+	import { idify } from '$lib/scripts/universal/idify';
 	import { UserAvatar } from 'carbon-icons-svelte';
 	import { typed_entries } from 'functional-utilities';
 
@@ -57,17 +60,31 @@
 	};
 	let error_message = '';
 	async function run_page_mode() {
-		const response =
-			page_mode === 'login'
-				? await login(field_values.Email, field_values.Passwort)
-				: await register(field_values.Email, field_values.Passwort, field_values.Name);
+		if (
+			page_mode === 'register' &&
+			field_values['Passwort'] !== field_values['Passwort wiederholen']
+		) {
+			error_message = 'Passwörter stimmen nicht überein.';
+			return;
+		}
+		try {
+			is_loading.set(true);
+			const response =
+				page_mode === 'login'
+					? await login(field_values.Email, field_values.Passwort)
+					: await register(field_values.Name, field_values.Email, field_values.Passwort);
 
-		if (response === undefined) {
-			await goto('/');
-		} else {
-			error_message = response.message;
+			if (response === undefined) {
+				await goto('/');
+			} else {
+				error_message = response.message;
+			}
+		} finally {
+			is_loading.set(false);
 		}
 	}
+
+	$: $current_auth_state !== 'none' ? goto('/') : null;
 </script>
 
 <div class="outer">
@@ -86,7 +103,7 @@
 			{#each typed_entries(required_fields[page_mode]) as required_field}
 				{@const type = required_field[1].type}
 				{@const text = required_field[0]}
-				{@const name = text.replace(' ', '').toLowerCase()}
+				{@const name = idify(text)}
 				{@const autocomplete = required_field[1].autocomplete}
 				<div>
 					<label for={name}>{text}</label>

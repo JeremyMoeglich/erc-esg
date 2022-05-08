@@ -1,18 +1,41 @@
+import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
+import { is_int } from '$lib/scripts/universal/validators';
 import type { RequestHandler } from '@sveltejs/kit';
-import isInt from 'validator/lib/isInt';
 import { compare } from 'bcrypt';
 import { v4 } from 'uuid';
 
 export const post: RequestHandler<
-	{ identifier: string; password: string },
+	Record<string, never>,
 	{ token?: string; error?: string }
-> = async ({ params }) => {
-	const { identifier, password } = params;
-	if (!identifier || !password) {
-		return { error: 'Missing identifier or password' };
+> = async ({ request }) => {
+	const body = await get_request_body(request, ['identifier', 'password']);
+	if (!body) {
+		return {
+			body: {
+				error: 'Missing identifier, password, or name'
+			},
+			status: 400
+		};
 	}
-	const userId = isInt(identifier)
+	const { identifier, password } = body;
+	if (!identifier || !password) {
+		return {
+			body: {
+				error: 'Missing identifier or password'
+			},
+			status: 400
+		};
+	}
+	if (typeof identifier !== 'string' || typeof password !== 'string') {
+		return {
+			body: {
+				error: 'Invalid identifier or password'
+			},
+			status: 400
+		};
+	}
+	const userId = is_int(identifier)
 		? parseInt(identifier)
 		: (await prisma_client.user.findUnique({ where: { email: identifier }, select: { id: true } }))
 				?.id;

@@ -3,7 +3,7 @@ import { hasProperty } from 'functional-utilities';
 import { token_login } from './token_login';
 
 export async function register(
-	username: string,
+	name: string,
 	email: string,
 	password: string
 ): Promise<Error | undefined> {
@@ -13,7 +13,7 @@ export async function register(
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify({ username, email, password })
+			body: JSON.stringify({ name, email, password })
 		})
 	).json();
 	if (!(response && typeof response === 'object')) {

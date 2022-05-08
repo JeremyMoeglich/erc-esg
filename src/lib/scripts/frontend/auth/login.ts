@@ -2,13 +2,16 @@ import type { JSONValue } from '@sveltejs/kit/types/private';
 import { hasProperty } from 'functional-utilities';
 import { token_login } from './token_login';
 
-export async function login(username: string, password: string): Promise<Error | undefined> {
+export async function login(email: string, password: string): Promise<Error | undefined> {
 	const result = await fetch('/auth/login', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
 		},
-		body: JSON.stringify({ username, password })
+		body: JSON.stringify({
+			identifier: email,
+			password
+		})
 	});
 	const data: JSONValue = await result.json();
 	if (!(data && typeof data === 'object')) {
