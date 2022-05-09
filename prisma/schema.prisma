@@ -24,7 +24,7 @@ model Item {
     price         Int
     subcategory   SubCategory @relation(fields: [subcategoryId], references: [id])
     subcategoryId Int
-    image         String
+    images        String[]
 }
 
 model Category {

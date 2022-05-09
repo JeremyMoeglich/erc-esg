@@ -25,6 +25,13 @@
 						>
 							Kategorie Löschen <TrashCan size={20} />
 						</button>
+						<button
+							on:click={async () => {
+								await delete_category(category_data.name);
+							}}
+						>
+							Kategorie Löschen <TrashCan size={20} />
+						</button>
 					{/if}
 					{#each category_data.subcategories as subcategory}
 						<a href={`/subcategory/${subcategory.name}`}>{subcategory.text}</a>
@@ -68,7 +75,7 @@
 		background-image: linear-gradient(to bottom, var(--gray300), var(--gray400));
 		border: 2px solid transparent;
 		color: var(--secondary-dark);
-		font-size: 17px;
+		font-size: 15px;
 		&:hover {
 			border: 2px solid var(--secondary-color);
 			cursor: pointer;
@@ -76,6 +83,6 @@
 		}
 	}
 	.wrapped > a {
-		min-width: 150px;
+		min-width: 130px;
 	}
 </style>

@@ -1,4 +1,5 @@
 import { hasProperty } from 'functional-utilities';
+import { idify } from './idify';
 
 export interface category_data_type {
 	name: string;
@@ -25,7 +26,8 @@ export function is_subcategory_data_type(data: unknown): data is subcategory_dat
 		typeof data.name === 'string' &&
 		typeof data.id === 'number' &&
 		typeof data.description === 'string' &&
-		typeof data.text === 'string'
+		typeof data.text === 'string' &&
+		data.name === idify(data.text)
 	);
 }
 
@@ -42,6 +44,7 @@ export function is_category_data_type(data: unknown): data is category_data_type
 		typeof data.description === 'string' &&
 		typeof data.text === 'string' &&
 		data.subcategories instanceof Array &&
+		data.name === idify(data.text) &&
 		data.subcategories.every(is_subcategory_data_type)
 	);
 }
@@ -73,6 +76,36 @@ export function is_user_data(data: unknown): data is user_data_type {
 		return false;
 	}
 	if (!['user', 'admin', 'root'].includes(data.role)) {
+		return false;
+	}
+	return true;
+}
+
+export interface simple_item_data_type {
+	id: number;
+	name: string;
+	description: string;
+	text: string;
+	price: number;
+	images: string[];
+}
+
+export interface filter {
+	category_id?: number;
+	subcategory_id?: number;
+}
+
+export function is_filter(data: unknown): data is filter {
+	if (typeof data !== 'object') {
+		return false;
+	}
+	if (!data) {
+		return false;
+	}
+	if (hasProperty(data, 'category') && typeof data.category !== 'number') {
+		return false;
+	}
+	if (hasProperty(data, 'subcategory') && typeof data.subcategory !== 'number') {
 		return false;
 	}
 	return true;

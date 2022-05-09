@@ -1,6 +1,5 @@
 import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { idify } from '$lib/scripts/universal/idify';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const post: RequestHandler<

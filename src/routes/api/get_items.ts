@@ -1,29 +1,45 @@
+import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
+import { is_filter, type simple_item_data_type } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from '@sveltejs/kit';
 import { map_values } from 'functional-utilities';
 
 export const get: RequestHandler<
-	{ subcategory_id: string; start: string; end: string },
+	Record<string, never>,
 	{
-		items?: {
-			description: string;
-			id: number;
-			price: number;
-			name: string;
-			image: string;
-		}[];
+		items?: simple_item_data_type[];
 		error?: string;
 	}
-> = async ({ params }) => {
-	const { subcategory_id, start, end } = map_values(params, (v) => parseInt(v));
-	if (!start || !end) {
+> = async ({ request }) => {
+	const body = await get_request_body(request, ['name', 'start', 'end', 'filter']);
+	if (body instanceof Error) {
 		return {
-			status: 400,
+			status: 401,
 			body: {
-				error: 'start and end must be integers'
+				error: body.message
 			}
 		};
 	}
+	if (
+		!body ||
+		!body.name ||
+		!(typeof body.name === 'string') ||
+		!body.start ||
+		!(typeof body.start === 'number') ||
+		!body.end ||
+		!(typeof body.end === 'number') ||
+		!body.filter ||
+		!is_filter(body.filter)
+	) {
+		return {
+			status: 400,
+			body: {
+				error: 'Field datatypes invalid'
+			}
+		};
+	}
+	const { name, start, end, filter } = body;
+
 	if (start > end) {
 		return {
 			status: 400,
@@ -49,6 +65,7 @@ export const get: RequestHandler<
 		};
 	}
 	try {
+		let subcategory_id 
 		const response = await prisma_client.item.findMany({
 			where: {
 				subcategoryId: subcategory_id
@@ -71,7 +88,10 @@ export const get: RequestHandler<
 		};
 	} catch (error) {
 		return {
-			status: 500
+			status: 500,
+			body: {
+				error: 'Internal server error'
+			}
 		};
 	}
 };
