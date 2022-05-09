@@ -73,7 +73,10 @@ export const get: RequestHandler<
 		};
 	} catch (error) {
 		return {
-			status: 500
+			status: 500,
+			body: {
+				error: 'Internal server error (categories)'
+			}
 		};
 	}
 };

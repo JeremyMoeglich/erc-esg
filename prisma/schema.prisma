@@ -11,24 +11,25 @@ generator client {
 }
 
 model PageVariant {
-    id         Int        @id @default(autoincrement())
+    id         String     @id @default(uuid())
     name       String     @unique
     categories Category[]
 }
 
 model Item {
-    id            Int         @id @default(autoincrement())
+    id            String      @id @default(uuid())
     name          String      @unique
     text          String
     description   String
     price         Int
     subcategory   SubCategory @relation(fields: [subcategoryId], references: [id])
-    subcategoryId Int
+    subcategoryId String
     images        String[]
+    quantity      Int
 }
 
 model Category {
-    id            Int           @id @default(autoincrement())
+    id            String        @id @default(uuid())
     name          String        @unique
     text          String        @default("Neue Kategorie")
     description   String
@@ -37,7 +38,7 @@ model Category {
 }
 
 model SubCategory {
-    id          Int        @id @default(autoincrement())
+    id          String     @id @default(uuid())
     name        String     @unique
     text        String     @default("Neue Unterkategorie")
     description String
@@ -47,7 +48,7 @@ model SubCategory {
 }
 
 model User {
-    id            Int    @id @default(autoincrement())
+    id            String @id @default(uuid())
     name          String
     email         String @unique
     password_hash String
@@ -55,7 +56,7 @@ model User {
 }
 
 model LoginToken {
-    id     Int      @id @default(autoincrement())
+    id     String   @id @default(uuid())
     userId Int      @unique
     time   DateTime @default(now())
     value  String   @unique

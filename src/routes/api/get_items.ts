@@ -2,16 +2,17 @@ import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import { is_filter, type simple_item_data_type } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from '@sveltejs/kit';
-import { map_values } from 'functional-utilities';
+import { hasProperty } from 'functional-utilities';
+import type { Jsonify } from 'type-fest';
 
 export const get: RequestHandler<
 	Record<string, never>,
 	{
-		items?: simple_item_data_type[];
+		items?: Jsonify<simple_item_data_type[]>;
 		error?: string;
 	}
 > = async ({ request }) => {
-	const body = await get_request_body(request, ['name', 'start', 'end', 'filter']);
+	const body = await get_request_body(request, ['start', 'end', 'filter']);
 	if (body instanceof Error) {
 		return {
 			status: 401,
@@ -22,8 +23,6 @@ export const get: RequestHandler<
 	}
 	if (
 		!body ||
-		!body.name ||
-		!(typeof body.name === 'string') ||
 		!body.start ||
 		!(typeof body.start === 'number') ||
 		!body.end ||
@@ -38,7 +37,7 @@ export const get: RequestHandler<
 			}
 		};
 	}
-	const { name, start, end, filter } = body;
+	const { start, end, filter } = body;
 
 	if (start > end) {
 		return {
@@ -56,20 +55,40 @@ export const get: RequestHandler<
 			}
 		};
 	}
-	if (end - start > 100) {
+	const max_amount = 40;
+	if (end - start > max_amount) {
 		return {
 			status: 403,
 			body: {
-				error: 'maximum number of items is 100'
+				error: `maximum number of items is ${max_amount}`
 			}
 		};
 	}
+
+	const subcategory_ids =
+		hasProperty(filter, 'subcategory_id') && filter.subcategory_id
+			? [filter.subcategory_id]
+			: hasProperty(filter, 'category_id')
+			? (
+					await prisma_client.subCategory.findMany({
+						where: {
+							categoryId: filter.category_id
+						},
+						select: {
+							id: true
+						}
+					})
+			  ).map((v) => v.id)
+			: undefined;
 	try {
-		let subcategory_id 
 		const response = await prisma_client.item.findMany({
-			where: {
-				subcategoryId: subcategory_id
-			},
+			where: subcategory_ids
+				? {
+						subcategoryId: {
+							in: subcategory_ids
+						}
+				  }
+				: undefined,
 			skip: start,
 			take: end - start,
 			select: {
@@ -77,7 +96,8 @@ export const get: RequestHandler<
 				id: true,
 				price: true,
 				name: true,
-				image: true
+				text: true,
+				images: true
 			}
 		});
 		return {

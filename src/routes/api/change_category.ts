@@ -34,14 +34,14 @@ export const post: RequestHandler<
 		};
 	}
 
-    if (body.new_data.name !== idify(body.new_data.text)) {
-        return {
-            status: 400,
-            body: {
-                error: 'Category name must be the id version of the text'
-            }
-        };
-    }
+	if (body.new_data.name !== idify(body.new_data.text)) {
+		return {
+			status: 400,
+			body: {
+				error: 'Category name must be the id version of the text'
+			}
+		};
+	}
 
 	await prisma_client.category.update({
 		where: {

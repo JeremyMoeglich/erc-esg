@@ -10,9 +10,9 @@
 	import { UserAvatar } from 'carbon-icons-svelte';
 	import { typed_entries } from 'functional-utilities';
 
-	type page_mode = 'login' | 'register';
+	type page_mode_type = 'login' | 'register';
 
-	let page_mode: page_mode = 'login';
+	let page_mode: page_mode_type = 'login';
 
 	const field_keys = ['Passwort wiederholen', 'Passwort', 'Email', 'Name'] as const;
 
@@ -26,7 +26,7 @@
 	};
 
 	const required_fields: Record<
-		page_mode,
+		page_mode_type,
 		Partial<Record<field_key, { type: 'password' | 'email' | 'text'; autocomplete: string }>>
 	> = {
 		login: {

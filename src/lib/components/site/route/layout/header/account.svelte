@@ -1,5 +1,4 @@
 <script>
-	import Dropdown from '$lib/components/layout/dropdown.svelte';
 	import ItemDropdown from '$lib/components/layout/item_dropdown.svelte';
 	import { current_auth_state, in_auth_action } from '$lib/scripts/frontend/auth/auth_state';
 	import { logout } from '$lib/scripts/frontend/auth/logout';

@@ -25,7 +25,7 @@
 	import { category_datas_store } from '$lib/scripts/frontend/data/category_data';
 
 	const auth_pages = ['/login', '/register', '/profile'];
-	export let category_datas: category_data_type[]
+	export let category_datas: category_data_type[];
 
 	$: category_datas_store.set(category_datas);
 	export let error = '';

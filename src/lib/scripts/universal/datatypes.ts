@@ -90,9 +90,41 @@ export interface simple_item_data_type {
 	images: string[];
 }
 
+export function is_simple_item_data_type(data: unknown): data is simple_item_data_type {
+	return (
+		typeof data === 'object' &&
+		hasProperty(data, 'id') &&
+		hasProperty(data, 'name') &&
+		hasProperty(data, 'description') &&
+		hasProperty(data, 'text') &&
+		hasProperty(data, 'price') &&
+		hasProperty(data, 'images') &&
+		typeof data.id === 'number' &&
+		typeof data.name === 'string' &&
+		typeof data.description === 'string' &&
+		typeof data.text === 'string' &&
+		typeof data.price === 'number' &&
+		data.images instanceof Array &&
+		data.images.every((v) => typeof v === 'string')
+	);
+}
+
+export interface detailed_item_data_type extends simple_item_data_type {
+	quantity: number;
+}
+
+export function is_detailed_item_data_type(data: unknown): data is detailed_item_data_type {
+	return (
+		is_simple_item_data_type(data) &&
+		hasProperty(data, 'quantity') &&
+		typeof data.quantity === 'number'
+	);
+}
+
 export interface filter {
 	category_id?: number;
 	subcategory_id?: number;
+	search?: string;
 }
 
 export function is_filter(data: unknown): data is filter {
