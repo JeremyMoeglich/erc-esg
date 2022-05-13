@@ -2,7 +2,7 @@
 	import Account from './account.svelte';
 	import Logo from './logo.svelte';
 	import MainCategoryBar from './main_category_bar.svelte';
-	import SearchBar from './search_bar.svelte';
+	import SearchBar from '../../../../../scripts/frontend/fetch/search_bar.svelte';
 </script>
 
 <div class="main">

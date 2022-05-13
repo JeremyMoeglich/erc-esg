@@ -1,13 +1,13 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { detailed_item_data_type } from '$lib/scripts/universal/datatypes';
+import type { article } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Jsonify } from 'type-fest';
 
 export const post: RequestHandler<
 	Record<string, never>,
 	{
-		item?: Jsonify<detailed_item_data_type>;
+		item?: Jsonify<article>;
 		error?: string;
 	}
 > = async ({ request }) => {

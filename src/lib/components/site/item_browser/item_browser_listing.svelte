@@ -1,8 +1,8 @@
 <script lang="ts">
-	import type { simple_item_data_type } from '$lib/scripts/universal/datatypes';
+	import type { article_preview } from '$lib/scripts/universal/datatypes';
 	import { send, receive } from '$lib/scripts/frontend/crossfade';
 
-	export let items: simple_item_data_type[];
+	export let items: article_preview[];
 </script>
 
 <div>

@@ -1,7 +1,7 @@
 import {
-	is_simple_item_data_type,
+	is_article_preview,
 	type filter_type,
-	type simple_item_data_type
+	type article_preview
 } from '$lib/scripts/universal/datatypes';
 import type { JSONValue } from '@sveltejs/kit/types/private';
 import { hasProperty } from 'functional-utilities';
@@ -12,7 +12,7 @@ export async function get_items(
 	start: number,
 	end: number,
 	filter: filter_type
-): Promise<simple_item_data_type[]> {
+): Promise<article_preview[]> {
 	const response: Response = await fetch('/api/get_items', {
 		method: 'POST',
 		headers: {
@@ -42,7 +42,7 @@ export async function get_items(
 		throw new Error('Items is not an array');
 	}
 
-	if (!body.items.every(is_simple_item_data_type)) {
+	if (!body.items.every(is_article_preview)) {
 		throw new Error('Items is not an array of simple item data types');
 	}
 

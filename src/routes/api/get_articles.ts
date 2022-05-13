@@ -1,14 +1,13 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { is_filter, type simple_item_data_type } from '$lib/scripts/universal/datatypes';
+import { is_filter, type article_preview } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from '@sveltejs/kit';
-import { hasProperty } from 'functional-utilities';
 import type { Jsonify } from 'type-fest';
 
 export const post: RequestHandler<
 	Record<string, never>,
 	{
-		items?: Jsonify<simple_item_data_type[]>;
+		articles?: Jsonify<article_preview[]>;
 		error?: string;
 	}
 > = async ({ request }) => {
@@ -70,44 +69,29 @@ export const post: RequestHandler<
 		};
 	}
 
-	const subcategory_ids =
-		hasProperty(filter, 'subcategory_id') && filter.subcategory_id
-			? [filter.subcategory_id]
-			: hasProperty(filter, 'category_id')
-			? (
-					await prisma_client.subCategory.findMany({
-						where: {
-							categoryId: filter.category_id
-						},
-						select: {
-							id: true
-						}
-					})
-			  ).map((v) => v.id)
-			: undefined;
 	try {
-		const response = await prisma_client.item.findMany({
-			where: subcategory_ids
-				? {
-						subcategoryId: {
-							in: subcategory_ids
-						}
-				  }
-				: undefined,
+		const response = await prisma_client.article.findMany({
+			where: {
+				title: filter.search
+					? {
+							search: filter.search
+					  }
+					: undefined
+			},
 			skip: start,
 			take: end - start,
 			select: {
-				description: true,
+				title: true,
 				id: true,
-				price: true,
-				name: true,
-				text: true,
-				images: true
+				createdAt: true
+			},
+			orderBy: {
+				createdAt: 'desc'
 			}
 		});
 		return {
 			body: {
-				items: response
+				articles: response
 			},
 			status: 200
 		};

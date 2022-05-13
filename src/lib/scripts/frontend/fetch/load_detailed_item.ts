@@ -1,17 +1,17 @@
 import {
-	is_detailed_item_data_type,
-	type detailed_item_data_type
+	is_article,
+	type article
 } from '$lib/scripts/universal/datatypes';
 import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
 import type { JsonValue } from 'type-fest';
 import { items_cache_store } from '../data/items';
 
-export async function load_item(name: string): Promise<detailed_item_data_type | undefined> {
+export async function load_item(name: string): Promise<article | undefined> {
 	let cache = get(items_cache_store);
 	if (hasProperty(cache, name)) {
 		const cached_item = cache[name];
-		if (is_detailed_item_data_type(cached_item)) {
+		if (is_article(cached_item)) {
 			return cached_item;
 		}
 	}
@@ -40,7 +40,7 @@ export async function load_item(name: string): Promise<detailed_item_data_type |
 	if (!hasProperty(body, 'item')) {
 		throw new Error('Missing item, without error');
 	}
-	if (!is_detailed_item_data_type(body.item)) {
+	if (!is_article(body.item)) {
 		throw new Error('Invalid item');
 	}
 
