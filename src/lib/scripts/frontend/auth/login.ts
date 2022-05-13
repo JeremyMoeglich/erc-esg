@@ -9,7 +9,7 @@ export async function login(email: string, password: string): Promise<Error | un
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			identifier: email,
+			email,
 			password
 		})
 	});

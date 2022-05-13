@@ -24,7 +24,7 @@ export async function create_category(text: string) {
 			response &&
 			typeof response === 'object' &&
 			hasProperty(response, 'id') &&
-			typeof response.id === 'number'
+			typeof response.id === 'string'
 		) {
 			category_datas_store.set(
 				(get(category_datas_store) ?? []).concat([

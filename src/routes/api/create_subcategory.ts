@@ -7,7 +7,7 @@ export const post: RequestHandler<
 	Record<string, never>,
 	{
 		error?: string;
-		id?: number;
+		id?: string
 	}
 > = async ({ request }) => {
 	const body = await validate_get_admin_body(request, ['text', 'parent_id']);
@@ -23,7 +23,7 @@ export const post: RequestHandler<
 		!body.text ||
 		!(typeof body.text === 'string') ||
 		!body.parent_id ||
-		!(typeof body.parent_id === 'number')
+		!(typeof body.parent_id === 'string')
 	) {
 		return {
 			status: 400,

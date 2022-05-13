@@ -1,6 +1,5 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { is_int } from '$lib/scripts/universal/validators';
 import type { RequestHandler } from '@sveltejs/kit';
 import { compare } from 'bcrypt';
 import { v4 } from 'uuid';
@@ -9,25 +8,25 @@ export const post: RequestHandler<
 	Record<string, never>,
 	{ token?: string; error?: string }
 > = async ({ request }) => {
-	const body = await get_request_body(request, ['identifier', 'password']);
+	const body = await get_request_body(request, ['email', 'password']);
 	if (!body) {
 		return {
 			body: {
-				error: 'Missing identifier, password, or name'
+				error: 'Missing email, password'
 			},
 			status: 400
 		};
 	}
-	const { identifier, password } = body;
-	if (!identifier || !password) {
+	const { email, password } = body;
+	if (!email || !password) {
 		return {
 			body: {
-				error: 'Missing identifier or password'
+				error: 'Missing email or password'
 			},
 			status: 400
 		};
 	}
-	if (typeof identifier !== 'string' || typeof password !== 'string') {
+	if (typeof email !== 'string' || typeof password !== 'string') {
 		return {
 			body: {
 				error: 'Invalid identifier or password'
@@ -35,10 +34,9 @@ export const post: RequestHandler<
 			status: 400
 		};
 	}
-	const userId = is_int(identifier)
-		? parseInt(identifier)
-		: (await prisma_client.user.findUnique({ where: { email: identifier }, select: { id: true } }))
-				?.id;
+	const userId = (await prisma_client.user.findUnique({ where: { email }, select: { id: true } }))
+		?.id;
+
 	if (!userId) {
 		return {
 			body: {

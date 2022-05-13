@@ -25,13 +25,6 @@
 						>
 							Kategorie Löschen <TrashCan size={20} />
 						</button>
-						<button
-							on:click={async () => {
-								await delete_category(category_data.name);
-							}}
-						>
-							Kategorie Löschen <TrashCan size={20} />
-						</button>
 					{/if}
 					{#each category_data.subcategories as subcategory}
 						<a href={`/subcategory/${subcategory.name}`}>{subcategory.text}</a>
@@ -40,16 +33,18 @@
 			</ItemDropdown>
 		{/each}
 		{#if $admin_mode}
-			<div class="new_category">
+			<form
+				class="new_category"
+				on:submit|preventDefault={async () => {
+					await create_category(new_category_text);
+					new_category_text = '';
+				}}
+			>
 				<input type="text" bind:value={new_category_text} />
-				<button
-					on:click={async () => {
-						await create_category(new_category_text);
-					}}
-				>
+				<button type="submit">
 					<AddAlt size={20} />
 				</button>
-			</div>
+			</form>
 		{/if}
 	</div>
 {/if}

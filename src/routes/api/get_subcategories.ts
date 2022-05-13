@@ -5,7 +5,7 @@ export const get: RequestHandler<
 	{ category_name: string },
 	{
 		subcategory_metadatas: {
-			id: number;
+			id: string;
 			name: string;
 		}[];
 	}

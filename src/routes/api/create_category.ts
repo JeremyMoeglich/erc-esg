@@ -7,7 +7,7 @@ export const post: RequestHandler<
 	Record<string, never>,
 	{
 		error?: string;
-		id?: number;
+		id?: string;
 	}
 > = async ({ request }) => {
 	const body = await validate_get_admin_body(request, ['text', 'page_variant']);

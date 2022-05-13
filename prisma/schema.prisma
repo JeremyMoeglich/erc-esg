@@ -10,56 +10,26 @@ generator client {
     previewFeatures = ["fullTextSearch"]
 }
 
-model PageVariant {
-    id         String     @id @default(uuid())
-    name       String     @unique
-    categories Category[]
-}
-
-model Item {
-    id            String      @id @default(uuid())
-    name          String      @unique
-    text          String
-    description   String
-    price         Int
-    subcategory   SubCategory @relation(fields: [subcategoryId], references: [id])
-    subcategoryId String
-    images        String[]
-    quantity      Int
-}
-
-model Category {
-    id            String        @id @default(uuid())
-    name          String        @unique
-    text          String        @default("Neue Kategorie")
-    description   String
-    subcategories SubCategory[]
-    page_variants PageVariant[]
-}
-
-model SubCategory {
-    id          String     @id @default(uuid())
-    name        String     @unique
-    text        String     @default("Neue Unterkategorie")
-    description String
-    items       Item[]
-    category    Category[]
-    categoryId  Int
-}
-
 model User {
-    id            String @id @default(uuid())
-    name          String
-    email         String @unique
-    password_hash String
+    id            String @id @default(uuid()) @db.VarChar(255)
+    name          String @db.VarChar(24)
+    email         String @unique @db.VarChar(255)
+    password_hash String @db.VarChar(255)
     role          Role   @default(user)
 }
 
 model LoginToken {
-    id     String   @id @default(uuid())
-    userId Int      @unique
+    id     String   @id @default(uuid()) @db.VarChar(255)
+    userId String   @unique @db.VarChar(255)
     time   DateTime @default(now())
-    value  String   @unique
+    value  String   @unique @db.VarChar(255)
+}
+
+model Article {
+    id        String @id @default(uuid())
+    title     String @unique @db.VarChar(511)
+    content   String
+    createdAt DateTime @default(now())
 }
 
 enum Role {

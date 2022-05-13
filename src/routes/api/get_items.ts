@@ -5,7 +5,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 import { hasProperty } from 'functional-utilities';
 import type { Jsonify } from 'type-fest';
 
-export const get: RequestHandler<
+export const post: RequestHandler<
 	Record<string, never>,
 	{
 		items?: Jsonify<simple_item_data_type[]>;
@@ -23,11 +23,8 @@ export const get: RequestHandler<
 	}
 	if (
 		!body ||
-		!body.start ||
-		!(typeof body.start === 'number') ||
-		!body.end ||
-		!(typeof body.end === 'number') ||
-		!body.filter ||
+		typeof body.start !== 'number' ||
+		typeof body.end !== 'number' ||
 		!is_filter(body.filter)
 	) {
 		return {
@@ -61,6 +58,14 @@ export const get: RequestHandler<
 			status: 403,
 			body: {
 				error: `maximum number of items is ${max_amount}`
+			}
+		};
+	}
+	if (start > 500) {
+		return {
+			status: 403,
+			body: {
+				error: 'start must be less than 500'
 			}
 		};
 	}

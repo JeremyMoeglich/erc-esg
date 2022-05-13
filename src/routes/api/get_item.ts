@@ -4,7 +4,7 @@ import type { detailed_item_data_type } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Jsonify } from 'type-fest';
 
-export const get: RequestHandler<
+export const post: RequestHandler<
 	Record<string, never>,
 	{
 		item?: Jsonify<detailed_item_data_type>;

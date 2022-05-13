@@ -3,7 +3,7 @@
 	import { current_auth_state, in_auth_action } from '$lib/scripts/frontend/auth/auth_state';
 	import { logout } from '$lib/scripts/frontend/auth/logout';
 	import { user_datas_store } from '$lib/scripts/frontend/data/user_data';
-	import { ContentView, Dashboard, Logout, User, UserAvatar } from 'carbon-icons-svelte';
+	import { ContentView, Dashboard, Logout, User, UserAvatar, Login } from 'carbon-icons-svelte';
 	import { onDestroy } from 'svelte';
 	import { get } from 'svelte/store';
 
@@ -52,7 +52,7 @@
 	</div>
 	<div class="dropdown" slot="content">
 		{#if auth_state === 'none'}
-			<a href="/login">Anmelden</a>
+			<a href="/login">Anmelden <Login /></a>
 		{:else}
 			<a href="/profile">
 				Profil

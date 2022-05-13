@@ -16,7 +16,7 @@
 		display: flex;
 		flex-direction: column;
 	}
-	:global([slot='content'] > a, button) {
+	:global([slot='content'] > a, [slot='content'] > button) {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -30,7 +30,7 @@
 		text-decoration: none;
 		border: 2px solid transparent;
 	}
-	:global([slot='content'] > a:hover, button:hover) {
+	:global([slot='content'] > a:hover, [slot='content'] > button:hover) {
 		border: 2px solid var(--secondary-color);
 		cursor: pointer;
 	}
