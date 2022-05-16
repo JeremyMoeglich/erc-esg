@@ -3,7 +3,7 @@
 	import { current_auth_state, in_auth_action } from '$lib/scripts/frontend/auth/auth_state';
 	import { logout } from '$lib/scripts/frontend/auth/logout';
 	import { user_datas_store } from '$lib/scripts/frontend/data/user_data';
-	import { ContentView, Dashboard, Logout, User, UserAvatar, Login } from 'carbon-icons-svelte';
+	import { ContentView, Dashboard, Logout, User, UserAvatar, Login, AddAlt } from 'carbon-icons-svelte';
 	import { onDestroy } from 'svelte';
 	import { get } from 'svelte/store';
 
@@ -33,7 +33,7 @@
 				{#if !$in_auth_action}
 					<p class="side_text">
 						{#if auth_state === 'none'}
-							Anmelden
+							Anmelden / Registrieren
 						{:else}
 							{$user_datas_store?.name}
 						{/if}
@@ -53,6 +53,7 @@
 	<div class="dropdown" slot="content">
 		{#if auth_state === 'none'}
 			<a href="/login">Anmelden <Login /></a>
+			<a href="/login?register">Registrieren <AddAlt /></a>
 		{:else}
 			<a href="/profile">
 				Profil

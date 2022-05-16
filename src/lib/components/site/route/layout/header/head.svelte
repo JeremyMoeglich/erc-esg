@@ -12,8 +12,8 @@
 
 <style>
 	.main {
-		background: var(--gray100);
-		box-shadow: 0px 5px 7px rgba(0, 0, 0, 0.2);
+		background: white;
+		border-bottom: 7px solid var(--primary-color);
 	}
 	.upper {
 		padding: 10px 3vw;

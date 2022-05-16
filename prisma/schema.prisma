@@ -29,6 +29,7 @@ model Article {
     title     String @unique @db.VarChar(511)
     content   String
     createdAt DateTime @default(now())
+    image_url String
 }
 
 enum Role {

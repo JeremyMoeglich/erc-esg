@@ -1,17 +1,4 @@
-<script context="module" lang="ts">
-	import type { Load } from '@sveltejs/kit';
 
-	export const load: Load = async ({ fetch }) => {
-		const response = await fetch(`/api/get_categories_of_main.json`);
-
-		return {
-			status: response.status,
-			props: {
-				category_datas: (await response.json()).category_datas
-			}
-		};
-	};
-</script>
 
 <script lang="ts">
 	import '../global.scss';
@@ -21,14 +8,8 @@
 	import { check_token_and_login } from '$lib/scripts/frontend/auth/token_login';
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import { Circle2 } from 'svelte-loading-spinners';
-	import type { category_data_type } from '$lib/scripts/universal/datatypes';
-	import { category_datas_store } from '$lib/scripts/frontend/data/category_data';
 
 	const auth_pages = ['/login', '/register', '/profile'];
-	export let category_datas: category_data_type[];
-
-	$: category_datas_store.set(category_datas);
-	export let error = '';
 
 	page.subscribe((current_page) => {
 		if (auth_pages.includes(current_page.url.pathname)) {
@@ -51,11 +32,6 @@
 			<div class="spinner">
 				<Circle2 />
 			</div>
-		</div>
-	{/if}
-	{#if error}
-		<div class="error">
-			<p>{error}</p>
 		</div>
 	{/if}
 </div>

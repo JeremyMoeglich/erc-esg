@@ -8,7 +8,7 @@ import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
 import { items_cache_store } from '../data/items';
 
-export async function get_items(
+export async function get_articles(
 	start: number,
 	end: number,
 	filter: filter_type

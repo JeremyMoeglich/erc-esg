@@ -50,6 +50,7 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@sveltejs/adapter-netlify": "1.0.0-next.58",
 		"@sveltejs/adapter-node": "1.0.0-next.73",
 		"dotenv": "^16.0.1",
 		"functional-utilities": "^1.15.1",

@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
+	import { page } from '$app/stores';
 
 	import Button from '$lib/components/elements/button.svelte';
 	import { current_auth_state } from '$lib/scripts/frontend/auth/auth_state';
@@ -13,6 +14,8 @@
 	type page_mode_type = 'login' | 'register';
 
 	let page_mode: page_mode_type = 'login';
+
+	$: page_mode = $page.url.searchParams.has('register') ? 'register' : 'login';
 
 	const field_keys = ['Passwort wiederholen', 'Passwort', 'Email', 'Name'] as const;
 
