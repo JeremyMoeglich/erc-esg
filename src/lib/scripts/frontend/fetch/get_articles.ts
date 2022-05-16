@@ -13,7 +13,7 @@ export async function get_items(
 	end: number,
 	filter: filter_type
 ): Promise<article_preview[]> {
-	const response: Response = await fetch('/api/get_items', {
+	const response: Response = await fetch('/api/get_articles', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -34,22 +34,22 @@ export async function get_items(
 		throw new Error(body.error);
 	}
 
-	if (!hasProperty(body, 'items')) {
-		throw new Error('Missing items');
+	if (!hasProperty(body, 'articles')) {
+		throw new Error('Missing Articles');
 	}
 
-	if (!Array.isArray(body.items)) {
+	if (!Array.isArray(body.articles)) {
 		throw new Error('Items is not an array');
 	}
 
-	if (!body.items.every(is_article_preview)) {
+	if (!body.articles.every(is_article_preview)) {
 		throw new Error('Items is not an array of simple item data types');
 	}
 
 	const cache = get(items_cache_store);
-	body.items.forEach((item) => {
-		cache[item.name] = item;
+	body.articles.forEach((article) => {
+		cache[article.id] = article;
 	});
 
-	return body.items;
+	return body.articles;
 }

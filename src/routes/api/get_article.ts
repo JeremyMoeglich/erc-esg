@@ -11,7 +11,7 @@ export const post: RequestHandler<
 		error?: string;
 	}
 > = async ({ request }) => {
-	const body = await get_request_body(request, ['name']);
+	const body = await get_request_body(request, ['id']);
 	if (body instanceof Error) {
 		return {
 			status: 401,
@@ -20,7 +20,7 @@ export const post: RequestHandler<
 			}
 		};
 	}
-	if (!body || !body.name || !(typeof body.name === 'string')) {
+	if (!body || !body.id || !(typeof body.id === 'string')) {
 		return {
 			status: 400,
 			body: {
@@ -28,19 +28,17 @@ export const post: RequestHandler<
 			}
 		};
 	}
-	const { name } = body;
+	const { id } = body;
 	try {
-		const response = await prisma_client.item.findUnique({
+		const response = await prisma_client.article.findUnique({
 			where: {
-				name
+				id
 			},
 			select: {
-				name: true,
-				description: true,
-				images: true,
-				price: true,
-				text: true,
-				quantity: true
+				content: true,
+				title: true,
+				id: true,
+				createdAt: true
 			}
 		});
 		if (!response) {

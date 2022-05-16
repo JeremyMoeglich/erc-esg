@@ -1,9 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/env';
 
-	import { get_items } from '$lib/scripts/frontend/fetch/get_items';
-
-	import type { filter_type, article_preview } from '$lib/scripts/universal/datatypes';
+	import { get_items } from '$lib/scri$lib/scripts/frontend/fetch/get_articlesport type { filter_type, article_preview } from '$lib/scripts/universal/datatypes';
 	import ItemBrowserListing from './item_browser_listing.svelte';
 
 	export let filter: filter_type | undefined;

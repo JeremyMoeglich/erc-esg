@@ -1,4 +1,3 @@
-// For testing
 
 datasource db {
     provider = "postgresql"

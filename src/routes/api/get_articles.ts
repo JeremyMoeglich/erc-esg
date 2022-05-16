@@ -91,7 +91,11 @@ export const post: RequestHandler<
 		});
 		return {
 			body: {
-				articles: response
+				articles: response.map((article) => ({
+					title: article.title,
+					id: article.id,
+					createdAt: JSON.stringify(article.createdAt)
+				}))
 			},
 			status: 200
 		};
