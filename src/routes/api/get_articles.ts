@@ -6,10 +6,12 @@ import type { Jsonify } from 'type-fest';
 
 export const post: RequestHandler<
 	Record<string, never>,
-	{
-		articles?: Jsonify<article_preview[]>;
-		error?: string;
-	}
+	| {
+			articles: Jsonify<article_preview[]>;
+	  }
+	| {
+			error: string;
+	  }
 > = async ({ request }) => {
 	const body = await get_request_body(request, ['start', 'end', 'filter']);
 	if (body instanceof Error) {
@@ -83,7 +85,8 @@ export const post: RequestHandler<
 			select: {
 				title: true,
 				id: true,
-				createdAt: true
+				createdAt: true,
+				image_url: true
 			},
 			orderBy: {
 				createdAt: 'desc'
@@ -94,7 +97,8 @@ export const post: RequestHandler<
 				articles: response.map((article) => ({
 					title: article.title,
 					id: article.id,
-					createdAt: JSON.stringify(article.createdAt)
+					createdAt: JSON.stringify(article.createdAt),
+					image_url: article.image_url
 				}))
 			},
 			status: 200

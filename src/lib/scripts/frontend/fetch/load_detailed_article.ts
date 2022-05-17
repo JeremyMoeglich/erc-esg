@@ -5,10 +5,10 @@ import {
 import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
 import type { JsonValue } from 'type-fest';
-import { items_cache_store } from '../data/items';
+import { articles_cache_store } from '../data/articles';
 
-export async function load_item(name: string): Promise<article | undefined> {
-	let cache = get(items_cache_store);
+export async function load_article(name: string): Promise<article | undefined> {
+	let cache = get(articles_cache_store);
 	if (hasProperty(cache, name)) {
 		const cached_item = cache[name];
 		if (is_article(cached_item)) {
@@ -44,7 +44,7 @@ export async function load_item(name: string): Promise<article | undefined> {
 		throw new Error('Invalid item');
 	}
 
-	cache = get(items_cache_store);
+	cache = get(articles_cache_store);
 	cache[name] = body.item;
-	items_cache_store.set(cache);
+	articles_cache_store.set(cache);
 }

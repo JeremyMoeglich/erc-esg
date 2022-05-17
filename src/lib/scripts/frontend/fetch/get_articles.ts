@@ -6,7 +6,7 @@ import {
 import type { JSONValue } from '@sveltejs/kit/types/private';
 import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
-import { items_cache_store } from '../data/items';
+import { articles_cache_store } from '../data/articles';
 
 export async function get_articles(
 	start: number,
@@ -46,7 +46,7 @@ export async function get_articles(
 		throw new Error('Items is not an array of simple item data types');
 	}
 
-	const cache = get(items_cache_store);
+	const cache = get(articles_cache_store);
 	body.articles.forEach((article) => {
 		cache[article.id] = article;
 	});

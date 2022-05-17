@@ -1,6 +1,5 @@
 <script lang="ts">
 	import type { article_preview } from '$lib/scripts/universal/datatypes';
-	import { send, receive } from '$lib/scripts/frontend/crossfade';
 
 	export let articles: article_preview[];
 </script>
