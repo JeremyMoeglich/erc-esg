@@ -86,7 +86,13 @@ export const post: RequestHandler<
 				title: true,
 				id: true,
 				createdAt: true,
-				image_url: true
+				image_link: {
+					select: {
+						id: true,
+						image_url: true,
+						name: true
+					}
+				}
 			},
 			orderBy: {
 				createdAt: 'desc'
@@ -95,10 +101,8 @@ export const post: RequestHandler<
 		return {
 			body: {
 				articles: response.map((article) => ({
-					title: article.title,
-					id: article.id,
-					createdAt: JSON.stringify(article.createdAt),
-					image_url: article.image_url
+					...article,
+					createdAt: JSON.stringify(article.createdAt)
 				}))
 			},
 			status: 200

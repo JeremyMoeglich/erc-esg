@@ -24,17 +24,20 @@ model LoginToken {
 }
 
 model imageLink {
-    id        String @id @default(uuid()) @db.VarChar(255)
-    name      String @unique @db.VarChar(255)
-    image_url String @unique @db.VarChar(255)
+    id        String    @id @default(uuid()) @db.VarChar(255)
+    name      String    @unique @db.VarChar(255)
+    image_url String    @unique @db.VarChar(255)
+    Article   Article[]
 }
 
 model Article {
-    id        String   @id @default(uuid())
-    title     String   @unique @db.VarChar(511)
-    content   String
-    createdAt DateTime @default(now())
-    image_url String
+    id             String    @id @default(uuid())
+    title          String    @unique @db.VarChar(511)
+    content        String
+    content_images String[]
+    createdAt      DateTime  @default(now())
+    image_link     imageLink @relation(fields: [imageLinkId], references: [id])
+    imageLinkId    String    @db.VarChar(255)
 }
 
 enum Role {

@@ -8,7 +8,9 @@ export async function get_image_url(name: string): Promise<string | Error> {
 	if (current_cache?.[name]) {
 		return current_cache[name];
 	}
-	const response = await fetch(`/api/get_image_${name}.json`);
+	const url = `/api/images/${name}.json`;
+	console.debug(`Fetching image url for ${url}`);
+	const response = await fetch(url);
 	const body: JSONValue = await response.json();
 	if (hasProperty(body, 'error')) {
 		if (typeof body.error !== 'string') {

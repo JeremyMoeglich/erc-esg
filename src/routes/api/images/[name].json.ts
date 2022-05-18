@@ -1,7 +1,7 @@
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { RequestHandler } from '@sveltejs/kit';
 
-export const post: RequestHandler<
+export const get: RequestHandler<
 	{ name: string },
 	| {
 			image_url: string;
@@ -24,7 +24,7 @@ export const post: RequestHandler<
 			return {
 				status: 404,
 				body: {
-					error: 'Item not found'
+					image_url: 'https://via.placeholder.com/300x300'
 				}
 			};
 		}

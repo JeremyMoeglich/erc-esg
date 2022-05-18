@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+
 	import { send, receive } from '$lib/scripts/frontend/crossfade';
 	import { get_image_url } from '$lib/scripts/frontend/fetch/get_image_url';
 	export let name: string;
@@ -6,11 +8,13 @@
 	$: key = `dbimage:${name}`;
 
 	async function update_image_url(name: string) {
-		const new_image_url = await get_image_url(name);
-		if (new_image_url instanceof Error) {
-			throw new_image_url;
+		if (browser) {
+			const new_image_url = await get_image_url(name);
+			if (new_image_url instanceof Error) {
+				throw new_image_url;
+			}
+			image_url = new_image_url;
 		}
-		image_url = new_image_url;
 	}
 
 	$: update_image_url(name);

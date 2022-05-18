@@ -1,15 +1,23 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { article } from '$lib/scripts/universal/datatypes';
+import type { imageLink } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Jsonify } from 'type-fest';
 
 export const post: RequestHandler<
 	Record<string, never>,
-	{
-		item?: Jsonify<article>;
-		error?: string;
-	}
+	| {
+			item: Jsonify<{
+				id: string;
+				title: string;
+				createdAt: string;
+				content: string;
+				image_link: imageLink;
+			}>;
+	  }
+	| {
+			error: string;
+	  }
 > = async ({ request }) => {
 	const body = await get_request_body(request, ['id']);
 	if (body instanceof Error) {
@@ -38,7 +46,14 @@ export const post: RequestHandler<
 				content: true,
 				title: true,
 				id: true,
-				createdAt: true
+				createdAt: true,
+				image_link: {
+					select: {
+						id: true,
+						image_url: true,
+						name: true
+					}
+				}
 			}
 		});
 		if (!response) {
@@ -49,9 +64,13 @@ export const post: RequestHandler<
 				}
 			};
 		}
+		const serialized_response = {
+			...response,
+			createdAt: JSON.stringify(response.createdAt)
+		};
 		return {
 			body: {
-				items: response
+				item: serialized_response
 			},
 			status: 200
 		};

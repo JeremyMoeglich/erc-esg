@@ -1,16 +1,13 @@
-import {
-	is_article,
-	type article
-} from '$lib/scripts/universal/datatypes';
+import { is_article, type article } from '$lib/scripts/universal/datatypes';
 import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
 import type { JsonValue } from 'type-fest';
 import { articles_cache_store } from '../data/articles';
 
-export async function load_article(name: string): Promise<article | undefined> {
+export async function load_article(id: string): Promise<article | undefined> {
 	let cache = get(articles_cache_store);
-	if (hasProperty(cache, name)) {
-		const cached_item = cache[name];
+	if (hasProperty(cache, id)) {
+		const cached_item = cache[id];
 		if (is_article(cached_item)) {
 			return cached_item;
 		}
@@ -21,13 +18,15 @@ export async function load_article(name: string): Promise<article | undefined> {
 			'Content-Type': 'application/json'
 		},
 		body: JSON.stringify({
-			name
+			id
 		})
-	}).catch((v) => v);
+	});
 
 	if (response.status === 404) {
 		return undefined;
 	}
+
+	console.debug(JSON.stringify(response));
 
 	const body: JsonValue = await response.json();
 
@@ -45,6 +44,7 @@ export async function load_article(name: string): Promise<article | undefined> {
 	}
 
 	cache = get(articles_cache_store);
-	cache[name] = body.item;
+	cache[id] = body.item;
 	articles_cache_store.set(cache);
+	return body.item;
 }

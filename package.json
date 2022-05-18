@@ -17,6 +17,8 @@
 	"devDependencies": {
 		"@playwright/test": "^1.22.0",
 		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/adapter-netlify": "1.0.0-next.58",
+		"@sveltejs/adapter-node": "1.0.0-next.73",
 		"@sveltejs/kit": "next",
 		"@types/bcrypt": "^5.0.0",
 		"@types/cookie": "^0.5.1",
@@ -29,9 +31,11 @@
 		"carbon-icons-svelte": "^11.0.1",
 		"carbon-preprocess-svelte": "^0.9.0",
 		"cookie": "^0.5.0",
+		"dotenv": "^16.0.1",
 		"eslint": "^7.32.0",
 		"eslint-config-prettier": "^8.5.0",
 		"eslint-plugin-svelte3": "^3.4.1",
+		"imagekit": "^3.2.5",
 		"postcss": "^8.4.13",
 		"postcss-load-config": "^3.1.4",
 		"postcss-nested": "^5.0.6",
@@ -45,20 +49,19 @@
 		"svelte-preprocess": "^4.10.6",
 		"tslib": "^2.4.0",
 		"type-fest": "^2.12.2",
-		"dotenv": "^16.0.1",
 		"typescript": "~4.6.4",
-		"@sveltejs/adapter-netlify": "1.0.0-next.58",
-		"@sveltejs/adapter-node": "1.0.0-next.73",
-		"imagekit": "^3.2.5",
 		"uuid": "^8.3.2"
 	},
 	"type": "module",
 	"dependencies": {
+		"@bytemd/plugin-gfm": "^1.15.0",
+		"@prisma/client": "^3.14.0",
+		"bytemd": "^1.15.0",
 		"functional-utilities": "^1.15.1",
 		"js-cookie": "^3.0.1",
 		"svelte-file-dropzone": "1.0.0-dev.1",
+		"svelte-lazy": "^1.1.0",
 		"svelte-loading-spinners": "^0.1.7",
-		"@prisma/client": "^3.14.0",
 		"svelte-use-click-outside": "^1.0.0"
 	}
 }

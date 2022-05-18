@@ -11,7 +11,7 @@ export const post: RequestHandler<
 			error: string;
 	  }
 > = async ({ request }) => {
-	const body = await validate_get_admin_body(request, ['name', 'data_url']);
+	const body = await validate_get_admin_body(request, ['name', 'image']);
 	if (body instanceof Error) {
 		return {
 			status: 401,
@@ -20,7 +20,7 @@ export const post: RequestHandler<
 			}
 		};
 	}
-	if (typeof body.name !== 'string' || typeof body.data_url !== 'string') {
+	if (typeof body.name !== 'string' || typeof body.image !== 'string') {
 		return {
 			status: 400,
 			body: {
@@ -28,9 +28,9 @@ export const post: RequestHandler<
 			}
 		};
 	}
-	const { name, data_url } = body;
+	const { name, image } = body;
 
-	const response = await upload_image(name, data_url);
+	const response = await upload_image(name, image);
 
 	return {
 		status: 200,

@@ -1,6 +1,7 @@
 lockfileVersion: 5.4
 
 specifiers:
+  '@bytemd/plugin-gfm': ^1.15.0
   '@playwright/test': ^1.22.0
   '@prisma/client': ^3.14.0
   '@sveltejs/adapter-auto': next
@@ -15,6 +16,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.23.0
   autoprefixer: ^10.4.7
   bcrypt: ^5.0.1
+  bytemd: ^1.15.0
   carbon-icons-svelte: ^11.0.1
   carbon-preprocess-svelte: ^0.9.0
   cookie: ^0.5.0
@@ -36,6 +38,7 @@ specifiers:
   svelte: ^3.48.0
   svelte-check: ^2.7.0
   svelte-file-dropzone: 1.0.0-dev.1
+  svelte-lazy: ^1.1.0
   svelte-loading-spinners: ^0.1.7
   svelte-preprocess: ^4.10.6
   svelte-use-click-outside: ^1.0.0
@@ -45,10 +48,13 @@ specifiers:
   uuid: ^8.3.2
 
 dependencies:
+  '@bytemd/plugin-gfm': 1.15.0_bytemd@1.15.0
   '@prisma/client': 3.14.0_prisma@3.14.0
+  bytemd: 1.15.0
   functional-utilities: 1.15.1
   js-cookie: 3.0.1
   svelte-file-dropzone: 1.0.0-dev.1
+  svelte-lazy: 1.1.0_svelte@3.48.0
   svelte-loading-spinners: 0.1.7
   svelte-use-click-outside: 1.0.0
 
@@ -57,7 +63,7 @@ devDependencies:
   '@sveltejs/adapter-auto': 1.0.0-next.43
   '@sveltejs/adapter-netlify': 1.0.0-next.58
   '@sveltejs/adapter-node': 1.0.0-next.73
-  '@sveltejs/kit': 1.0.0-next.332_sass@1.51.0+svelte@3.48.0
+  '@sveltejs/kit': 1.0.0-next.334_sass@1.51.0+svelte@3.48.0
   '@types/bcrypt': 5.0.0
   '@types/cookie': 0.5.1
   '@types/js-cookie': 3.0.2
@@ -111,6 +117,14 @@ packages:
       chalk: 2.4.2
       js-tokens: 4.0.0
     dev: true
+
+  /@bytemd/plugin-gfm/1.15.0_bytemd@1.15.0:
+    resolution: {integrity: sha512-yrDIomnuuOWVm4pMUfbcCHnWBtPySmt/ytZah/eEz1tdMLlHQ7dfoGMl2irmD4lVF4qmADAfaRjtT1kbMN2CAA==}
+    peerDependencies:
+      bytemd: ^1.5.0
+    dependencies:
+      bytemd: 1.15.0
+    dev: false
 
   /@eslint/eslintrc/0.4.3:
     resolution: {integrity: sha512-J6KFFz5QCYUJq3pf0mjEcCJVERbzv71PUIDczuh9JkwGEzced6CO5ADLHB1rbf/+oPBtoPfMYNOpGDzCANlbXw==}
@@ -261,8 +275,8 @@ packages:
       esbuild: 0.14.39
     dev: true
 
-  /@sveltejs/kit/1.0.0-next.332_sass@1.51.0+svelte@3.48.0:
-    resolution: {integrity: sha512-feFwdVY70+McnRy1Z4ls3Yk9qGJksojrGIbi9Qah/K5qAcixDb4xcssbRwSKVOhr2YTuc1rFW2NQNFcghyGhgQ==}
+  /@sveltejs/kit/1.0.0-next.334_sass@1.51.0+svelte@3.48.0:
+    resolution: {integrity: sha512-HPMF1oYBfyOG6wfU0Y6F4SID8jphue9yF+PXJqVTDBL5Z2WBG2ogum6MavE8aWhq+g2H6w5y0jNT8+8DO2KTCA==}
     engines: {node: '>=16'}
     hasBin: true
     peerDependencies:
@@ -310,9 +324,19 @@ packages:
       '@types/node': 17.0.33
     dev: true
 
+  /@types/codemirror/5.60.5:
+    resolution: {integrity: sha512-TiECZmm8St5YxjFUp64LK0c8WU5bxMDt9YaAek1UqUb9swrSCoJhh92fWu1p3mTEqlHjhB5sY7OFBhWroJXZVg==}
+    dependencies:
+      '@types/tern': 0.23.4
+    dev: false
+
   /@types/cookie/0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
     dev: true
+
+  /@types/estree/0.0.51:
+    resolution: {integrity: sha512-CuPgU6f3eT/XgKKPqKd/gLZV1Xmvf1a2R5POBOGQa6uv82xpls89HU5zKeVoyR8XzHd1RGNOlQlvUe3CFkjWNQ==}
+    dev: false
 
   /@types/js-cookie/3.0.2:
     resolution: {integrity: sha512-6+0ekgfusHftJNYpihfkMu8BWdeHs9EOJuGcSofErjstGPfPGEu9yTu4t460lTzzAMl2cM5zngQJqPMHbbnvYA==}
@@ -335,6 +359,12 @@ packages:
     dependencies:
       '@types/node': 17.0.33
     dev: true
+
+  /@types/tern/0.23.4:
+    resolution: {integrity: sha512-JAUw1iXGO1qaWwEOzxTKJZ/5JxVeON9kvGZ/osgZaJImBnyjyn0cjovPsf6FNLmyGY8Vw9DoXZCMlfMkMwHRWg==}
+    dependencies:
+      '@types/estree': 0.0.51
+    dev: false
 
   /@types/uuid/8.3.4:
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
@@ -666,6 +696,12 @@ packages:
   /buffer-crc32/0.2.13:
     resolution: {integrity: sha1-DTM+PwDqxQqhRUq9MO+MKl2ackI=}
     dev: true
+
+  /bytemd/1.15.0:
+    resolution: {integrity: sha512-27G6vP4oLuaAEISCs+PnCcrQu4aeUkvkcViSefU0KxqXjmFHzjouqKWgd55S7jZWdNy1GwPAYyzpAR8A7qqxLQ==}
+    dependencies:
+      '@types/codemirror': 5.60.5
+    dev: false
 
   /callsites/3.1.0:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
@@ -2395,6 +2431,14 @@ packages:
     dependencies:
       svelte: 3.48.0
     dev: true
+
+  /svelte-lazy/1.1.0_svelte@3.48.0:
+    resolution: {integrity: sha512-Vol0Px4tKNK13xTs187T9wgenAgXZVHr+HCZx1Wgd5NFvgRxXR/5BE6gZAeF/BkLxLgYIprfZmJlE65slFYqOA==}
+    peerDependencies:
+      svelte: 3.x
+    dependencies:
+      svelte: 3.48.0
+    dev: false
 
   /svelte-loading-spinners/0.1.7:
     resolution: {integrity: sha512-EKCId1DjVL2RSUVJJsvtNcqQHox03XIgh4xh/4p7r6ST7d8mut6INY9/LqK4A17PFU64+3quZmqiSfOlf480CA==}
