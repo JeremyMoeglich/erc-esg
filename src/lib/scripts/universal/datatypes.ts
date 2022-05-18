@@ -1,7 +1,7 @@
 import type { Article, User } from '@prisma/client';
 import { hasProperty } from 'functional-utilities';
 
-export type user_data_type = Omit<User, 'password_hash'>
+export type user_data_type = Omit<User, 'password_hash'>;
 
 export function is_user_data(data: unknown): data is user_data_type {
 	if (typeof data !== 'object') {
@@ -36,9 +36,11 @@ export function is_article_preview(data: unknown): data is article_preview {
 		hasProperty(data, 'id') &&
 		hasProperty(data, 'title') &&
 		hasProperty(data, 'createdAt') &&
+		hasProperty(data, 'image_url') &&
 		typeof data.id === 'string' &&
 		typeof data.title === 'string' &&
-		typeof data.createdAt === 'string'
+		typeof data.createdAt === 'string' &&
+		typeof data.image_url === 'string'
 	);
 }
 
@@ -46,9 +48,7 @@ export type article = article_preview & Article;
 
 export function is_article(data: unknown): data is article {
 	return (
-		is_article_preview(data) &&
-		hasProperty(data, 'content') &&
-		typeof data.content === 'string'
+		is_article_preview(data) && hasProperty(data, 'content') && typeof data.content === 'string'
 	);
 }
 
