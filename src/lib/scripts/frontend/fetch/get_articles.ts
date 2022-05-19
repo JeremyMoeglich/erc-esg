@@ -1,12 +1,13 @@
 import {
-	is_article_preview,
 	type filter_type,
-	type article_preview
+	type article_preview,
+	is_article_preview_data
 } from '$lib/scripts/universal/datatypes';
 import type { JSONValue } from '@sveltejs/kit/types/private';
 import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
 import { articles_cache_store } from '../data/articles';
+import { image_cache_store } from '../data/image';
 
 export async function get_articles(
 	start: number,
@@ -42,14 +43,28 @@ export async function get_articles(
 		throw new Error('Items is not an array');
 	}
 
-	if (!body.articles.every(is_article_preview)) {
+	if (!body.articles.every(is_article_preview_data)) {
 		throw new Error('Items is not an array of simple item data types');
 	}
 
-	const cache = get(articles_cache_store);
-	body.articles.forEach((article) => {
-		cache[article.id] = article;
-	});
+	const articles_data = body.articles;
+	const articles: article_preview[] = articles_data.map((article) => ({
+		id: article.id,
+		title: article.title,
+		createdAt: article.createdAt,
+		image_link_id: article.image_link.id
+	}));
 
-	return body.articles;
+	const article_cache = get(articles_cache_store);
+	articles.forEach((article) => {
+		article_cache[article.id] = article;
+	});
+	articles_cache_store.set(article_cache);
+	const image_cache = get(image_cache_store);
+	articles_data.forEach((article_data) => {
+		image_cache[article_data.image_link.id] = article_data.image_link.image_url;
+	});
+	image_cache_store.set(image_cache);
+
+	return articles;
 }

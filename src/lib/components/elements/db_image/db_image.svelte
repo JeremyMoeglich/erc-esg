@@ -5,7 +5,7 @@
 	import { Edit } from 'carbon-icons-svelte';
 	import { get } from 'svelte/store';
 	import DbImageContent from './db_image_content.svelte';
-	export let name: string;
+	export let id: string;
 	export let click: string | (() => void) | undefined = undefined;
 	export let width: number | string | undefined = undefined;
 
@@ -17,12 +17,12 @@
 				throw new Error('Too many files');
 			}
 			const file = files[0];
-			const image_url = await upload_image(name, file);
+			const image_url = await upload_image(id, file);
 			if (image_url instanceof Error) {
 				throw image_url;
 			}
 			const current_image_url_store = get(image_cache_store);
-			current_image_url_store[name] = image_url;
+			current_image_url_store[id] = image_url;
 			image_cache_store.set(current_image_url_store);
 		}
 	}
@@ -33,15 +33,15 @@
 	<div class="content">
 		{#if typeof click === 'function'}
 			<button on:click={click}>
-				<DbImageContent {name} />
+				<DbImageContent {id} />
 			</button>
 		{:else if typeof click === 'string'}
 			<a href={click}>
-				<DbImageContent {name} />
+				<DbImageContent {id} />
 			</a>
 		{:else}
 			<div>
-				<DbImageContent {name} />
+				<DbImageContent {id} />
 			</div>
 		{/if}
 	</div>

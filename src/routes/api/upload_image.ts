@@ -1,5 +1,6 @@
 import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
 import { upload_image } from '$lib/scripts/backend/imagekit/upload_file';
+import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const post: RequestHandler<
@@ -11,7 +12,7 @@ export const post: RequestHandler<
 			error: string;
 	  }
 > = async ({ request }) => {
-	const body = await validate_get_admin_body(request, ['name', 'image']);
+	const body = await validate_get_admin_body(request, ['id', 'image']);
 	if (body instanceof Error) {
 		return {
 			status: 401,
@@ -20,7 +21,7 @@ export const post: RequestHandler<
 			}
 		};
 	}
-	if (typeof body.name !== 'string' || typeof body.image !== 'string') {
+	if (typeof body.id !== 'string' || typeof body.image !== 'string') {
 		return {
 			status: 400,
 			body: {
@@ -28,14 +29,29 @@ export const post: RequestHandler<
 			}
 		};
 	}
-	const { name, image } = body;
+	const { id, image } = body;
 
-	const response = await upload_image(name, image);
+	const response = await upload_image(id, image);
+
+	const url = response.url;
+
+	prisma_client.imageLink.upsert({
+		where: {
+			id
+		},
+		create: {
+			id,
+			image_url: url
+		},
+		update: {
+			image_url: url
+		}
+	});
 
 	return {
 		status: 200,
 		body: {
-			image_url: response.url
+			image_url: url
 		}
 	};
 };

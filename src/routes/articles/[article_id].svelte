@@ -33,17 +33,15 @@
 		is_loading.set(false);
 	}
 	let article: article_preview | article | undefined = undefined;
-	$: article = $articles_cache_store?.[article_id] ?? {
-		content: 'leerer Artikel',
-		image_link: {
-			name: v4(),
-			id: v4(),
-			image_url: 'https://via.placeholder.com/300x200'
-		},
-		id: article_id,
-		createdAt: JSON.stringify(new Date()),
-		title: 'Artikel nicht gefunden'
-	};
+	$: article =
+		$articles_cache_store?.[article_id] ??
+		({
+			content: 'leerer Artikel',
+			image_link_id: article_id,
+			id: article_id,
+			createdAt: JSON.stringify(new Date()),
+			title: 'Artikel nicht gefunden'
+		} as article);
 
 	import gfm from '@bytemd/plugin-gfm';
 	import { browser } from '$app/env';
@@ -63,7 +61,7 @@
 
 <div class="outer">
 	{#if article}
-		<DbImage name={article?.image_link?.name ?? article_id} width={'30%'} />
+		<DbImage id={article?.image_link_id ?? article_id} width={'30%'} />
 		<div class="article">
 			<h1>
 				{#if state !== 'loading'}

@@ -28,6 +28,17 @@ export const post: RequestHandler<
 	}
 	const { article } = body;
 
+	prisma_client.imageLink.upsert({
+		where: {
+			id: article.image_link_id
+		},
+		create: {
+			id: article.image_link_id,
+			image_url: 'https://via.placeholder.com/300x300'
+		},
+		update: {}
+	});
+
 	prisma_client.article.upsert({
 		where: {
 			id: article.id
@@ -35,13 +46,13 @@ export const post: RequestHandler<
 		update: {
 			title: article.title,
 			content: article.content,
-			imageLinkId: article.image_link.id
+			imageLinkId: article.image_link_id
 		},
 		create: {
-			id: article.id,
 			title: article.title,
 			content: article.content,
-			imageLinkId: article.image_link.id
+			imageLinkId: article.image_link_id,
+			createdAt: new Date()
 		}
 	});
 

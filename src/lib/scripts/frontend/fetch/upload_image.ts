@@ -9,7 +9,7 @@ const toBase64 = (file: File) =>
 		reader.onerror = (error) => reject(error);
 	});
 
-export async function upload_image(name: string, file: File): Promise<string | Error> {
+export async function upload_image(id: string, file: File): Promise<string | Error> {
 	if (!file.type.startsWith('image/')) {
 		return Promise.reject(new Error('Invalid file type'));
 	}
@@ -17,7 +17,7 @@ export async function upload_image(name: string, file: File): Promise<string | E
 		method: 'POST',
 		body: JSON.stringify({
 			image: await toBase64(file),
-			name: name
+			id
 		}),
 		headers: {
 			'Content-Type': 'application/json'
@@ -32,11 +32,11 @@ export async function upload_image(name: string, file: File): Promise<string | E
 		}
 		return new Error(body.error);
 	}
-    if (!hasProperty(body, 'image_url')) {
-        return new Error('Invalid response');
-    }
-    if (typeof body.image_url !== 'string') {
-        return new Error('Invalid url');
-    }
-    return body.image_url;
+	if (!hasProperty(body, 'image_url')) {
+		return new Error('Invalid response');
+	}
+	if (typeof body.image_url !== 'string') {
+		return new Error('Invalid url');
+	}
+	return body.image_url;
 }

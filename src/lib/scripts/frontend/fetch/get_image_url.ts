@@ -3,12 +3,12 @@ import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
 import { image_cache_store } from '../data/image';
 
-export async function get_image_url(name: string): Promise<string | Error> {
+export async function get_image_url(id: string): Promise<string | Error> {
 	let current_cache = get(image_cache_store);
-	if (current_cache?.[name]) {
-		return current_cache[name];
+	if (hasProperty(current_cache, id)) {
+		return current_cache[id];
 	}
-	const url = `/api/images/${name}.json`;
+	const url = `/api/images/${id}.json`;
 	const response = await fetch(url);
 	const body: JSONValue = await response.json();
 	if (hasProperty(body, 'error')) {
@@ -26,7 +26,7 @@ export async function get_image_url(name: string): Promise<string | Error> {
 	current_cache = get(image_cache_store);
 	image_cache_store.set({
 		...current_cache,
-		[name]: body.image_url
+		[id]: body.image_url
 	});
 	return body.image_url;
 }

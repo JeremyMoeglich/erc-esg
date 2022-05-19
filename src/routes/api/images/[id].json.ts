@@ -2,7 +2,7 @@ import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { RequestHandler } from '@sveltejs/kit';
 
 export const get: RequestHandler<
-	{ name: string },
+	{ id: string },
 	| {
 			image_url: string;
 	  }
@@ -10,12 +10,12 @@ export const get: RequestHandler<
 			error: string;
 	  }
 > = async ({ params }) => {
-	const { name } = params;
+	const { id } = params;
 	try {
 		const response = await prisma_client.imageLink
 			.findUnique({
 				where: {
-					name
+					id
 				},
 				select: {
 					image_url: true

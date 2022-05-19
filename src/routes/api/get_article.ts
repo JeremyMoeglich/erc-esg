@@ -1,19 +1,13 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { imageLink } from '@prisma/client';
+import type { article_data } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from '@sveltejs/kit';
 import type { Jsonify } from 'type-fest';
 
 export const post: RequestHandler<
 	Record<string, never>,
 	| {
-			item: Jsonify<{
-				id: string;
-				title: string;
-				createdAt: string;
-				content: string;
-				image_link: imageLink;
-			}>;
+			item: Jsonify<article_data>;
 	  }
 	| {
 			error: string;
@@ -51,8 +45,7 @@ export const post: RequestHandler<
 					image_link: {
 						select: {
 							id: true,
-							image_url: true,
-							name: true
+							image_url: true
 						}
 					}
 				}

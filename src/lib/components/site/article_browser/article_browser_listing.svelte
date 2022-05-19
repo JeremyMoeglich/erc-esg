@@ -7,6 +7,6 @@
 
 <div>
 	{#each articles as article}
-		<DbImage name={article.image_link.name} click={`/articles/${article.id}`} />
+		<DbImage id={article.image_link_id} click={`/articles/${article.id}`} />
 	{/each}
 </div>
