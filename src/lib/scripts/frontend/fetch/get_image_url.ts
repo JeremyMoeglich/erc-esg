@@ -9,7 +9,6 @@ export async function get_image_url(name: string): Promise<string | Error> {
 		return current_cache[name];
 	}
 	const url = `/api/images/${name}.json`;
-	console.debug(`Fetching image url for ${url}`);
 	const response = await fetch(url);
 	const body: JSONValue = await response.json();
 	if (hasProperty(body, 'error')) {
@@ -18,16 +17,16 @@ export async function get_image_url(name: string): Promise<string | Error> {
 		}
 		return new Error(body.error);
 	}
-	if (!hasProperty(body, 'url')) {
+	if (!hasProperty(body, 'image_url')) {
 		return new Error('Invalid response');
 	}
-	if (typeof body.url !== 'string') {
+	if (typeof body.image_url !== 'string') {
 		return new Error('Invalid url');
 	}
 	current_cache = get(image_cache_store);
 	image_cache_store.set({
 		...current_cache,
-		[name]: body.url
+		[name]: body.image_url
 	});
-	return body.url;
+	return body.image_url;
 }

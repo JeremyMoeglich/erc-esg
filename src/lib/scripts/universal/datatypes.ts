@@ -65,17 +65,13 @@ export function is_article_preview(data: unknown): data is article_preview {
 
 export interface article extends article_preview {
 	content: string;
-	content_images: string[];
 }
 
 export function is_article(data: unknown): data is article {
 	return (
 		is_article_preview(data) &&
 		hasProperty(data, 'content') &&
-		typeof data.content === 'string' &&
-		hasProperty(data, 'content_images') &&
-		Array.isArray(data.content_images) &&
-		data.content_images.every((image) => typeof image === 'string')
+		typeof data.content === 'string'
 	);
 }
 

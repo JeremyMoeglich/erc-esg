@@ -12,8 +12,10 @@ export function parse_body<T extends string>(
 	if (typeof content !== 'object') {
 		return undefined;
 	}
+	console.debug(content);
 	attrs.forEach((attr) => {
 		if (!hasProperty(content, attr)) {
+			console.debug('Missing attribute', attr);
 			return undefined;
 		}
 	});

@@ -12,7 +12,7 @@ export async function load_article(id: string): Promise<article | undefined> {
 			return cached_item;
 		}
 	}
-	const response: Response = await fetch('/api/get_item', {
+	const response: Response | undefined = await fetch('/api/get_article', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -21,18 +21,19 @@ export async function load_article(id: string): Promise<article | undefined> {
 			id
 		})
 	});
-
-	if (response.status === 404) {
+	
+	if (!response) {
 		return undefined;
 	}
-
-	console.debug(JSON.stringify(response));
 
 	const body: JsonValue = await response.json();
 
 	if (hasProperty(body, 'error')) {
 		if (typeof body.error !== 'string') {
 			throw new Error('Invalid error message');
+		}
+		if (response.status === 404) {
+			return undefined;
 		}
 		throw new Error(body.error);
 	}

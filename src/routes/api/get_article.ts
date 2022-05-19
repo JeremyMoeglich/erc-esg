@@ -38,29 +38,31 @@ export const post: RequestHandler<
 	}
 	const { id } = body;
 	try {
-		const response = await prisma_client.article.findUnique({
-			where: {
-				id
-			},
-			select: {
-				content: true,
-				title: true,
-				id: true,
-				createdAt: true,
-				image_link: {
-					select: {
-						id: true,
-						image_url: true,
-						name: true
+		const response = await prisma_client.article
+			.findUnique({
+				where: {
+					id
+				},
+				select: {
+					content: true,
+					title: true,
+					id: true,
+					createdAt: true,
+					image_link: {
+						select: {
+							id: true,
+							image_url: true,
+							name: true
+						}
 					}
 				}
-			}
-		});
+			})
+			.catch(() => undefined);
 		if (!response) {
 			return {
 				status: 404,
 				body: {
-					error: 'Item not found'
+					error: 'Article not found'
 				}
 			};
 		}

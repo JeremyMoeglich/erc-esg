@@ -5,7 +5,7 @@ import type { RequestHandler } from '@sveltejs/kit';
 export const post: RequestHandler<
 	Record<string, never>,
 	| {
-			url: string;
+			image_url: string;
 	  }
 	| {
 			error: string;
@@ -35,7 +35,7 @@ export const post: RequestHandler<
 	return {
 		status: 200,
 		body: {
-			url: response.url
+			image_url: response.url
 		}
 	};
 };

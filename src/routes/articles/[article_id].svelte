@@ -7,7 +7,6 @@
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import type { article, article_preview } from '$lib/scripts/universal/datatypes';
 	import { hasProperty } from 'functional-utilities';
-	import { noop } from 'svelte/internal';
 	import { get } from 'svelte/store';
 	import { v4 } from 'uuid';
 	import { Editor, Viewer } from 'bytemd';
@@ -16,7 +15,7 @@
 
 	let article_id: string = get(page).params.article;
 	let state: 'loading' | 'not_found' | 'loaded' = 'loading';
-	$: article_id = $page.params.article;
+	$: article_id = $page.params.article_id;
 
 	async function load(article_id: string) {
 		if (browser) {
@@ -38,14 +37,19 @@
 		content: 'leerer Artikel',
 		image_link: {
 			name: v4(),
-			url: 'https://via.placeholder.com/300x200'
+			id: v4(),
+			image_url: 'https://via.placeholder.com/300x200'
 		},
-		id: v4(),
+		id: article_id,
+		createdAt: JSON.stringify(new Date()),
 		title: 'Artikel nicht gefunden'
 	};
 
 	import gfm from '@bytemd/plugin-gfm';
 	import { browser } from '$app/env';
+	import Button from '$lib/components/elements/button.svelte';
+	import Inplaceedit from '$lib/components/elements/inplaceedit.svelte';
+	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
 
 	const plugins = [gfm()];
 
@@ -57,27 +61,64 @@
 	}
 </script>
 
-<div>
+<div class="outer">
 	{#if article}
-		<DbImage name={article?.image_link?.name ?? article_id} click={noop} />
-		<h1>
-			{#if state !== 'loading'}
-				{article.title}
-				{#if $admin_mode}
-					<a href={`/admin/articles/${article_id}`}>
-						<i class="fas fa-edit" />
-					</a>
+		<DbImage name={article?.image_link?.name ?? article_id} width={'30%'} />
+		<div class="article">
+			<h1>
+				{#if state !== 'loading'}
+					{#if $admin_mode}
+						<Inplaceedit
+							value={article.title}
+							on:submit={({ detail: value }) => {
+								if (!article?.title) {
+									throw new Error('article has no title, but title is shown');
+								}
+								article.title = value;
+							}}
+						/>
+					{:else}
+						{article.title}
+					{/if}
 				{/if}
+			</h1>
+			{#if hasProperty(article, 'content')}
+				<template>
+					{#if $admin_mode}
+						<Editor value={article.content} {plugins} on:change={content_change} locale={de} />
+						<div class="save_button">
+							<Button
+								text={'Speichern'}
+								onclick={() => {
+									if (!hasProperty(article, 'content')) {
+										throw new Error('article has no content, but content is shown');
+									}
+									update_article(article);
+								}}
+							/>
+						</div>
+					{:else}
+						<Viewer value={article.content} {plugins} />
+					{/if}
+				</template>
 			{/if}
-		</h1>
-		{#if hasProperty(article, 'content')}
-			<template>
-				{#if $admin_mode}
-					<Editor value={article.content} {plugins} on:change={content_change} locale={de} />
-				{:else}
-					<Viewer value={article.content} {plugins} locale={de} />
-				{/if}
-			</template>
-		{/if}
+		</div>
 	{/if}
 </div>
+
+<style>
+	.outer {
+		display: flex;
+		width: 90%;
+		margin: 50px auto;
+		gap: 40px;
+	}
+	.article {
+		width: 100%;
+	}
+	.save_button {
+		display: flex;
+		justify-content: center;
+		margin-top: 2rem;
+	}
+</style>

@@ -12,17 +12,19 @@ export const get: RequestHandler<
 > = async ({ params }) => {
 	const { name } = params;
 	try {
-		const response = await prisma_client.imageLink.findUnique({
-			where: {
-				name
-			},
-			select: {
-				image_url: true
-			}
-		});
+		const response = await prisma_client.imageLink
+			.findUnique({
+				where: {
+					name
+				},
+				select: {
+					image_url: true
+				}
+			})
+			.catch(() => undefined);
 		if (!response) {
 			return {
-				status: 404,
+				status: 200,
 				body: {
 					image_url: 'https://via.placeholder.com/300x300'
 				}
