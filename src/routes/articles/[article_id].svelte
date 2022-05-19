@@ -8,18 +8,28 @@
 	import type { article, article_preview } from '$lib/scripts/universal/datatypes';
 	import { hasProperty } from 'functional-utilities';
 	import { get } from 'svelte/store';
-	import { v4 } from 'uuid';
 	import { Editor, Viewer } from 'bytemd';
 	import 'bytemd/dist/index.css';
 	import de from 'bytemd/locales/de.json';
 
-	let article_id: string = get(page).params.article;
-	let state: 'loading' | 'not_found' | 'loaded' = 'loading';
+	const sanitize = (v: unknown) => v;
+
+	let article_id: string = get(page).params.article_id;
+	let state: 'loading' | 'not_found' | 'loaded' | undefined = 'loading';
 	$: article_id = $page.params.article_id;
 
 	async function load(article_id: string) {
-		if (browser) {
+		if (browser && article_id) {
 			state = (await load_article(article_id)) ? 'loaded' : 'not_found';
+			if (state === 'not_found') {
+				article = {
+					content: 'Kein Inhalt',
+					id: article_id,
+					image_link_id: article_id,
+					title: 'Leerer Artikel',
+					createdAt: JSON.stringify(new Date())
+				};
+			}
 		}
 	}
 
@@ -31,23 +41,17 @@
 		}
 		load(article_id);
 		is_loading.set(false);
+		state = undefined;
 	}
 	let article: article_preview | article | undefined = undefined;
-	$: article =
-		$articles_cache_store?.[article_id] ??
-		({
-			content: 'leerer Artikel',
-			image_link_id: article_id,
-			id: article_id,
-			createdAt: JSON.stringify(new Date()),
-			title: 'Artikel nicht gefunden'
-		} as article);
+	$: article = $articles_cache_store?.[article_id];
 
 	import gfm from '@bytemd/plugin-gfm';
 	import { browser } from '$app/env';
 	import Button from '$lib/components/elements/button.svelte';
 	import Inplaceedit from '$lib/components/elements/inplaceedit.svelte';
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
+	import { goto } from '$app/navigation';
 
 	const plugins = [gfm()];
 
@@ -83,15 +87,22 @@
 			{#if hasProperty(article, 'content')}
 				<template>
 					{#if $admin_mode}
-						<Editor value={article.content} {plugins} on:change={content_change} locale={de} />
+						<Editor
+							value={article.content}
+							{plugins}
+							on:change={content_change}
+							locale={de}
+							{sanitize}
+						/>
 						<div class="save_button">
 							<Button
 								text={'Speichern'}
-								onclick={() => {
+								onclick={async () => {
 									if (!hasProperty(article, 'content')) {
 										throw new Error('article has no content, but content is shown');
 									}
 									update_article(article);
+									await goto('/blog');
 								}}
 							/>
 						</div>

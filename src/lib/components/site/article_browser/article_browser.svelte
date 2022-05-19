@@ -1,13 +1,18 @@
 <script lang="ts">
 	import { browser } from '$app/env';
+	import { update_index } from '$lib/scripts/frontend/data/local_changes';
 	import { get_articles } from '$lib/scripts/frontend/fetch/get_articles';
 	import type { article_preview, filter_type } from '$lib/scripts/universal/datatypes';
 	import ArticleBrowserListing from './article_browser_listing.svelte';
+	import SearchBar from './search_bar.svelte';
 
-	import ItemBrowserListing from './article_browser_listing.svelte';
-
-	export let filter: filter_type | undefined;
 	export let page = 0;
+
+	let search_value: string = '';
+
+	let filter: filter_type = {
+		search: ''
+	};
 
 	const articles_per_page = 12;
 
@@ -26,10 +31,19 @@
 		}
 	}
 
-	$: update_items(filter, page);
+	$: $update_index, update_items(filter, page);
 </script>
 
-This is the item browser listing component.
-{#if articles}
-	<ArticleBrowserListing {articles} />
-{/if}
+<div>
+	<div>
+		<SearchBar
+			bind:value={search_value}
+			on_search={async () => {
+				filter.search = search_value;
+			}}
+		/>
+	</div>
+	{#if articles}
+		<ArticleBrowserListing {articles} />
+	{/if}
+</div>

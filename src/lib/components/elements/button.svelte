@@ -6,7 +6,7 @@
 
 <div class:important class="main">
 	{#if typeof onclick === 'function'}
-		<button on:click={onclick}>
+		<button on:click|stopPropagation={onclick}>
 			{text}
 		</button>
 	{:else}

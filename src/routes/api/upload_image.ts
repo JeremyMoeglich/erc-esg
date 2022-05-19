@@ -35,7 +35,7 @@ export const post: RequestHandler<
 
 	const url = response.url;
 
-	prisma_client.imageLink.upsert({
+	await prisma_client.imageLink.upsert({
 		where: {
 			id
 		},

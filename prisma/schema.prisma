@@ -25,13 +25,13 @@ model LoginToken {
 
 model imageLink {
     id        String    @id @unique @db.VarChar(255)
-    image_url String    @unique @db.VarChar(255)
+    image_url String    @db.VarChar(255)
     Article   Article[]
 }
 
 model Article {
     id          String    @id @default(uuid())
-    title       String    @unique @db.VarChar(511)
+    title       String    @db.VarChar(511)
     content     String
     createdAt   DateTime  @default(now())
     image_link  imageLink @relation(fields: [imageLinkId], references: [id])

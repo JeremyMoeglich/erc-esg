@@ -28,7 +28,7 @@ export const post: RequestHandler<
 	}
 	const { article } = body;
 
-	prisma_client.imageLink.upsert({
+	await prisma_client.imageLink.upsert({
 		where: {
 			id: article.image_link_id
 		},
@@ -39,7 +39,7 @@ export const post: RequestHandler<
 		update: {}
 	});
 
-	prisma_client.article.upsert({
+	await prisma_client.article.upsert({
 		where: {
 			id: article.id
 		},

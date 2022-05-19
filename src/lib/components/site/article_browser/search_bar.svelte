@@ -1,16 +1,17 @@
 <script lang="ts">
 	import { Search } from 'carbon-icons-svelte';
 	export let value = '';
+	export let on_search: () => Promise<void>;
 </script>
 
-<div>
+<form on:submit={on_search}>
 	<input type="search" bind:value />
-	<button><Search fill={'var(--primary-color)'} size={32} /></button>
-</div>
+	<button type="submit"><Search fill={'var(--primary-color)'} size={32} /></button>
+</form>
 
 <style lang="scss">
 	$size: 36px;
-	div {
+	form {
 		display: flex;
 		border: 1px solid var(--gray400);
 		height: $size * 1.125;

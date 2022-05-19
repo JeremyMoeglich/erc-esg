@@ -2,12 +2,14 @@
 	import { admin_mode } from '$lib/scripts/frontend/auth/auth_state';
 	import { image_cache_store } from '$lib/scripts/frontend/data/image';
 	import { upload_image } from '$lib/scripts/frontend/fetch/upload_image';
+	import { Circle2 } from 'svelte-loading-spinners';
 	import { Edit } from 'carbon-icons-svelte';
 	import { get } from 'svelte/store';
 	import DbImageContent from './db_image_content.svelte';
 	export let id: string;
 	export let click: string | (() => void) | undefined = undefined;
 	export let width: number | string | undefined = undefined;
+	let loading = false;
 
 	let files: FileList | undefined = undefined;
 
@@ -16,14 +18,19 @@
 			if (files.length > 1) {
 				throw new Error('Too many files');
 			}
-			const file = files[0];
-			const image_url = await upload_image(id, file);
-			if (image_url instanceof Error) {
-				throw image_url;
+			try {
+				loading = true;
+				const file = files[0];
+				const image_url = await upload_image(id, file);
+				if (image_url instanceof Error) {
+					throw image_url;
+				}
+				const current_image_url_store = get(image_cache_store);
+				current_image_url_store[id] = image_url;
+				image_cache_store.set(current_image_url_store);
+			} finally {
+				loading = false;
 			}
-			const current_image_url_store = get(image_cache_store);
-			current_image_url_store[id] = image_url;
-			image_cache_store.set(current_image_url_store);
 		}
 	}
 	$: str_width = typeof width === 'number' ? `${width}px` : width;
@@ -46,13 +53,17 @@
 		{/if}
 	</div>
 	{#if $admin_mode}
-		<div class="overlay">
-			<div class="edit_file_input">
-				<div class="edit_file_symbol">
-					<Edit size={24} />
+		<div class="overlay" class:loading>
+			{#if !loading}
+				<div class="edit_file_input">
+					<div class="edit_file_symbol">
+						<Edit size={24} />
+					</div>
+					<input type="file" bind:files on:change={update_image} on:click|stopPropagation />
 				</div>
-				<input type="file" bind:files on:change={update_image} />
-			</div>
+			{:else}
+				<Circle2 />
+			{/if}
 		</div>
 	{/if}
 </div>
@@ -79,7 +90,8 @@
 		filter: opacity(0);
 		transition-duration: 200ms;
 	}
-	.overlay:hover {
+	.overlay:hover,
+	.loading {
 		filter: opacity(1);
 	}
 	.edit_file_input {

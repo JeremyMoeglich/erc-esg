@@ -1,5 +1,3 @@
-
-
 <script lang="ts">
 	import '../global.scss';
 	import Header from '$lib/components/site/route/layout/header/head.svelte';
@@ -8,6 +6,7 @@
 	import { check_token_and_login } from '$lib/scripts/frontend/auth/token_login';
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import { Circle2 } from 'svelte-loading-spinners';
+	import PageTransition from '$lib/components/layout/page_transition.svelte';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -26,7 +25,9 @@
 
 <div class="outer">
 	<Header />
-	<slot />
+	<PageTransition>
+		<slot />
+	</PageTransition>
 	{#if $is_loading}
 		<div class="loading">
 			<div class="spinner">

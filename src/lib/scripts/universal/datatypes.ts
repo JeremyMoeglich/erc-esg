@@ -47,9 +47,7 @@ export function is_image_link(data: unknown): data is imageLink {
 		hasProperty(data, 'id') &&
 		typeof data.id === 'string' &&
 		hasProperty(data, 'image_url') &&
-		typeof data.image_url === 'string' &&
-		hasProperty(data, 'name') &&
-		typeof data.name === 'string'
+		typeof data.image_url === 'string'
 	) {
 		return true;
 	}

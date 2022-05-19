@@ -5,7 +5,10 @@
 
 <div class="main">
 	<div class="upper">
-		<Logo />
+		<div class="left_side">
+			<Logo />
+			<a href="/blog">Blog</a>
+		</div>
 		<Account />
 	</div>
 </div>
@@ -14,6 +17,11 @@
 	.main {
 		background: white;
 		border-bottom: 7px solid var(--primary-color);
+	}
+	.left_side {
+		display: flex;
+		align-items: center;
+		gap: 10px;
 	}
 	.upper {
 		padding: 10px 3vw;

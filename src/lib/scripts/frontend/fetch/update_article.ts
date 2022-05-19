@@ -1,6 +1,8 @@
 import type { article } from '$lib/scripts/universal/datatypes';
 import { hasProperty } from 'functional-utilities';
+import { get } from 'svelte/store';
 import type { JsonValue } from 'type-fest';
+import { update_index } from '../data/local_changes';
 
 export async function update_article(article: article) {
 	const response: Response = await fetch('/api/update_article', {
@@ -21,4 +23,6 @@ export async function update_article(article: article) {
 		}
 		throw new Error(body.error);
 	}
+
+	update_index.set(get(update_index) + 1);
 }

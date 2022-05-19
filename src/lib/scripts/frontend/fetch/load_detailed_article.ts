@@ -29,6 +29,8 @@ export async function load_article(id: string): Promise<article | undefined> {
 
 	const body: JsonValue = await response.json();
 
+	console.log(body);
+
 	if (hasProperty(body, 'error')) {
 		if (typeof body.error !== 'string') {
 			throw new Error('Invalid error message');
@@ -54,6 +56,7 @@ export async function load_article(id: string): Promise<article | undefined> {
 	};
 
 	cache = get(articles_cache_store);
+
 	cache[id] = article;
 	articles_cache_store.set(cache);
 
