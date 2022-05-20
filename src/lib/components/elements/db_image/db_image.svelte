@@ -9,6 +9,8 @@
 	export let id: string;
 	export let click: string | (() => void) | undefined = undefined;
 	export let width: number | string | undefined = undefined;
+	export let attr: string = '';
+
 	let loading = false;
 
 	let files: FileList | undefined = undefined;
@@ -40,15 +42,15 @@
 	<div class="content">
 		{#if typeof click === 'function'}
 			<button on:click={click}>
-				<DbImageContent {id} />
+				<DbImageContent {id} {attr} />
 			</button>
 		{:else if typeof click === 'string'}
 			<a href={click}>
-				<DbImageContent {id} />
+				<DbImageContent {id} {attr} />
 			</a>
 		{:else}
 			<div>
-				<DbImageContent {id} />
+				<DbImageContent {id} {attr} />
 			</div>
 		{/if}
 	</div>

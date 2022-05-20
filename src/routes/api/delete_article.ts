@@ -26,21 +26,13 @@ export const post: RequestHandler<
 		};
 	}
 	const { id } = body;
-	try {
-		await prisma_client.article.delete({
-			where: {
-				id
-			}
-		});
-		return {
-			status: 200
-		};
-	} catch (error) {
-		return {
-			status: 500,
-			body: {
-				error: 'Internal server error'
-			}
-		};
-	}
+
+	await prisma_client.article.delete({
+		where: {
+			id
+		}
+	});
+	return {
+		status: 200
+	};
 };

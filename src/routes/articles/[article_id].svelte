@@ -52,6 +52,8 @@
 	import Inplaceedit from '$lib/components/elements/inplaceedit.svelte';
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
 	import { goto } from '$app/navigation';
+	import { upload_image } from '$lib/scripts/frontend/fetch/upload_image';
+	import { v4 } from 'uuid';
 
 	const plugins = [gfm()];
 
@@ -61,11 +63,39 @@
 		}
 		article.content = event.detail.value;
 	}
+	const uploadImages: (files: File[]) => Promise<
+		{
+			url: string;
+			alt: string;
+			title: string;
+		}[]
+	> = async (files: File[]) => {
+		const result = await Promise.all(
+			files.map(async (file) => {
+				return {
+					url: await upload_image(v4(), file),
+					alt: file.name,
+					title: file.name
+				};
+			})
+		);
+		return result.map((image) => {
+			const url = image.url;
+			if (typeof url === 'string') {
+				return {
+					url: `${url}?tr=w-300`,
+					alt: image.alt,
+					title: image.title
+				};
+			}
+			throw new Error('upload_image returned Error');
+		});
+	};
 </script>
 
 <div class="outer">
 	{#if article}
-		<DbImage id={article?.image_link_id ?? article_id} width={'30%'} />
+		<DbImage id={article?.image_link_id ?? article_id} width={'30%'}/>
 		<div class="article">
 			<h1>
 				{#if state !== 'loading'}
@@ -93,6 +123,7 @@
 							on:change={content_change}
 							locale={de}
 							{sanitize}
+							{uploadImages}
 						/>
 						<div class="save_button">
 							<Button

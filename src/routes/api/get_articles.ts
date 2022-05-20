@@ -80,52 +80,43 @@ export const post: RequestHandler<
 		  }
 		: undefined;
 
-	try {
-		const response = await prisma_client.article.findMany({
-			where: query
-				? {
-						OR: [
-							{
-								content: query
-							},
-							{
-								title: query
-							}
-						]
-				  }
-				: undefined,
-			skip: start,
-			take: end - start,
-			select: {
-				title: true,
-				id: true,
-				createdAt: true,
-				image_link: {
-					select: {
-						id: true,
-						image_url: true
-					}
+	const response = await prisma_client.article.findMany({
+		where: query
+			? {
+					OR: [
+						{
+							content: query
+						},
+						{
+							title: query
+						}
+					]
+			  }
+			: undefined,
+		skip: start,
+		take: end - start,
+		select: {
+			title: true,
+			id: true,
+			createdAt: true,
+			image_link: {
+				select: {
+					id: true,
+					image_url: true
 				}
-			},
-			orderBy: {
-				createdAt: 'desc'
 			}
-		});
-		return {
-			body: {
-				articles: response.map((article) => ({
-					...article,
-					createdAt: JSON.stringify(article.createdAt)
-				}))
-			},
-			status: 200
-		};
-	} catch (error) {
-		return {
-			status: 500,
-			body: {
-				error: 'Internal server error'
-			}
-		};
-	}
+		},
+		orderBy: {
+			createdAt: 'desc'
+		}
+	});
+	return {
+		body: {
+			articles: response.map((article) => ({
+				...article,
+				createdAt: JSON.stringify(article.createdAt)
+			}))
+		},
+		status: 200
+	};
 };

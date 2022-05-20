@@ -14,7 +14,7 @@
 	<div class="outer">
 		<a href={`/articles/${article.id}`}>
 			<div class="img">
-				<DbImage id={article.image_link_id} width={'100%'} />
+				<DbImage id={article.image_link_id} width={'100%'} attr={'w-200,ar-5-3,fo-auto'}/>
 			</div>
 			<div>
 				<h3>{article.title}</h3>
