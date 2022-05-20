@@ -70,16 +70,30 @@ export const post: RequestHandler<
 			}
 		};
 	}
+	const query = filter.search
+		? {
+				search: filter.search
+					.split(' ')
+					.filter(Boolean)
+					.map((word) => `${word}`)
+					.join(' & ')
+		  }
+		: undefined;
 
 	try {
 		const response = await prisma_client.article.findMany({
-			where: {
-				title: filter.search
-					? {
-							search: filter.search
-					  }
-					: undefined
-			},
+			where: query
+				? {
+						OR: [
+							{
+								content: query
+							},
+							{
+								title: query
+							}
+						]
+				  }
+				: undefined,
 			skip: start,
 			take: end - start,
 			select: {

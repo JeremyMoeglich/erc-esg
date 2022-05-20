@@ -2,16 +2,22 @@
 	import { Search } from 'carbon-icons-svelte';
 	export let value = '';
 	export let on_search: () => Promise<void>;
+
+	function keypress(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			on_search();
+		}
+	}
 </script>
 
-<form on:submit={on_search}>
-	<input type="search" bind:value />
-	<button type="submit"><Search fill={'var(--primary-color)'} size={32} /></button>
-</form>
+<div>
+	<input type="search" bind:value on:keypress={keypress} />
+	<button on:click={on_search}><Search fill={'var(--primary-color)'} size={32} /></button>
+</div>
 
 <style lang="scss">
 	$size: 36px;
-	form {
+	div {
 		display: flex;
 		border: 1px solid var(--gray400);
 		height: $size * 1.125;

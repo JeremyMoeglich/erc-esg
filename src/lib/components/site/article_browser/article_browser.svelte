@@ -34,7 +34,7 @@
 	$: $update_index, update_items(filter, page);
 </script>
 
-<div>
+<div class="outer">
 	<div>
 		<SearchBar
 			bind:value={search_value}
@@ -47,3 +47,15 @@
 		<ArticleBrowserListing {articles} />
 	{/if}
 </div>
+
+<style>
+	.outer {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		height: 100%;
+		gap: 20px;
+		padding: 30px 90px;
+		background-color: var(--gray200);
+	}
+</style>

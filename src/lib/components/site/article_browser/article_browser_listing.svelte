@@ -9,14 +9,14 @@
 </script>
 
 <div class="listing">
+	{#if $admin_mode}
+		<div class="add">
+			<a class="add_button" href={`/articles/${v4()}`}><Add size={32} /></a>
+		</div>
+	{/if}
 	{#each articles as article}
 		<ArticleBrowserItem {article} />
 	{/each}
-	{#if $admin_mode}
-		<div class="add">
-			<a class="add_button" href={`/articles/${v4()}`}><Add size={32}/></a>
-		</div>
-	{/if}
 </div>
 
 <style lang="scss">
@@ -25,6 +25,8 @@
 		gap: 30px;
 		flex-direction: column;
 		padding: 30px;
+		width: 100%;
+		background-color: var(--gray100);
 	}
 	.add {
 		display: flex;

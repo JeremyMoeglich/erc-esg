@@ -36,6 +36,18 @@
 <style>
 	.outer {
 		display: flex;
+		background-color: var(--gray200);
+		border-bottom: 4px solid var(--secondary-color);
+		transition-duration: 300ms;
+		align-items: center;
+		padding-right: 70px;
+	}
+	.outer:hover {
+		border-bottom: 4px solid var(--primary-color);
+		transform: scale(1.01);
+		filter: drop-shadow(0px 6px 10px rgba(0, 0, 0, 0.2));
+		background-color: var(--gray000);
+		color: var(--secondary-color);
 	}
 	a {
 		display: flex;
