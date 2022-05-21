@@ -15,7 +15,7 @@
 		if (auth_state === 'none') {
 			route = '/login';
 		} else if (auth_state === 'user') {
-			route = '/profile';
+			route = '/account';
 		} else if (auth_state === 'admin') {
 			route = '/admin';
 		} else if (auth_state === 'root') {
@@ -55,8 +55,8 @@
 			<a href="/login">Anmelden <Login /></a>
 			<a href="/login?register">Registrieren <AddAlt /></a>
 		{:else}
-			<a href="/profile">
-				Profil
+			<a href="/account">
+				Account
 				<User size={20} />
 			</a>
 			<button
