@@ -34,5 +34,30 @@ export function fadeScale(
 		}
 	};
 }
-
+export function tfade(
+	node: Element,
+	{
+		angle = 0,
+		delay = 0,
+		duration = 200,
+		easing = (x: number) => x,
+		x = 0,
+		y = 0,
+		scale = 1,
+		opacity = 1
+	}
+) {
+	return {
+		duration,
+		delay,
+		css(t: number) {
+			const eased = easing(t);
+			return `transform: rotate(${(1 - eased) * angle}deg) opacity: ${
+				eased * (1 - opacity) + opacity
+			}); translate(${(1 - eased) * x}px, ${(1 - eased) * y}px) scale(${
+				(1 - eased) * scale + scale
+			})`;
+		}
+	};
+}
 export { send, receive };

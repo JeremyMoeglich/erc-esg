@@ -11,6 +11,7 @@
 	import { Editor, Viewer } from 'bytemd';
 	import 'bytemd/dist/index.css';
 	import de from 'bytemd/locales/de.json';
+	import type { EditorConfiguration } from 'codemirror';
 
 	const sanitize = (v: unknown) => v;
 
@@ -23,7 +24,7 @@
 			state = (await load_article(article_id)) ? 'loaded' : 'not_found';
 			if (state === 'not_found') {
 				article = {
-					content: 'Kein Inhalt',
+					content: '',
 					id: article_id,
 					image_link_id: article_id,
 					title: 'Leerer Artikel',
@@ -57,11 +58,11 @@
 
 	const plugins = [gfm()];
 
-	function content_change(event: CustomEvent<{ value: string }>) {
+	function content_change(e: CustomEvent<{ value: string }>) {
 		if (!hasProperty(article, 'content')) {
 			throw new Error('article has no content, but content is shown');
 		}
-		article.content = event.detail.value;
+		article.content = e.detail.value;
 	}
 	const uploadImages: (files: File[]) => Promise<
 		{
@@ -91,11 +92,13 @@
 			throw new Error('upload_image returned Error');
 		});
 	};
+
+	const config: Omit<EditorConfiguration, 'value' | 'placeholder'> = {};
 </script>
 
 <div class="outer">
 	{#if article}
-		<DbImage id={article?.image_link_id ?? article_id} width={'30%'}/>
+		<DbImage id={article?.image_link_id ?? article_id} width={'30%'} />
 		<div class="article">
 			<h1>
 				{#if state !== 'loading'}
@@ -115,16 +118,19 @@
 				{/if}
 			</h1>
 			{#if hasProperty(article, 'content')}
-				<template>
+				<div>
 					{#if $admin_mode}
-						<Editor
-							value={article.content}
-							{plugins}
-							on:change={content_change}
-							locale={de}
-							{sanitize}
-							{uploadImages}
-						/>
+						<div class="editor">
+							<Editor
+								value={article.content}
+								{plugins}
+								on:change={content_change}
+								locale={de}
+								{uploadImages}
+								placeholder="Schreibe hier deinen Artikel..."
+								editorConfig={config}
+							/>
+						</div>
 						<div class="save_button">
 							<Button
 								text={'Speichern'}
@@ -138,9 +144,9 @@
 							/>
 						</div>
 					{:else}
-						<Viewer value={article.content} {plugins} />
+						<Viewer value={article.content} {plugins} {sanitize} />
 					{/if}
-				</template>
+				</div>
 			{/if}
 		</div>
 	{/if}
@@ -155,6 +161,9 @@
 	}
 	.article {
 		width: 100%;
+	}
+	.editor :global(*) {
+		z-index: 3;
 	}
 	.save_button {
 		display: flex;

@@ -4,6 +4,7 @@
 	import { Add } from 'carbon-icons-svelte';
 	import { v4 } from 'uuid';
 	import ArticleBrowserItem from './article_browser_item.svelte';
+	import { fly } from 'svelte/transition';
 
 	export let articles: article_preview[];
 </script>
@@ -14,26 +15,27 @@
 			<a class="add_button" href={`/articles/${v4()}`}><Add size={32} /></a>
 		</div>
 	{/if}
-	{#each articles as article}
-		<ArticleBrowserItem {article} />
+	{#each articles as article, i}
+		<div in:fly={{ duration: 800, y: 30, delay: i * 150 }}>
+			<ArticleBrowserItem {article} />
+		</div>
 	{/each}
 </div>
 
 <style lang="scss">
 	.listing {
-		display: flex;
+		display: grid;
 		gap: 30px;
-		flex-direction: column;
 		padding: 30px;
 		width: 100%;
-		background-color: var(--gray100);
+		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	}
 	.add {
 		display: flex;
 		justify-content: center;
 		align-items: center;
 		width: 100%;
-		height: 50px;
+		height: 300px;
 	}
 	.add_button {
 		display: flex;

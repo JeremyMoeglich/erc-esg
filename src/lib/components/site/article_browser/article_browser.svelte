@@ -56,6 +56,5 @@
 		height: 100%;
 		gap: 20px;
 		padding: 30px 90px;
-		background-color: var(--gray200);
 	}
 </style>

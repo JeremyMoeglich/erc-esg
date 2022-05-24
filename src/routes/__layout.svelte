@@ -7,6 +7,7 @@
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import { Circle2 } from 'svelte-loading-spinners';
 	import PageTransition from '$lib/components/layout/page_transition.svelte';
+	import { onMount } from 'svelte';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -21,13 +22,20 @@
 	(async () => {
 		await check_token_and_login();
 	})();
+
+	let ready = false;
+	onMount(() => (ready = true));
 </script>
 
 <div class="outer">
-	<Header />
-	<PageTransition>
-		<slot />
-	</PageTransition>
+	{#if ready}
+		<Header />
+	{/if}
+	<div class="content">
+		<PageTransition>
+			<slot />
+		</PageTransition>
+	</div>
 	{#if $is_loading}
 		<div class="loading">
 			<div class="spinner">
@@ -49,5 +57,8 @@
 		left: 0px;
 		z-index: 9999;
 		background-color: rgba(128, 128, 128, 0.308);
+	}
+	.content {
+		z-index: -4;
 	}
 </style>

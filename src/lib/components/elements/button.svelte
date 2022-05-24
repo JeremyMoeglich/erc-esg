@@ -1,16 +1,16 @@
 <script lang="ts">
 	export let important = false;
 	export let text: string;
-	export let onclick: () => void | string | Promise<void>;
+	export let onclick: string | ((event: MouseEvent) => void | Promise<void>);
 </script>
 
-<div class:important class="main">
+<div class:important class="main" on:click|stopPropagation>
 	{#if typeof onclick === 'function'}
-		<button on:click|stopPropagation={onclick}>
+		<button on:click={onclick} class="btn">
 			{text}
 		</button>
 	{:else}
-		<a href={onclick}>
+		<a href={onclick} class="btn">
 			{text}
 		</a>
 	{/if}
@@ -20,8 +20,10 @@
 	.main {
 		width: 128px;
 		height: 48px;
-		& > button,
-		a {
+		.btn {
+			display: flex;
+			justify-content: center;
+			align-items: center;
 			font-size: large;
 			width: 100%;
 			height: 100%;
@@ -38,8 +40,7 @@
 		}
 	}
 	.important {
-		& > button,
-		a {
+		.btn {
 			font-weight: bold;
 			border: 2px solid var(--primary-color);
 			box-shadow: 0px 2px 10px -3px var(--primary-color);

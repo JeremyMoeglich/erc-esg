@@ -23,13 +23,26 @@
 
 body {
 	margin: 0px;
-	background-color: white;
+	background-color: rgb(221, 235, 235);
 	min-height: 100vh;
 }
 
 p {
 	margin: 0px;
 	padding: 0px;
+}
+
+a {
+	text-decoration: none;
+	color: inherit;
+	display: inline-block;
+}
+
+button {
+	border: none;
+	background-color: transparent;
+	cursor: pointer;
+	color: inherit;
 }
 
 * {

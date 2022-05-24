@@ -1,11 +1,11 @@
-datasource db {
-    provider = "postgresql"
-    url      = env("DATABASE_URL")
-}
-
 generator client {
     provider        = "prisma-client-js"
     previewFeatures = ["fullTextSearch"]
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
 }
 
 model User {
@@ -34,8 +34,8 @@ model Article {
     title       String    @db.VarChar(511)
     content     String
     createdAt   DateTime  @default(now())
-    image_link  imageLink @relation(fields: [imageLinkId], references: [id])
     imageLinkId String    @db.VarChar(255)
+    image_link  imageLink @relation(fields: [imageLinkId], references: [id])
 }
 
 enum Role {

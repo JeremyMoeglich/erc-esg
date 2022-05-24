@@ -26,7 +26,7 @@ export const get: RequestHandler<
 			return {
 				status: 200,
 				body: {
-					image_url: 'https://via.placeholder.com/300x300'
+					image_url: 'https://ik.imagekit.io/p6h71lfbt/300_tlkwM74E5.png'
 				}
 			};
 		}
