@@ -26,7 +26,7 @@
 	.listing {
 		display: grid;
 		gap: 30px;
-		padding: 30px;
+		padding: 2vw;
 		width: 100%;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
 	}
