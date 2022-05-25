@@ -28,7 +28,7 @@ jobs:
       - name: build
         run: |
           npm run server_setup
-          
+
       - name: Deploy using ssh
         uses: appleboy/ssh-action@master
         with:
