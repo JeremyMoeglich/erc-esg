@@ -44,6 +44,7 @@ jobs:
             git reset --hard
             npm i -g pnpm
             pnpm setup
+            bash
             pnpm i -g pm2
             git pull origin main
             git status
