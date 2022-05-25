@@ -51,6 +51,8 @@
 							<br /><mark>[Admin]</mark>
 						{:else if auth_state === 'root'}
 							<br /><mark>[Root]</mark>
+						{:else if auth_state === 'linus'}
+							<br /><mark>[Linus]</mark>
 						{/if}
 					</p>
 				{/if}

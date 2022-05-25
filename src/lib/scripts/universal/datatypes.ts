@@ -22,7 +22,7 @@ export function is_user_data(data: unknown): data is user_data_type {
 	if (!hasProperty(data, 'role') || typeof data.role !== 'string') {
 		return false;
 	}
-	if (!['user', 'admin', 'root'].includes(data.role)) {
+	if (!['user', 'admin', 'root', 'linus'].includes(data.role)) {
 		return false;
 	}
 	return true;
