@@ -47,12 +47,12 @@
 						{:else}
 							{$user_datas_store?.name}
 						{/if}
-						{#if auth_state === 'admin'}
+						{#if $user_datas_store?.tag}
+							<br /><mark>[{$user_datas_store.tag}]</mark>
+						{:else if auth_state === 'admin'}
 							<br /><mark>[Admin]</mark>
 						{:else if auth_state === 'root'}
 							<br /><mark>[Root]</mark>
-						{:else if auth_state === 'linus'}
-							<br /><mark>[Linus]</mark>
 						{/if}
 					</p>
 				{/if}

@@ -58,7 +58,8 @@ export async function get_auth_user_data(request: Request): Promise<user_data_ty
 			name: true,
 			id: true,
 			email: true,
-			role: true
+			role: true,
+			tag: true
 		}
 	});
 

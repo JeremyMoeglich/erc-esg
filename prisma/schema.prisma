@@ -23,6 +23,7 @@ model User {
     email         String @unique @db.VarChar(255)
     password_hash String @db.VarChar(255)
     role          Role   @default(user)
+    tag           String @db.VarChar(255) @default("")
 }
 
 model LoginToken {
@@ -51,5 +52,4 @@ enum Role {
     root
     admin
     user
-    linus
 }
