@@ -38,6 +38,8 @@ jobs:
           port: 22
           script: |
             cd /home/mpplay/Software/ercesg
+            npm i -g pnpm
+            pnpm setup
             git reset --hard
             git pull origin main
             git status
