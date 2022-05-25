@@ -35,7 +35,7 @@
 </div>
 
 <style lang="scss">
-	$text-margin: 120px;
+	$text-margin: 8vh;
 	.outer {
 		position: relative;
 		width: 100vw;

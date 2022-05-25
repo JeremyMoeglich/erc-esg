@@ -26,7 +26,7 @@ export const get: RequestHandler<
 			return {
 				status: 200,
 				body: {
-					image_url: 'https://ik.imagekit.io/p6h71lfbt/300_tlkwM74E5.png'
+					image_url: 'https://ik.imagekit.io/p6h71lfbt/nutzungsverhalten_analyse_uQC0Zauvv'
 				}
 			};
 		}

@@ -51,4 +51,5 @@ enum Role {
     root
     admin
     user
+    linus
 }

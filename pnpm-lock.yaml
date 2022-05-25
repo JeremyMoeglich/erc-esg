@@ -12,6 +12,7 @@ specifiers:
   '@types/codemirror': ^5.60.5
   '@types/cookie': ^0.5.1
   '@types/js-cookie': ^3.0.2
+  '@types/lodash-es': ^4.17.6
   '@types/uuid': ^8.3.4
   '@typescript-eslint/eslint-plugin': ^5.26.0
   '@typescript-eslint/parser': ^5.26.0
@@ -29,6 +30,7 @@ specifiers:
   functional-utilities: ^1.15.1
   imagekit: ^3.2.5
   js-cookie: ^3.0.1
+  lodash-es: ^4.17.21
   postcss: ^8.4.14
   postcss-load-config: ^3.1.4
   postcss-nested: ^5.0.6
@@ -51,10 +53,12 @@ specifiers:
 
 dependencies:
   '@bytemd/plugin-gfm': 1.15.0_bytemd@1.15.0
+  '@types/lodash-es': 4.17.6
   bytemd: 1.15.0
   cuid: 2.1.8
   functional-utilities: 1.15.1
   js-cookie: 3.0.1
+  lodash-es: 4.17.21
   svelte-file-dropzone: 1.0.0-dev.1
   svelte-hamburgers: 4.0.1
   svelte-lazy: 1.1.0_svelte@3.48.0
@@ -380,6 +384,16 @@ packages:
   /@types/json-schema/7.0.11:
     resolution: {integrity: sha512-wOuvG1SN4Us4rez+tylwwwCV1psiNVOkJeM3AUWUNWg/jDQY2+HE/444y5gc+jBmRqASOm2Oeh5c1axHobwRKQ==}
     dev: true
+
+  /@types/lodash-es/4.17.6:
+    resolution: {integrity: sha512-R+zTeVUKDdfoRxpAryaQNRKk3105Rrgx2CFRClIgRGaqDTdjsm8h6IYA8ir584W3ePzkZfst5xIgDwYrlh9HLg==}
+    dependencies:
+      '@types/lodash': 4.14.182
+    dev: false
+
+  /@types/lodash/4.14.182:
+    resolution: {integrity: sha512-/THyiqyQAP9AfARo4pF+aCGcyiQ94tX/Is2I7HofNRqoYLgN1PBoOWu2/zTA5zMxzP5EFutMtWtGAFRKUe961Q==}
+    dev: false
 
   /@types/node/17.0.35:
     resolution: {integrity: sha512-vu1SrqBjbbZ3J6vwY17jBs8Sr/BKA+/a/WtjRG+whKg1iuLFOosq872EXS0eXWILdO36DHQQeku/ZcL6hz2fpg==}

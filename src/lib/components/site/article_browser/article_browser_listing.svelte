@@ -4,8 +4,8 @@
 	import { Add } from 'carbon-icons-svelte';
 
 	import ArticleBrowserItem from './article_browser_item.svelte';
-	import { fly } from 'svelte/transition';
-
+	import { send, receive } from '$lib/scripts/frontend/transitions';
+	import { flip } from 'svelte/animate';
 	import cuid from 'cuid';
 
 	export let articles: article_preview[];
@@ -17,8 +17,12 @@
 			<a class="add_button" href={`/articles/${cuid()}`}><Add size={32} /></a>
 		</div>
 	{/if}
-	{#each articles as article, i}
-		<div in:fly={{ duration: 800, y: 30, delay: i * 150 }} out:fly={{ duration: 500, y: 30 }}>
+	{#each articles as article (article)}
+		<div
+			out:send={{ key: JSON.stringify(article) }}
+			in:receive={{ key: JSON.stringify(article) }}
+			animate:flip={{ duration: 500 }}
+		>
 			<ArticleBrowserItem {article} />
 		</div>
 	{/each}

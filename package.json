@@ -56,10 +56,12 @@
 	"type": "module",
 	"dependencies": {
 		"@bytemd/plugin-gfm": "^1.15.0",
+		"@types/lodash-es": "^4.17.6",
 		"bytemd": "^1.15.0",
 		"cuid": "^2.1.8",
 		"functional-utilities": "^1.15.1",
 		"js-cookie": "^3.0.1",
+		"lodash-es": "^4.17.21",
 		"svelte-file-dropzone": "1.0.0-dev.1",
 		"svelte-hamburgers": "^4.0.1",
 		"svelte-lazy": "^1.1.0",

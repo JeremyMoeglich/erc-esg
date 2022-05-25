@@ -1,9 +1,11 @@
 <script lang="ts">
 	import Button from '$lib/components/elements/button.svelte';
 	import InputField from '$lib/components/elements/input_field.svelte';
+	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import type { contact_form_type } from '$lib/scripts/universal/datatypes';
 	import { Email } from 'carbon-icons-svelte';
 	import { typed_keys } from 'functional-utilities';
+	import { cloneDeep } from 'lodash-es';
 
 	async function submit_form(contact_form: contact_form_type): Promise<Response> {
 		if (contact_form.id === '') {
@@ -20,7 +22,7 @@
 			body: JSON.stringify(contact_form)
 		});
 	}
-	let contact_form = {
+	const default_form = {
 		'Name*': {
 			value: '',
 			autocomplete: 'name'
@@ -38,19 +40,11 @@
 			autocomplete: 'tel'
 		}
 	};
-	let form_obj: HTMLFormElement;
+
+	let contact_form = cloneDeep(default_form);
 </script>
 
-<form
-	bind:this={form_obj}
-	on:submit|preventDefault={async () =>
-		submit_form({
-			email: contact_form['Email*'].value,
-			name: contact_form['Name*'].value,
-			message: contact_form['Nachricht*'].value,
-			phone: contact_form['Telefon Nummer'].value
-		})}
->
+<div class="form">
 	<div class="top">
 		<Email size={32} />
 		<h2>Kontaktformular</h2>
@@ -63,14 +57,28 @@
 				{text}
 				autocomplete={contact_form[text].autocomplete}
 				required={text !== 'Telefon Nummer'}
+				text_field={text === 'Nachricht*'}
 			/>
 		{/each}
 	</div>
-	<Button text="Absenden" onclick={() => form_obj.submit()} />
-</form>
+	<Button
+		text="Absenden"
+		onclick={async () => {
+			is_loading.set(true);
+			await submit_form({
+				email: contact_form['Email*'].value,
+				name: contact_form['Name*'].value,
+				message: contact_form['Nachricht*'].value,
+				phone: contact_form['Telefon Nummer'].value
+			});
+			contact_form = cloneDeep(default_form);
+			is_loading.set(false);
+		}}
+	/>
+</div>
 
 <style>
-	form {
+	.form {
 		display: flex;
 		width: 800px;
 		max-width: 100%;
