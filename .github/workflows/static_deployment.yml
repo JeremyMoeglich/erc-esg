@@ -48,5 +48,6 @@ jobs:
             pnpm i -g pm2
             git pull origin main
             git status
+            kill $(lsof -t -i:8080)
             npm run server_setup
             npm run start
