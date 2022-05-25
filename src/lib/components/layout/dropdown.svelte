@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
 	let active = false;
+
+	export let disabled = false;
 </script>
 
 <div
@@ -13,7 +15,7 @@
 >
 	<slot name="wrapped" />
 	<div class="dropdown_top">
-		{#if active}
+		{#if active && !disabled}
 			<div class="dropdown" transition:fly={{ y: 10 }}>
 				<slot name="content" />
 			</div>

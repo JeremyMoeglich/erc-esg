@@ -2,7 +2,7 @@ import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { RequestHandler } from '@sveltejs/kit';
 import { compare } from 'bcrypt';
-import { v4 } from 'uuid';
+import cuid from 'cuid';
 
 export const post: RequestHandler<
 	Record<string, never>,
@@ -91,7 +91,7 @@ export const post: RequestHandler<
 	const new_token = await prisma_client.loginToken.create({
 		data: {
 			userId: userId,
-			value: v4()
+			value: cuid()
 		}
 	});
 	return {

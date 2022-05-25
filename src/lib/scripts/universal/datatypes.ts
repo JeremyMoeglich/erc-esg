@@ -114,3 +114,31 @@ export function is_filter(data: unknown): data is filter_type {
 	}
 	return true;
 }
+
+export interface contact_form_type {
+	id?: string;
+	name: string;
+	email: string;
+	phone?: string;
+	message: string;
+}
+
+export function is_contact_form(data: unknown): data is contact_form_type {
+	if (hasProperty(data, 'id') && typeof data.id !== 'string') {
+		return false;
+	}
+	if (hasProperty(data, 'phone') && typeof data.phone !== 'string') {
+		return false;
+	}
+	if (
+		!hasProperty(data, 'name') ||
+		typeof data.name !== 'string' ||
+		!hasProperty(data, 'email') ||
+		typeof data.email !== 'string' ||
+		!hasProperty(data, 'message') ||
+		typeof data.message !== 'string'
+	) {
+		return false;
+	}
+	return true;
+}

@@ -2,9 +2,11 @@
 	import { admin_mode } from '$lib/scripts/frontend/auth/auth_state';
 	import type { article_preview } from '$lib/scripts/universal/datatypes';
 	import { Add } from 'carbon-icons-svelte';
-	import { v4 } from 'uuid';
+
 	import ArticleBrowserItem from './article_browser_item.svelte';
 	import { fly } from 'svelte/transition';
+
+	import cuid from 'cuid';
 
 	export let articles: article_preview[];
 </script>
@@ -12,7 +14,7 @@
 <div class="listing">
 	{#if $admin_mode}
 		<div class="add">
-			<a class="add_button" href={`/articles/${v4()}`}><Add size={32} /></a>
+			<a class="add_button" href={`/articles/${cuid()}`}><Add size={32} /></a>
 		</div>
 	{/if}
 	{#each articles as article, i}

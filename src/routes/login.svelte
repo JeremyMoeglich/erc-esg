@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 
 	import Button from '$lib/components/elements/button.svelte';
+	import InputField from '$lib/components/elements/input_field.svelte';
 	import { current_auth_state } from '$lib/scripts/frontend/auth/auth_state';
 	import { login } from '$lib/scripts/frontend/auth/login';
 	import { register } from '$lib/scripts/frontend/auth/register';
@@ -106,18 +107,13 @@
 			{#each typed_entries(required_fields[page_mode]) as required_field}
 				{@const type = required_field[1].type}
 				{@const text = required_field[0]}
-				{@const name = idify(text)}
-				{@const autocomplete = required_field[1].autocomplete}
-				<div>
-					<label for={name}>{text}</label>
-					{#if type === 'password'}
-						<input type="password" {name} {autocomplete} bind:value={field_values[text]} />
-					{:else if type === 'email'}
-						<input type="email" {name} {autocomplete} bind:value={field_values[text]} />
-					{:else if type === 'text'}
-						<input type="text" {name} {autocomplete} bind:value={field_values[text]} />
-					{/if}
-				</div>
+				<InputField
+					{text}
+					autocomplete={required_field[1].autocomplete}
+					{type}
+					placeholder={`Hier ${text} eingeben...`}
+					bind:value={field_values[text]}
+				/>
 			{/each}
 			{#if error_message}
 				<p>
@@ -164,32 +160,6 @@
 		width: 100%;
 		flex-direction: column;
 		align-items: center;
-		& > div {
-			display: flex;
-			gap: 5px;
-			width: 100%;
-			padding: 10px 30px;
-			flex-direction: column;
-			& > label {
-				font-weight: bold;
-				color: var(--gray800);
-			}
-			& > input {
-				border: 1px solid var(--gray800);
-				border-radius: 3px;
-				padding: 5px;
-				font-size: large;
-				color: var(--gray800);
-				background-color: var(--gray100);
-				width: 100%;
-				&:focus {
-					padding: 4px;
-					outline: none;
-					border: 2px solid var(--secondary-color);
-					color: var(--secondary-color);
-				}
-			}
-		}
 	}
 	.avatar {
 		display: flex;

@@ -12,15 +12,18 @@
 	<h2>{title}</h2>
 	<div class="main">
 		{#each fields as field}
-			<Field title={field.title} image_id={field.image_id} />
+			<div class="field">
+				<Field title={field.title} image_id={field.image_id} />
+			</div>
 		{/each}
 	</div>
 </div>
 
 <style>
 	.main {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
 		gap: 30px;
 		padding: 30px;
 		width: 100%;

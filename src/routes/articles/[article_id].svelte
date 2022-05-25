@@ -8,6 +8,7 @@
 	import type { article, article_preview } from '$lib/scripts/universal/datatypes';
 	import { hasProperty } from 'functional-utilities';
 	import { get } from 'svelte/store';
+	import cuid from 'cuid';
 	import { Editor, Viewer } from 'bytemd';
 	import 'bytemd/dist/index.css';
 	import de from 'bytemd/locales/de.json';
@@ -54,7 +55,7 @@
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
 	import { goto } from '$app/navigation';
 	import { upload_image } from '$lib/scripts/frontend/fetch/upload_image';
-	import { v4 } from 'uuid';
+	
 
 	const plugins = [gfm()];
 
@@ -74,7 +75,7 @@
 		const result = await Promise.all(
 			files.map(async (file) => {
 				return {
-					url: await upload_image(v4(), file),
+					url: await upload_image(cuid(), file),
 					alt: file.name,
 					title: file.name
 				};

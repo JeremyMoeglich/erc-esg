@@ -5,6 +5,7 @@
 	import { fly } from 'svelte/transition';
 	import Account from './account.svelte';
 	import Logo from './logo.svelte';
+	import { Hamburger } from 'svelte-hamburgers';
 
 	const routes: Record<string, string> = {
 		'/': 'Startseite',
@@ -12,15 +13,25 @@
 		'/about': 'Über uns',
 		'/contact': 'Kontakt'
 	};
+
+	let navigation_open = false;
 </script>
 
-<div class="main" in:fly={{ duration: 1000, y: -30 }}>
-	<div>
-		<Logo />
+<div class="main" in:fly={{ duration: 1000, y: -30 }} class:opened={navigation_open}>
+	<div class="logo_navigator">
+		<div class="logo">
+			<Logo />
+		</div>
+		<div class="mobile account">
+			<Account simple={true} />
+		</div>
+		<div class="navigator mobile">
+			<Hamburger bind:open={navigation_open} />
+		</div>
 	</div>
 	{#each typed_entries(routes) as [route, name], i}
 		<a
-			class="desktop"
+			class:desktop={!navigation_open}
 			in:fly={{ duration: 500, y: -30, delay: i * 100 }}
 			href={route}
 			class:current_route={$page.url.pathname === route}>{name}</a
@@ -31,12 +42,16 @@
 	</div>
 </div>
 
-<style>
+<style lang="scss">
 	a {
 		font-size: 20px;
 		text-decoration: none;
+		padding: 10px;
+		&:hover {
+			border: 1px solid #000;
+			padding: 9px;
+		}
 	}
-	/* glass backround */
 	.main {
 		position: sticky;
 		display: flex;
@@ -45,6 +60,7 @@
 		justify-content: flex-start;
 		padding: 10px 3vw;
 		padding-bottom: 7px;
+		transition-duration: 200ms;
 
 		top: 0px;
 		z-index: 2;
@@ -56,15 +72,37 @@
 
 		border-bottom: 7px solid var(--primary-color);
 	}
-	.account {
+	.account,
+	.navigator {
 		margin-left: auto;
 	}
 	.current_route {
 		text-decoration: underline;
 	}
+	.mobile {
+		display: none;
+	}
 	@media (max-width: 830px) {
 		.desktop {
 			display: none;
 		}
+		.mobile {
+			display: block;
+		}
+		.main {
+			flex-direction: column;
+			gap: 10px;
+		}
+		.logo_navigator {
+			width: 100%;
+		}
+		.opened {
+			padding-bottom: 40px;
+		}
+	}
+	.logo_navigator {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
 	}
 </style>

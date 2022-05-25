@@ -1,8 +1,10 @@
-<script>
+<script lang="ts">
 	import Dropdown from './dropdown.svelte';
+
+	export let disabled = false;
 </script>
 
-<Dropdown>
+<Dropdown {disabled}>
 	<div slot="wrapped">
 		<slot name="wrapped" />
 	</div>

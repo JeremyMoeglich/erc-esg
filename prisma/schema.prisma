@@ -8,8 +8,17 @@ datasource db {
     url      = env("DATABASE_URL")
 }
 
+model ContactForm {
+    id        String   @id @default(cuid())
+    name      String
+    email     String
+    phone     String?
+    message   String
+    createdAt DateTime @default(now())
+}
+
 model User {
-    id            String @id @default(uuid()) @db.VarChar(255)
+    id            String @id @default(cuid()) @db.VarChar(255)
     name          String @db.VarChar(24)
     email         String @unique @db.VarChar(255)
     password_hash String @db.VarChar(255)
@@ -17,7 +26,7 @@ model User {
 }
 
 model LoginToken {
-    id     String   @id @default(uuid()) @db.VarChar(255)
+    id     String   @id @default(cuid()) @db.VarChar(255)
     userId String   @unique @db.VarChar(255)
     time   DateTime @default(now())
     value  String   @unique @db.VarChar(255)
@@ -30,7 +39,7 @@ model imageLink {
 }
 
 model Article {
-    id          String    @id @default(uuid())
+    id          String    @id @default(cuid())
     title       String    @db.VarChar(511)
     content     String
     createdAt   DateTime  @default(now())

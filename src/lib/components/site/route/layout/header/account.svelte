@@ -1,14 +1,24 @@
-<script>
+<script lang="ts">
 	import ItemDropdown from '$lib/components/layout/item_dropdown.svelte';
 	import { current_auth_state, in_auth_action } from '$lib/scripts/frontend/auth/auth_state';
 	import { logout } from '$lib/scripts/frontend/auth/logout';
 	import { user_datas_store } from '$lib/scripts/frontend/data/user_data';
-	import { ContentView, Dashboard, Logout, User, UserAvatar, Login, AddAlt } from 'carbon-icons-svelte';
+	import {
+		ContentView,
+		Dashboard,
+		Logout,
+		User,
+		UserAvatar,
+		Login,
+		AddAlt
+	} from 'carbon-icons-svelte';
 	import { onDestroy } from 'svelte';
 	import { get } from 'svelte/store';
 
 	let auth_state = get(current_auth_state);
 	let route = '/login';
+
+	export let simple = false;
 
 	const unsubscribe = current_auth_state.subscribe((new_auth_state) => {
 		auth_state = new_auth_state;
@@ -26,11 +36,11 @@
 	onDestroy(unsubscribe);
 </script>
 
-<ItemDropdown>
+<ItemDropdown disabled={simple}>
 	<div slot="wrapped">
 		<div class="outer">
 			<a class="main" href={route}>
-				{#if !$in_auth_action}
+				{#if !$in_auth_action && !simple}
 					<p class="side_text">
 						{#if auth_state === 'none'}
 							Anmelden / Registrieren
