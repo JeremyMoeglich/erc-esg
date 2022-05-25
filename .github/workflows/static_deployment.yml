@@ -37,7 +37,7 @@ jobs:
           key: ${{ secrets.PRIVATE_KEY }}
           port: 22
           script: |
-            cd ~/Software/ercesg
+            cd /home/mpplay/Software/ercesg
             git reset --hard
             git pull origin main
             git status
