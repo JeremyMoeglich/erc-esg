@@ -38,6 +38,7 @@ jobs:
           port: 22
           script: |
             cd /home/mpplay/Software/ercesg
+            nvm use 17
             npm i -g pnpm
             pnpm setup
             git reset --hard
