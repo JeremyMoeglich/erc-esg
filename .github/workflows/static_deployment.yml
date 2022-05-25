@@ -44,10 +44,10 @@ jobs:
             git reset --hard
             npm i -g pnpm
             pnpm setup
-            bash
+            source ~/.bash_profile
             pnpm i -g pm2
             git pull origin main
             git status
-            kill $(lsof -t -i:8080)
+            kill $(lsof -t -i:3000)
             npm run server_setup
             npm run start
