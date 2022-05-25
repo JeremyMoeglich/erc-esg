@@ -7,7 +7,7 @@
 		"complete_build": "npm run checkup && npm run build",
 		"server_setup": "pnpm install --frozen-lockfile && npx playwright install && npx playwright install-deps && npm run complete_build",
 		"package": "svelte-kit package",
-		"start": "dotenv -- pm2 restart ./build/index.js",
+		"start": "dotenv -- pm2 reload ./build/index.js",
 		"preview": "svelte-kit preview",
 		"updateprisma": "prisma generate",
 		"prepare": "svelte-kit sync",
