@@ -41,9 +41,10 @@ jobs:
             export NVM_DIR=~/.nvm
             source ~/.nvm/nvm.sh
             nvm use 17
+            git reset --hard
             npm i -g pnpm
             pnpm setup
-            git reset --hard
+            pnpm i -g pm2
             git pull origin main
             git status
             npm run server_setup
