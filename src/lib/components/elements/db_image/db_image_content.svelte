@@ -3,6 +3,8 @@
 
 	import { image_cache_store } from '$lib/scripts/frontend/data/image';
 	import { get_image_url } from '$lib/scripts/frontend/fetch/get_image_url';
+	import { send, receive } from '$lib/scripts/frontend/transitions';
+
 	export let id: string;
 	export let attr: string = '';
 
@@ -19,7 +21,10 @@
 </script>
 
 {#if $image_cache_store?.[id]}
-	<img src={`${$image_cache_store[id]}?tr=${attr}`} alt={id} />
+	<img
+		src={`${$image_cache_store[id]}?tr=${attr}`}
+		alt={id}
+	/>
 {/if}
 
 <style>

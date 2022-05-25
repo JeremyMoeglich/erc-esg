@@ -9,4 +9,7 @@
 		width: 175px;
 		max-width: 15vw;
 	}
+	img {
+		width: 100%;
+	}
 </style>

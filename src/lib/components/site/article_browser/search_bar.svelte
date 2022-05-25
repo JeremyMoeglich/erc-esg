@@ -1,5 +1,7 @@
 <script lang="ts">
 	import { Search } from 'carbon-icons-svelte';
+	import { fly } from 'svelte/transition';
+
 	export let value = '';
 	export let on_search: () => Promise<void>;
 
@@ -10,7 +12,7 @@
 	}
 </script>
 
-<div>
+<div transition:fly={{ duration: 500, y: -40 }}>
 	<input type="search" bind:value on:keypress={keypress} />
 	<button on:click={on_search}><Search fill={'var(--primary-color)'} size={32} /></button>
 </div>

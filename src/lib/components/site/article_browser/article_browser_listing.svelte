@@ -16,7 +16,7 @@
 		</div>
 	{/if}
 	{#each articles as article, i}
-		<div in:fly={{ duration: 800, y: 30, delay: i * 150 }}>
+		<div in:fly={{ duration: 800, y: 30, delay: i * 150 }} out:fly={{ duration: 500, y: 30 }}>
 			<ArticleBrowserItem {article} />
 		</div>
 	{/each}
@@ -29,6 +29,7 @@
 		padding: 2vw;
 		width: 100%;
 		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		justify-items: center;
 	}
 	.add {
 		display: flex;

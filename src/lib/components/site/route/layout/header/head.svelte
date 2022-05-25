@@ -15,28 +15,40 @@
 </script>
 
 <div class="main" in:fly={{ duration: 1000, y: -30 }}>
-	<div class="upper">
-		<div class="left_side">
-			<Logo />
-			{#each typed_entries(routes) as [route, name], i}
-				<a in:fly={{ duration: 500, y: -30, delay: i * 100 }} href={route} class:current_route={$page.url.pathname === route}>{name}</a>
-			{/each}
-		</div>
+	<div>
+		<Logo />
+	</div>
+	{#each typed_entries(routes) as [route, name], i}
+		<a
+			class="desktop"
+			in:fly={{ duration: 500, y: -30, delay: i * 100 }}
+			href={route}
+			class:current_route={$page.url.pathname === route}>{name}</a
+		>
+	{/each}
+	<div class="desktop account">
 		<Account />
 	</div>
 </div>
 
 <style>
 	a {
-		margin-top: 16px;
 		font-size: 20px;
 		text-decoration: none;
 	}
 	/* glass backround */
 	.main {
 		position: sticky;
+		display: flex;
+		gap: 20px;
+		align-items: center;
+		justify-content: flex-start;
+		padding: 10px 3vw;
+		padding-bottom: 7px;
+
 		top: 0px;
 		z-index: 2;
+		min-height: 70px;
 
 		background-color: rgba(255, 255, 255, 0.281);
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
@@ -44,18 +56,15 @@
 
 		border-bottom: 7px solid var(--primary-color);
 	}
-	.left_side {
-		display: flex;
-		align-items: center;
-		gap: 20px;
+	.account {
+		margin-left: auto;
 	}
 	.current_route {
 		text-decoration: underline;
 	}
-	.upper {
-		padding: 10px 3vw;
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
+	@media (max-width: 830px) {
+		.desktop {
+			display: none;
+		}
 	}
 </style>
