@@ -38,6 +38,9 @@ jobs:
           port: 22
           script: |
             cd /home/mpplay/Software/ercesg
+            curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash 
+            source ~/.profile
+            nvm install 17
             nvm use 17
             npm i -g pnpm
             pnpm setup
