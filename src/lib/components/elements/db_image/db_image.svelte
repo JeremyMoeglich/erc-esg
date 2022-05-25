@@ -9,7 +9,7 @@
 	export let id: string;
 	export let click: string | (() => void) | undefined = undefined;
 	export let width: number | string | undefined = undefined;
-	export let attr: string = '';
+	export let attr = '';
 
 	let loading = false;
 

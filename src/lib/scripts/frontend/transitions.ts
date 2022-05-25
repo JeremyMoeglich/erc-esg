@@ -35,7 +35,7 @@ export function fadeScale(
 	};
 }
 export function tfade(
-	node: Element,
+	_: Element,
 	{
 		angle = 0,
 		delay = 0,

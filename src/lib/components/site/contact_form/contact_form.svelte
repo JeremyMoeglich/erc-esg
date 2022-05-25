@@ -41,7 +41,7 @@
 		}
 	};
 
-	let contact_form = cloneDeep(default_form);
+	let contact_form: typeof default_form = cloneDeep(default_form);
 </script>
 
 <div class="form">

@@ -8,7 +8,6 @@
 	import { login } from '$lib/scripts/frontend/auth/login';
 	import { register } from '$lib/scripts/frontend/auth/register';
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
-	import { idify } from '$lib/scripts/universal/idify';
 	import { UserAvatar } from 'carbon-icons-svelte';
 	import { typed_entries } from 'functional-utilities';
 

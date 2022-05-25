@@ -2,7 +2,7 @@
 	import Button from '$lib/components/elements/button.svelte';
 	import DbImage from '$lib/components/elements/db_image/db_image.svelte';
 	import { admin_mode } from '$lib/scripts/frontend/auth/auth_state';
-	
+
 	import type { article_preview } from '$lib/scripts/universal/datatypes';
 	import { delete_article } from '$lib/scripts/frontend/fetch/delete_article';
 	export let article: article_preview;
@@ -11,9 +11,7 @@
 </script>
 
 {#if !hidden}
-	<div
-		class="outer"
-	>
+	<div class="outer">
 		<div class="img">
 			<DbImage id={article.image_link_id} width={'100%'} attr={'w-300,ar-5-3,fo-auto'} />
 		</div>

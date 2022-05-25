@@ -1,11 +1,11 @@
 <script lang="ts">
 	import { idify } from '$lib/scripts/universal/idify';
 
-	export let type: string = 'text';
-	export let value: string = '';
-	export let required: boolean = false;
+	export let type = 'text';
+	export let value = '';
+	export let required = false;
 	export let text: string;
-	export let placeholder: string = '';
+	export let placeholder = '';
 	export let autocomplete: string;
 	export let text_field = false;
 
@@ -61,7 +61,8 @@
 	textarea {
 		resize: vertical;
 	}
-	input, textarea {
+	input,
+	textarea {
 		border: 1px solid var(--gray800);
 		border-radius: 3px;
 		padding: 5px;

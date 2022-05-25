@@ -8,7 +8,7 @@
 
 	export let page = 0;
 
-	let search_value: string = '';
+	let search_value = '';
 
 	let filter: filter_type = {
 		search: ''

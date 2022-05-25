@@ -24,7 +24,7 @@
 		if (browser && article_id) {
 			state = (await load_article(article_id)) ? 'loaded' : 'not_found';
 			if (state === 'not_found') {
-				article = {
+				article_obj = {
 					content: '',
 					id: article_id,
 					image_link_id: article_id,
@@ -45,8 +45,8 @@
 		is_loading.set(false);
 		state = undefined;
 	}
-	let article: article_preview | article | undefined = undefined;
-	$: article = $articles_cache_store?.[article_id];
+	let article_obj: article_preview | article | undefined = undefined;
+	$: article_obj = $articles_cache_store?.[article_id];
 
 	import gfm from '@bytemd/plugin-gfm';
 	import { browser } from '$app/env';
@@ -55,15 +55,14 @@
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
 	import { goto } from '$app/navigation';
 	import { upload_image } from '$lib/scripts/frontend/fetch/upload_image';
-	
 
 	const plugins = [gfm()];
 
 	function content_change(e: CustomEvent<{ value: string }>) {
-		if (!hasProperty(article, 'content')) {
+		if (!hasProperty(article_obj, 'content')) {
 			throw new Error('article has no content, but content is shown');
 		}
-		article.content = e.detail.value;
+		article_obj.content = e.detail.value;
 	}
 	const uploadImages: (files: File[]) => Promise<
 		{
@@ -98,32 +97,32 @@
 </script>
 
 <div class="outer">
-	{#if article}
-		<DbImage id={article?.image_link_id ?? article_id} width={'30%'} />
+	{#if article_obj}
+		<DbImage id={article_obj?.image_link_id ?? article_id} width={'30%'} />
 		<div class="article">
 			<h1>
 				{#if state !== 'loading'}
 					{#if $admin_mode}
 						<Inplaceedit
-							value={article.title}
+							value={article_obj.title}
 							on:submit={({ detail: value }) => {
-								if (!article?.title) {
+								if (!article_obj?.title) {
 									throw new Error('article has no title, but title is shown');
 								}
-								article.title = value;
+								article_obj.title = value;
 							}}
 						/>
 					{:else}
-						{article.title}
+						{article_obj.title}
 					{/if}
 				{/if}
 			</h1>
-			{#if hasProperty(article, 'content')}
+			{#if hasProperty(article_obj, 'content')}
 				<div>
 					{#if $admin_mode}
 						<div class="editor">
 							<Editor
-								value={article.content}
+								value={article_obj.content}
 								{plugins}
 								on:change={content_change}
 								locale={de}
@@ -136,16 +135,16 @@
 							<Button
 								text={'Speichern'}
 								onclick={async () => {
-									if (!hasProperty(article, 'content')) {
+									if (!hasProperty(article_obj, 'content')) {
 										throw new Error('article has no content, but content is shown');
 									}
-									update_article(article);
+									update_article(article_obj);
 									await goto('/blog');
 								}}
 							/>
 						</div>
 					{:else}
-						<Viewer value={article.content} {plugins} {sanitize} />
+						<Viewer value={article_obj.content} {plugins} {sanitize} />
 					{/if}
 				</div>
 			{/if}
