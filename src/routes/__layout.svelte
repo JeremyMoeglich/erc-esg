@@ -58,5 +58,6 @@
 	}
 	.content {
 		z-index: -4;
+		width: 100vw;
 	}
 </style>

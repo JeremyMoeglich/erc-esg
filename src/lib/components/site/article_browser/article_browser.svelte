@@ -54,7 +54,8 @@
 		flex-direction: column;
 		align-items: center;
 		height: 100%;
+		width: 100%;
 		gap: 20px;
-		padding: 30px 90px;
+		padding: 30px calc(10vw - 40px);
 	}
 </style>

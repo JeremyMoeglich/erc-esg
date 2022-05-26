@@ -39,6 +39,7 @@
 		display: flex;
 		flex-direction: column;
 		width: 300px;
+		max-width: 100%;
 		background: rgba(255, 255, 255, 0.32);
 		backdrop-filter: blur(8.7px);
 		border-radius: 25px;

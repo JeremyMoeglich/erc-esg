@@ -19,6 +19,7 @@
 	{/if}
 	{#each articles as article (article)}
 		<div
+			class="transition_wrapper"
 			out:send={{ key: JSON.stringify(article) }}
 			in:receive={{ key: JSON.stringify(article) }}
 			animate:flip={{ duration: 500 }}
@@ -34,8 +35,12 @@
 		gap: 30px;
 		padding: 2vw;
 		width: 100%;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-		justify-items: center;
+		grid-template-columns: repeat(auto-fit, min(100%, 300px));
+		place-content: center;
+	}
+	.transition_wrapper {
+		width: 300px;
+		max-width: 100%;
 	}
 	.add {
 		display: flex;
