@@ -2,7 +2,9 @@
 	import { fly } from 'svelte/transition';
 </script>
 
-<a href="/"><img in:fly={{ duration: 1000, x: -10 }} src="/images/logo.svg" alt="" /></a>
+<a href="/" title="Startseite">
+	<img in:fly={{ duration: 1000, x: -10 }} src="/images/logo.svg" alt="" />
+</a>
 
 <style>
 	a {
@@ -11,5 +13,6 @@
 	}
 	img {
 		width: 100%;
+		aspect-ratio: 29/12;
 	}
 </style>

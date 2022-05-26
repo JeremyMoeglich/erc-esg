@@ -39,7 +39,15 @@
 <ItemDropdown disabled={simple}>
 	<div slot="wrapped">
 		<div class="outer">
-			<a class="main" href={route}>
+			<a
+				class="main"
+				href={route}
+				title={auth_state === 'none'
+					? 'Anmelden'
+					: auth_state === 'user'
+					? 'Account einstellungen'
+					: 'Admin Panel'}
+			>
 				{#if !$in_auth_action && !simple}
 					<p class="side_text">
 						{#if auth_state === 'none'}

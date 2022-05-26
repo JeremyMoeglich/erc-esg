@@ -13,8 +13,10 @@
 </script>
 
 <div transition:fly={{ duration: 500, y: -40 }}>
-	<input type="search" bind:value on:keypress={keypress} />
-	<button on:click={on_search}><Search fill={'var(--primary-color)'} size={32} /></button>
+	<input placeholder="Suche" type="search" bind:value on:keypress={keypress} />
+	<button title="Suchen" on:click={on_search}
+		><Search fill={'var(--primary-color)'} size={32} /></button
+	>
 </div>
 
 <style lang="scss">

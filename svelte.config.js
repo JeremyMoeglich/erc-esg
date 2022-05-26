@@ -7,7 +7,9 @@ const config = {
 	preprocess: [
 		preprocess([
 			{
-				scss: { includePaths: ['src'] }
+				scss: {
+					includePaths: ['src']
+				}
 			}
 		]),
 		optimizeImports()

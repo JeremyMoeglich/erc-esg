@@ -4,7 +4,7 @@
 	import { typed_entries } from 'functional-utilities';
 	import { fly } from 'svelte/transition';
 	import Account from './account.svelte';
-	import Logo from './logo.svelte';
+	import Logo from '../logo.svelte';
 	import { Hamburger } from 'svelte-hamburgers';
 
 	const routes: Record<string, string> = {

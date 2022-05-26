@@ -7,6 +7,7 @@
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import { Circle2 } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
+	import Footer from '$lib/components/site/route/layout/footer/foot.svelte';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -33,6 +34,8 @@
 		<div class="content">
 			<slot />
 		</div>
+
+		<Footer />
 	{/if}
 	{#if $is_loading}
 		<div class="loading">
@@ -42,6 +45,10 @@
 		</div>
 	{/if}
 </div>
+
+<svelte:head>
+	<title>ERC eSG</title>
+</svelte:head>
 
 <style>
 	.loading {
@@ -59,5 +66,12 @@
 	.content {
 		z-index: -4;
 		width: 100vw;
+	}
+	.outer {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+		width: 100vw;
+		position: relative;
 	}
 </style>
