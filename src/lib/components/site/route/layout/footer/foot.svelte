@@ -13,6 +13,9 @@
 		background-color: rgba(255, 255, 255, 0.281);
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(8.7px);
-		margin-top: auto;
+	}
+	a:hover {
+		color: var(--secondary-color);
+		text-decoration: underline;
 	}
 </style>

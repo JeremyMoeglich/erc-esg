@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Roboto+Flex:opsz,wght@8..144,300&display=swap');
 
 :root {
-	--primary-color: #0ce33a;
+	--primary-color: #0fc736;
 	--secondary-color: #034a75;
 	--primary-hint: #72db88;
 	--secondary-hint: #5e7998;
@@ -27,6 +27,7 @@ body {
 	background: linear-gradient(to right, var(--light-color), rgb(201, 255, 230));
 	min-height: 100vh;
 	overflow-x: hidden;
+	overflow-y: scroll;
 }
 
 p {
@@ -62,3 +63,4 @@ textarea {
 	width: 100%;
 	height: 100%;
 }
+

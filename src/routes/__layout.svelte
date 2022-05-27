@@ -8,6 +8,7 @@
 	import { Circle2 } from 'svelte-loading-spinners';
 	import { onMount } from 'svelte';
 	import Footer from '$lib/components/site/route/layout/footer/foot.svelte';
+	import { scrollbarWidth } from '@xobotyi/scrollbar-width';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -27,7 +28,7 @@
 	onMount(() => (ready = true));
 </script>
 
-<div class="outer">
+<div class="outer" style:--scrollbar_width={`${scrollbarWidth() ?? 0}px`}>
 	{#if ready}
 		<Header />
 
@@ -35,7 +36,9 @@
 			<slot />
 		</div>
 
-		<Footer />
+		<div class="footer">
+			<Footer />
+		</div>
 	{/if}
 	{#if $is_loading}
 		<div class="loading">
@@ -65,13 +68,21 @@
 	}
 	.content {
 		z-index: -4;
-		width: 100vw;
+		width: calc(100vw - var(--scrollbar_width));
 	}
 	.outer {
-		display: flex;
-		flex-direction: column;
 		min-height: 100vh;
 		width: 100vw;
 		position: relative;
+		padding-right: var(--scrollbar_width);
+		padding-bottom: 60px;
+	}
+
+	.footer {
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		height: fit-content;
 	}
 </style>

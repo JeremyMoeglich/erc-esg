@@ -105,4 +105,7 @@
 		align-items: center;
 		justify-content: space-between;
 	}
+	.logo {
+		min-width: 20%;
+	}
 </style>

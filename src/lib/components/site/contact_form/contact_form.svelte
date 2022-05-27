@@ -86,7 +86,7 @@
 		margin: 50px;
 		background-color: var(--gray100);
 		min-height: 700px;
-		width: min(100vw, 600px);
+		width: min(100%, 600px);
 		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.205);
 		border-radius: 10px;
 		margin-left: auto;

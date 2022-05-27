@@ -1,17 +1,21 @@
 @mixin simple_text {
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    background-color: rgba(255, 255, 255, 0.493);
-    border-radius: 10px;
-    border: 1px rgba(0, 0, 0, 0.274) solid;
-    backdrop-filter: blur(10px);
+	display: flex;
+	flex-direction: column;
+	padding: min(20px, 4%);
+	background-color: rgba(255, 255, 255, 0.493);
+	border-radius: 10px;
+	border: 1px rgba(0, 0, 0, 0.274) solid;
+	backdrop-filter: blur(10px);
 	& div {
-        padding: 10px;
+		padding: min(10px, 2%);
 	}
-    & p {
-        padding: 2px;
-    }
-    max-width: 1300px;
-    margin: 50px auto;
+	& p {
+		padding: 2px;
+	}
+	& h1 {
+		color: var(--secondary-color);
+	}
+	max-width: 1300px;
+	width: calc(100% - min(20px, 4%) * 2);
+	margin: 50px auto;
 }

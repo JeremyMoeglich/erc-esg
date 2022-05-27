@@ -125,6 +125,6 @@
 		justify-content: center;
 	}
 	.outer {
-		min-width: 140px;
+		min-width: min(140px, 20%);
 	}
 </style>
