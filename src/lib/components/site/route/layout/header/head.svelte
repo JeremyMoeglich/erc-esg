@@ -17,7 +17,7 @@
 	let navigation_open = false;
 </script>
 
-<div class="main" in:fly={{ duration: 1000, y: -30 }} class:opened={navigation_open}>
+<div class="main" in:fly|local={{ duration: 1000, y: -30 }} class:opened={navigation_open}>
 	<div class="logo_navigator">
 		<div class="logo">
 			<Logo />

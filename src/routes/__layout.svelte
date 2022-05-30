@@ -9,6 +9,7 @@
 	import { onMount } from 'svelte';
 	import Footer from '$lib/components/site/route/layout/footer/foot.svelte';
 	import { scrollbarWidth } from '@xobotyi/scrollbar-width';
+	import { delay } from '$lib/scripts/frontend/data/delay';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -25,7 +26,12 @@
 	})();
 
 	let ready = false;
-	onMount(() => (ready = true));
+	onMount(() => {
+		ready = true;
+		setTimeout(() => {
+			delay.set(250);
+		}, 600);
+	});
 </script>
 
 <div class="outer" style:--scrollbar_width={`${scrollbarWidth() ?? 0}px`}>

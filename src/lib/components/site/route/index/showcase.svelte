@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
+
 	import { CaretSortDown } from 'carbon-icons-svelte';
 	import { fly } from 'svelte/transition';
 
@@ -6,10 +8,13 @@
 </script>
 
 <svelte:window bind:scrollY={y} />
-
 <div class="outer">
 	<div class="main">
-		<div class="left" transition:fly={{ x: -50, y: -20, duration: 500 }}>
+		<div
+			class="left"
+			in:fly={{ x: -50, y: -20, ...$in_delay }}
+			out:fly={{ x: -50, y: -20, ...$out_delay }}
+		>
 			<h1>Ecological Revolutionary Company</h1>
 			<p>
 				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate inventore corrupti ea
@@ -19,13 +24,14 @@
 		<img
 			src="/images/solar.svg"
 			alt="Haus mit Solar"
-			transition:fly={{ x: 50, y: -20, duration: 500 }}
+			in:fly={{ x: 50, y: -20, ...$in_delay }}
+			out:fly={{ x: 50, y: -20, ...$out_delay }}
 		/>
 	</div>
 </div>
 <div class="more_space">
 	{#if y === 0}
-		<div class="more" transition:fly={{ y: 50, duration: 500 }}>
+		<div class="more" in:fly={{ y: 50, ...$in_delay }} out:fly={{ y: 50, ...$out_delay }}>
 			<div>Mehr erfahren</div>
 			<div>
 				<CaretSortDown size={32} />

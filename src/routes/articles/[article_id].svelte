@@ -14,7 +14,7 @@
 	import de from 'bytemd/locales/de.json';
 	import type { EditorConfiguration } from 'codemirror';
 
-	const sanitize = (v: unknown) => v;
+	const sanitize: <T>(v: T) => T = (v) => v;
 
 	let article_id: string = get(page).params.article_id;
 	let state: 'loading' | 'not_found' | 'loaded' | undefined = 'loading';

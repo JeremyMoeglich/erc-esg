@@ -4,9 +4,9 @@
 	import { Add } from 'carbon-icons-svelte';
 
 	import ArticleBrowserItem from './article_browser_item.svelte';
-	import { send, receive } from '$lib/scripts/frontend/transitions';
-	import { flip } from 'svelte/animate';
+	import { fly } from 'svelte/transition';
 	import cuid from 'cuid';
+	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
 
 	export let articles: article_preview[];
 </script>
@@ -20,9 +20,8 @@
 	{#each articles as article (article)}
 		<div
 			class="transition_wrapper"
-			out:send={{ key: JSON.stringify(article) }}
-			in:receive={{ key: JSON.stringify(article) }}
-			animate:flip={{ duration: 500 }}
+			in:fly={{ ...$in_delay, y: 20 }}
+			out:fly={{ ...$out_delay, y: 20 }}
 		>
 			<ArticleBrowserItem {article} />
 		</div>
