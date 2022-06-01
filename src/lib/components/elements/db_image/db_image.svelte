@@ -6,6 +6,7 @@
 	import { Edit } from 'carbon-icons-svelte';
 	import { get } from 'svelte/store';
 	import DbImageContent from './db_image_content.svelte';
+
 	export let id: string;
 	export let click: string | (() => void) | undefined = undefined;
 	export let width: number | string | undefined = undefined;

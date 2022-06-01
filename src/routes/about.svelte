@@ -1,3 +1,7 @@
+<script>
+	import ActionFields from '$lib/components/site/action_fields.svelte';
+</script>
+
 <div class="outer">
 	<h1>Über uns</h1>
 	<div>
@@ -33,8 +37,33 @@
 				Energiesparen besucht
 			</p>
 		</div>
+		<div>
+			<h2>Wir für Sie</h2>
+			<p>
+				Die ERC eSG berät Sie gerne in puncto Energieeinsparung. Wir sind unabhängig, kompetent und
+				motiviert, zusammen mit Ihnen einen Beitrag zur Rettung unseres Planeten zu leisten. Anders
+				als unsere Mitbewerber sind wir nicht auf externe Firmen angewiesen und beraten Sie völlig
+				objektiv. Außerdem sind wir nicht so kostenintensiv wie unsere Konkurrenten. Langfristig
+				werden die Energiekosten immer teurer. Mit unseren praktischen Tipps können Sie die Kosten
+				senken. Unser Angebot richtet sich primär an Privathaushalte sowie kleine Betriebe. Unser
+				Ziel ist die Senkung des Energieverbrauchs und eine damit verbundene Entlastung der Umwelt,
+				die auch Ihrem Geldbeutel zu Gute kommt.
+			</p>
+		</div>
+		<div>
+			<h2>Qualität</h2>
+			<p>
+				Um die Qualität in unserer Beratung auch als Schülerfirma zu gewährleisten arbeiten wir mit
+				kompetentten Partner aus der Region zuammen. <br />
+				An erster Stelle wäre dabei unsere Partnergenossenschaft die Dach Fassde Holz eG anzuführen.
+				Darüber hinaus arbeiten wir auch mit SRH Hochschule in Hamm zusammen. <br />
+				Beide unterstützen uns aber nicht nur in der Beratung sondern auch in der Abwicklung der Prozesse,
+				damit wir trotz Schulischem Betrieb schnellstmöglich ihre Aufträge Bearbeiten.
+			</p>
+		</div>
 	</div>
 </div>
+<ActionFields />
 
 <style lang="scss">
 	@import './src/mixins.scss';

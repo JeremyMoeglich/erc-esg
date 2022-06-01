@@ -17,7 +17,7 @@
 		</div>
 		<div class="text">
 			<h3>{article.title}</h3>
-			<p>{article.createdAt}</p>
+			<p>{new Date(JSON.parse(article.createdAt)).toLocaleString('de-DE')}</p>
 		</div>
 		<div class="btns">
 			<Button text={'Öffnen'} onclick={`/articles/${article.id}`} />

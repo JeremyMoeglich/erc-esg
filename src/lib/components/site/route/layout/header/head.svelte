@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { page } from '$app/stores';
-
 	import { typed_entries } from 'functional-utilities';
 	import { fly } from 'svelte/transition';
 	import Account from './account.svelte';
@@ -15,6 +14,10 @@
 	};
 
 	let navigation_open = false;
+
+	page.subscribe(() => {
+		navigation_open = false;
+	});
 </script>
 
 <div class="main" in:fly|local={{ duration: 1000, y: -30 }} class:opened={navigation_open}>
@@ -88,6 +91,10 @@
 		}
 		.mobile {
 			display: block;
+		}
+		.account,
+		.navigator {
+			margin-left: 0px;
 		}
 		.main {
 			flex-direction: column;

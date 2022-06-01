@@ -17,8 +17,9 @@
 		>
 			<h1>Ecological Revolutionary Company</h1>
 			<p>
-				Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptate inventore corrupti ea
-				architecto ex aliquam
+				Wir sind ein junges, kreatives und lebensbewusstes Team. Wir sind umweltbewusst und wollen
+				mit unserem Engagement für die Zukunft unserer Welt einen positiven Einfluss auf unsere
+				Umwelt haben.
 			</p>
 		</div>
 		<img

@@ -3,11 +3,13 @@
 
 	export let title: string;
 	export let image_id: string;
+	export let text: string;
 </script>
 
 <div class="outer">
-	<DbImage id={image_id} attr={'w-200,ar-1-1,fo-auto'} />
 	<h3>{title}</h3>
+	<DbImage id={image_id} attr={'w-200,ar-1-1,fo-auto'} />
+	<p>{text}</p>
 </div>
 
 <style>

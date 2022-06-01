@@ -6,6 +6,7 @@
 	export let fields: Array<{
 		title: string;
 		image_id: string;
+		text: string;
 	}>;
 	export let title: string;
 </script>
@@ -15,7 +16,7 @@
 	<div class="main">
 		{#each fields as field}
 			<div class="field">
-				<Field title={field.title} image_id={field.image_id} />
+				<Field title={field.title} image_id={field.image_id} text={field.text} />
 			</div>
 		{/each}
 	</div>

@@ -10,18 +10,15 @@
 	</div>
 	<div>
 		<h3>Vertreten durch:</h3>
-		<p>TODO</p>
-		<!-- TODO -->
+		<p>Die Schüler des Schloss Heessen in Hamm</p>
 	</div>
 	<div>
 		<h3>Aufsichtsvorsitzende:</h3>
-		<p>TODO</p>
-		<!-- TODO -->
+		<p>Mats Funke und Paul Dufhues</p>
 	</div>
 	<div>
 		<h3>Kontakt:</h3>
-		<p>TODO</p>
-		<!-- TODO -->
+		<p>ercesg.schlossheessen@gmail.com</p>
 	</div>
 	<div>
 		<h3>Registereintrag</h3>
