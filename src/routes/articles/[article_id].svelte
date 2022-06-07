@@ -98,7 +98,9 @@
 
 <div class="outer">
 	{#if article_obj}
-		<DbImage id={article_obj?.image_link_id ?? article_id} width={'30%'} />
+		<div class="image">
+			<DbImage id={article_obj?.image_link_id ?? article_id} width={'300px'} />
+		</div>
 		<div class="article">
 			<h1>
 				{#if state !== 'loading'}
@@ -158,6 +160,15 @@
 		width: 90%;
 		margin: 50px auto;
 		gap: 40px;
+	}
+
+	@media (max-width: 1200px) {
+		.outer {
+			flex-direction: column;
+		}
+		.image {
+			align-self: center;
+		}
 	}
 	.article {
 		width: 100%;

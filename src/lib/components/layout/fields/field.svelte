@@ -18,5 +18,13 @@
 		flex-direction: column;
 		align-items: center;
 		width: 200px;
+		padding: 20px;
+		text-align: center;
+		background-color: var(--gray000);
+		border-radius: 10px;
+		box-shadow: 0px 2px 10px -5px var(--secondary-color);
+	}
+	h3 {
+		margin-top: 0px;
 	}
 </style>

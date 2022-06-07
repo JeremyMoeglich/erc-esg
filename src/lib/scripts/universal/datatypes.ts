@@ -1,9 +1,14 @@
-import type { imageLink, User } from '@prisma/client';
+import type { imageLink, Role, User } from '@prisma/client';
 import { hasProperty } from 'functional-utilities';
 
-export type user_data_type = Omit<User, 'password_hash'>;
+export type user_data_type<R extends Role = Role> = Omit<User, 'password_hash' | 'role'> & {
+	role: R;
+};
 
-export function is_user_data(data: unknown): data is user_data_type {
+export function is_user_data(
+	data: unknown,
+	roles: Role[] = ['user', 'admin', 'root']
+): data is user_data_type {
 	if (typeof data !== 'object') {
 		return false;
 	}
@@ -25,10 +30,20 @@ export function is_user_data(data: unknown): data is user_data_type {
 	if (!hasProperty(data, 'tag') || typeof data.tag !== 'string') {
 		return false;
 	}
-	if (!['user', 'admin', 'root'].includes(data.role)) {
+	if (!roles.includes(data.role as Role)) {
 		return false;
 	}
 	return true;
+}
+
+export function is_user_of_role<R extends Role>(
+	user: unknown,
+	roles: R[]
+): user is user_data_type<R> {
+	if (!is_user_data(user)) {
+		return false;
+	}
+	return roles.includes(user.role as R);
 }
 
 export interface article_preview {

@@ -27,7 +27,7 @@
 		display: flex;
 		flex-wrap: wrap;
 		justify-content: center;
-		gap: 30px;
+		gap: 10px;
 		padding: 30px;
 		width: 100%;
 	}

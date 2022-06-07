@@ -8,18 +8,23 @@ export function parse_body<T extends string>(
 	body: string,
 	attrs: T[]
 ): Record<T, unknown> | undefined {
-	const content = JSON.parse(body);
-	if (typeof content !== 'object') {
-		return undefined;
-	}
-	console.debug(content);
-	attrs.forEach((attr) => {
-		if (!hasProperty(content, attr)) {
-			console.debug('Missing attribute', attr);
+	try {
+		const content = JSON.parse(body.trim() ? body : '{}');
+		if (typeof content !== 'object') {
 			return undefined;
 		}
-	});
-	return content;
+		console.debug(content);
+		attrs.forEach((attr) => {
+			if (!hasProperty(content, attr)) {
+				console.debug('Missing attribute', attr);
+				return undefined;
+			}
+		});
+		return content;
+	} catch (error) {
+		console.debug('parse_body error', body, attrs, typeof body);
+		throw error;
+	}
 }
 
 export async function get_request_body<T extends string>(
@@ -75,6 +80,7 @@ export async function get_auth_user_data(request: Request): Promise<user_data_ty
 }
 
 export async function validate_get_admin_body<T extends string>(request: Request, attrs: T[]) {
+	const body = await get_request_body(request, attrs);
 	const user_data = await get_auth_user_data(request);
 	if (user_data instanceof Error) {
 		return user_data;
@@ -82,7 +88,6 @@ export async function validate_get_admin_body<T extends string>(request: Request
 	if (!has_db_access(user_data.role)) {
 		return new Error('You do not have access to this endpoint');
 	}
-	const body = await get_request_body(request, attrs);
 	if (!body) {
 		return new Error('Missing required fields');
 	}
