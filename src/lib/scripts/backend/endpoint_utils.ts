@@ -3,36 +3,27 @@ import { hasProperty } from 'functional-utilities';
 import type { user_data_type } from '../universal/datatypes';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import { has_db_access } from './has_db_access';
-
-export function parse_body<T extends string>(
-	body: string,
-	attrs: T[]
-): Record<T, unknown> | undefined {
-	try {
-		const content = JSON.parse(body.trim() ? body : '{}');
-		if (typeof content !== 'object') {
-			return undefined;
-		}
-		console.debug(content);
-		attrs.forEach((attr) => {
-			if (!hasProperty(content, attr)) {
-				console.debug('Missing attribute', attr);
-				return undefined;
-			}
-		});
-		return content;
-	} catch (error) {
-		console.debug('parse_body error', body, attrs, typeof body);
-		throw error;
-	}
-}
+import type { JsonValue } from 'type-fest';
 
 export async function get_request_body<T extends string>(
 	request: Request,
 	attrs: T[]
 ): Promise<Record<T, unknown> | undefined> {
+	const body = await get_body(request);
+	if (attrs.every((attr) => hasProperty(body, attr))) {
+		return body as Record<T, unknown>;
+	} else {
+		return undefined;
+	}
+}
+
+export async function get_body(request: Request): Promise<JsonValue | Error> {
 	const decoded_body = await request.text();
-	return parse_body(decoded_body, attrs);
+	const body: JsonValue = JSON.parse(decoded_body.trim() ? decoded_body : '{}');
+	if (typeof body !== 'object') {
+		return new Error('Invalid body');
+	}
+	return body;
 }
 
 export async function get_auth_user_data(request: Request): Promise<user_data_type | Error> {
