@@ -5,6 +5,8 @@
 	import Account from './account.svelte';
 	import Logo from '../logo.svelte';
 	import { Hamburger } from 'svelte-hamburgers';
+	import { logged_in } from '$lib/scripts/frontend/auth/auth_state';
+	import { logout } from '$lib/scripts/frontend/auth/logout';
 
 	const routes: Record<string, string> = {
 		'/': 'Startseite',
@@ -40,13 +42,24 @@
 			class:current_route={$page.url.pathname === route}>{name}</a
 		>
 	{/each}
+	{#if $logged_in}
+		<button
+			in:fly={{ duration: 500, y: -30, delay: Object.keys(routes).length * 100 }}
+			class:mobile={true}
+			class:hidden={!navigation_open}
+			on:click={logout}
+		>
+			Abmelden
+		</button>
+	{/if}
 	<div class="desktop account">
 		<Account />
 	</div>
 </div>
 
 <style lang="scss">
-	a {
+	a,
+	button {
 		font-size: 20px;
 		text-decoration: none;
 		padding: 10px;
@@ -54,6 +67,9 @@
 			border: 1px solid #000;
 			padding: 9px;
 		}
+	}
+	button {
+		color: red;
 	}
 	.main {
 		position: sticky;
@@ -84,6 +100,9 @@
 	}
 	.mobile {
 		display: none;
+	}
+	.hidden {
+		display: none !important;
 	}
 	@media (max-width: 830px) {
 		.desktop {

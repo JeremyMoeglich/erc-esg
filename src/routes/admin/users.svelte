@@ -30,8 +30,8 @@
 					</p>
 					{#if is_locked(admin)}
 						<div class="locked">Locked <Locked /></div>
-                    {:else}
-                        <button>Admin Entfernen</button>
+					{:else}
+						<button>Admin Entfernen</button>
 					{/if}
 				</div>
 			{/each}
@@ -49,24 +49,24 @@
 		border-radius: 5px;
 		margin: 10px;
 		border: 2px solid var(--secondary-color);
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+		box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
 		& > p {
 			padding: 10px;
 		}
 	}
-    button {
-        background-color: var(--gray300);
-        border: 2px solid var(--secondary-color);
-        border-radius: 5px;
-        padding: 10px;
-        color: var(--secondary-color);
-        box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-        transition-duration: 300ms;
-        &:hover {
-            background-color: white;
-            color: var(--primary-color);
-            box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
-            transform: scale(1.02);
-        }
-    }
+	button {
+		background-color: var(--gray300);
+		border: 2px solid var(--secondary-color);
+		border-radius: 5px;
+		padding: 10px;
+		color: var(--secondary-color);
+		box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+		transition-duration: 300ms;
+		&:hover {
+			background-color: white;
+			color: var(--primary-color);
+			box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.3);
+			transform: scale(1.02);
+		}
+	}
 </style>
