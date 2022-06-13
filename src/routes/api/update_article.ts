@@ -26,6 +26,9 @@ export const post: RequestHandler<
 			}
 		};
 	}
+
+	
+
 	const { article } = body;
 
 	await prisma_client.imageLink.upsert({

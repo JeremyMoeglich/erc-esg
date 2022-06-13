@@ -14,7 +14,7 @@
 		if (contact_form.phone === '') {
 			delete contact_form.phone;
 		}
-		return await fetch('/api/submit_contact_form', {
+		return await fetch('/api/contacts', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'

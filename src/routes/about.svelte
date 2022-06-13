@@ -1,5 +1,6 @@
 <script>
-	import ActionFields from '$lib/components/site/action_fields.svelte';
+	import ActionFields from '$lib/components/site/fields/action_fields.svelte';
+	import SectionFields from '$lib/components/site/fields/section_fields.svelte';
 </script>
 
 <div class="outer">
@@ -64,6 +65,7 @@
 	</div>
 </div>
 <ActionFields />
+<SectionFields />
 
 <style lang="scss">
 	@import './src/mixins.scss';

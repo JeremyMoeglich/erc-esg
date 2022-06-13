@@ -70,14 +70,18 @@ export async function get_auth_user_data(request: Request): Promise<user_data_ty
 	return user;
 }
 
+export async function has_admin_access(request: Request): Promise<boolean> {
+	const user = await get_auth_user_data(request);
+	if (user instanceof Error) {
+		return false;
+	}
+	return has_db_access(user.role);
+}
+
 export async function validate_get_admin_body<T extends string>(request: Request, attrs: T[]) {
 	const body = await get_request_body(request, attrs);
-	const user_data = await get_auth_user_data(request);
-	if (user_data instanceof Error) {
-		return user_data;
-	}
-	if (!has_db_access(user_data.role)) {
-		return new Error('You do not have access to this endpoint');
+	if (!has_admin_access(request)) {
+		return new Error('Not logged in');
 	}
 	if (!body) {
 		return new Error('Missing required fields');

@@ -8,10 +8,10 @@
 {#if $admin_mode}
 	<div class="outer">
 		<div class="sidebar_tabs">
-			<a href="/admin/index">
+			<a href="/admin">
 				<Home {size} />
 			</a>
-			<a href="/admin/users">
+			<a href="/admin/admin_user">
 				<User {size} />
 			</a>
 			<a href="/admin/contacts">

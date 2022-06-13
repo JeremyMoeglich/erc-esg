@@ -5,9 +5,15 @@ export type user_data_type<R extends Role = Role> = Omit<User, 'password_hash' |
 	role: R;
 };
 
+export const ROLES = ['user', 'admin', 'root'] as const;
+
+export function is_role(role: unknown): role is Role {
+	return ROLES.includes(role as Role);
+}
+
 export function is_user_data(
 	data: unknown,
-	roles: Role[] = ['user', 'admin', 'root']
+	roles: readonly Role[] = ROLES
 ): data is user_data_type {
 	if (typeof data !== 'object') {
 		return false;

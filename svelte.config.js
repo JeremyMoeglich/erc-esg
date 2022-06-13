@@ -1,6 +1,27 @@
-import adapter from '@sveltejs/adapter-node';
+import staticAdapter from '@sveltejs/adapter-static';
+import nodeAdapter from '@sveltejs/adapter-node';
 import preprocess from 'svelte-preprocess';
 import { optimizeImports } from 'carbon-preprocess-svelte';
+
+//@ts-check
+
+const hasAdapter = process.env.ADAPTER;
+const adapt = hasAdapter ? hasAdapter : 'node';
+
+const getAdapters = (adapt) => {
+	switch (adapt) {
+		case 'node':
+			return nodeAdapter;
+		case 'static':
+			return staticAdapter;
+		default:
+			console.warn('unknown adapter, using node');
+			return nodeAdapter;
+	}
+};
+
+const adapter = getAdapters(adapt);
+
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -18,8 +39,12 @@ const config = {
 	kit: {
 		adapter: adapter(),
 		prerender: {
-			crawl: true
-		}
+			crawl: true,
+			enabled: true,
+			onError: 'fail',
+			entries: ['*'],
+			default: true
+		},
 	}
 };
 

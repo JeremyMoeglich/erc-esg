@@ -1,6 +1,7 @@
-import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
+import { get_request_body, has_admin_access } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { is_contact_form } from '$lib/scripts/universal/datatypes';
+import { is_contact_form, type contact_form_type } from '$lib/scripts/universal/datatypes';
+import type { ContactForm } from '@prisma/client';
 import type { RequestHandler } from '@sveltejs/kit';
 import cuid from 'cuid';
 
@@ -61,6 +62,27 @@ export const post: RequestHandler<Record<string, never>, { error?: string }> = a
 
 	return {
 		body: {},
+		status: 200
+	};
+};
+
+export const get: RequestHandler<
+	Record<string, never>,
+	{ error: string } | { forms: ContactForm[] }
+> = async ({ request }) => {
+	if (!(await has_admin_access(request))) {
+		return {
+			body: {
+				error: 'Unauthorized'
+			},
+			status: 401
+		};
+	}
+	const contact_forms = await prisma_client.contactForm.findMany();
+	return {
+		body: {
+			forms: contact_forms
+		},
 		status: 200
 	};
 };

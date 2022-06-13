@@ -1,5 +1,7 @@
 <script lang="ts">
+	import Button from '$lib/components/elements/button.svelte';
 	import { user_datas_store } from '$lib/scripts/frontend/data/user_data';
+	import { change_role } from '$lib/scripts/frontend/fetch/change_role';
 
 	import { get_admins } from '$lib/scripts/frontend/fetch/get_admins';
 
@@ -15,6 +17,8 @@
 	function is_locked(user_data: user_data_type<'admin'>): boolean {
 		return user_data.id === 'cl3lwm64k000473wpz1alp5di' || user_data.id === $user_datas_store?.id;
 	}
+
+	let email: string;
 </script>
 
 <div>
@@ -37,9 +41,24 @@
 			{/each}
 		</div>
 	{/if}
+	<div class="add_admin">
+		<Button
+			text={'Add Admin'}
+			onclick={async () => {
+				await change_role(email, 'admin');
+			}}
+		/>
+		<label for="email">Email:</label>
+		<input type="email" name="email" bind:value={email} />
+	</div>
 </div>
 
 <style lang="scss">
+	.add_admin {
+		display: flex;
+		gap: 20px;
+		align-items: center;
+	}
 	.user {
 		display: flex;
 		align-items: center;
