@@ -35,7 +35,7 @@ export const post: RequestHandler<
 		};
 	}
 	const user_exists = await prisma_client.user.findUnique({
-		where: { email: email },
+		where: { email },
 		select: { id: true }
 	});
 	if (user_exists) {

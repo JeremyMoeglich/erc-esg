@@ -22,7 +22,6 @@ const getAdapters = (adapt) => {
 
 const adapter = getAdapters(adapt);
 
-
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
 	preprocess: [
@@ -44,7 +43,7 @@ const config = {
 			onError: 'fail',
 			entries: ['*'],
 			default: true
-		},
+		}
 	}
 };
 
