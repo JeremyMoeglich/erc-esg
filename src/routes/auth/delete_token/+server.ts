@@ -1,6 +1,6 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
 export const post: RequestHandler = async ({ request }) => {
 	const body = await get_request_body(request, ['token']);

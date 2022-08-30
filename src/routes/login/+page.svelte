@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { browser } from '$app/env';
+
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 
@@ -15,7 +17,11 @@
 
 	let page_mode: page_mode_type = 'login';
 
-	$: page_mode = $page.url.searchParams.has('register') ? 'register' : 'login';
+	$: {
+		if (browser) {
+			page_mode = $page.url.searchParams.has('register') ? 'register' : 'login';
+		}
+	}
 
 	const field_keys = ['Passwort wiederholen', 'Passwort', 'Email', 'Name'] as const;
 

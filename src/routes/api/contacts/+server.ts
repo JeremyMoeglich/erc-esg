@@ -2,12 +2,10 @@ import { get_request_body, has_admin_access } from '$lib/scripts/backend/endpoin
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import { is_contact_form, type contact_form_type } from '$lib/scripts/universal/datatypes';
 import type { ContactForm } from '@prisma/client';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 import cuid from 'cuid';
 
-export const post: RequestHandler<Record<string, never>, { error?: string }> = async ({
-	request
-}) => {
+export const post: RequestHandler = async ({ request }) => {
 	const body = await get_request_body(request, ['email', 'name', 'message']);
 	if (!body) {
 		return {
@@ -66,10 +64,7 @@ export const post: RequestHandler<Record<string, never>, { error?: string }> = a
 	};
 };
 
-export const get: RequestHandler<
-	Record<string, never>,
-	{ error: string } | { forms: ContactForm[] }
-> = async ({ request }) => {
+export const GET: RequestHandler = async ({ request }) => {
 	if (!(await has_admin_access(request))) {
 		return {
 			body: {

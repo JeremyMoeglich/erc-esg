@@ -1,15 +1,7 @@
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
-export const get: RequestHandler<
-	{ id: string },
-	| {
-			image_url: string;
-	  }
-	| {
-			error: string;
-	  }
-> = async ({ params }) => {
+export const GET: RequestHandler = async ({ params }) => {
 	const { id } = params;
 	try {
 		const response = await prisma_client.imageLink

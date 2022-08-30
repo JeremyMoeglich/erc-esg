@@ -1,17 +1,10 @@
 import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { user_data_type } from '$lib/scripts/universal/datatypes';
-import type { RequestHandler } from '@sveltejs/kit';
+import { json } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
-export const get: RequestHandler<
-	Record<string, never>,
-	| {
-			error: string;
-	  }
-	| {
-			admins: Array<user_data_type<'admin'>>;
-	  }
-> = async ({ request }) => {
+export const GET: RequestHandler = async ({ request }) => {
 	const body = await validate_get_admin_body(request, []);
 	if (body instanceof Error) {
 		return {
@@ -36,10 +29,7 @@ export const get: RequestHandler<
 		tag
 	}));
 
-	return {
-		status: 200,
-		body: {
-			admins: admins_data
-		}
-	};
+	return json({
+		admins_data
+	});
 };

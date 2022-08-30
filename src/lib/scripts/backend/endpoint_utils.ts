@@ -1,29 +1,36 @@
 import { parse } from 'cookie';
-import { hasProperty } from 'functional-utilities';
 import type { user_data_type } from '../universal/datatypes';
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { has_db_access } from './has_db_access';
+import { prisma_client } from './db/prisma_client';
 import type { JsonValue } from 'type-fest';
+import type { z } from 'zod';
+import type { ZodObjectAny } from '../universal/zod_util';
+import { error } from '@sveltejs/kit';
+import { has_db_access } from './has_db_access';
 
-export async function get_request_body<T extends string>(
+export async function get_request_body<T extends ZodObjectAny>(
 	request: Request,
-	attrs: T[]
-): Promise<Record<T, unknown> | undefined> {
+	schema: T
+): Promise<z.infer<T>> {
 	const body = await get_body(request);
-	if (attrs.every((attr) => hasProperty(body, attr))) {
-		return body as Record<T, unknown>;
+	const parsed = schema.safeParse(body);
+	if (parsed.success) {
+		return parsed.data;
 	} else {
-		return undefined;
+		throw error(400, `Invalid request body: ${parsed.error.message}`);
 	}
 }
 
-export async function get_body(request: Request): Promise<JsonValue | Error> {
+export async function get_body(request: Request): Promise<JsonValue> {
 	const decoded_body = await request.text();
-	const body: JsonValue = JSON.parse(decoded_body.trim() ? decoded_body : '{}');
-	if (typeof body !== 'object') {
-		return new Error('Invalid body');
+	try {
+		const body: JsonValue = JSON.parse(decoded_body.trim() ? decoded_body : '{}');
+		if (typeof body !== 'object') {
+			throw error(400, 'Not an object');
+		}
+		return body;
+	} catch (_) {
+		throw error(400, 'Invalid JSON');
 	}
-	return body;
 }
 
 export async function get_auth_user_data(request: Request): Promise<user_data_type | Error> {
@@ -78,13 +85,13 @@ export async function has_admin_access(request: Request): Promise<boolean> {
 	return has_db_access(user.role);
 }
 
-export async function validate_get_admin_body<T extends string>(request: Request, attrs: T[]) {
-	const body = await get_request_body(request, attrs);
+export async function validate_get_admin_body<T extends ZodObjectAny>(request: Request, schema: T) {
+	const body = await get_request_body(request, schema);
 	if (!has_admin_access(request)) {
-		return new Error('Not logged in');
+		throw error(403, 'Not authorized');
 	}
 	if (!body) {
-		return new Error('Missing required fields');
+		throw error(400, 'No body');
 	}
 	return body;
 }

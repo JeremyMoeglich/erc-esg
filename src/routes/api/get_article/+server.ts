@@ -1,18 +1,10 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
 import type { article_data } from '$lib/scripts/universal/datatypes';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 import type { Jsonify } from 'type-fest';
 
-export const post: RequestHandler<
-	Record<string, never>,
-	| {
-			item: Jsonify<article_data>;
-	  }
-	| {
-			error: string;
-	  }
-> = async ({ request }) => {
+export const post: RequestHandler = async ({ request }) => {
 	const body = await get_request_body(request, ['id']);
 	if (body instanceof Error) {
 		return {

@@ -1,13 +1,8 @@
 import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { RequestHandler } from '@sveltejs/kit';
+import type { RequestHandler } from './$types';
 
-export const post: RequestHandler<
-	Record<string, never>,
-	{
-		error?: string;
-	}
-> = async ({ request }) => {
+export const post: RequestHandler = async ({ request }) => {
 	const body = await validate_get_admin_body(request, ['id']);
 	if (body instanceof Error) {
 		return {
