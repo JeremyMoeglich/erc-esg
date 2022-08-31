@@ -5,16 +5,16 @@
 
 	import { get_admins } from '$lib/scripts/frontend/fetch/get_admins';
 
-	import type { user_data_type } from '$lib/scripts/universal/datatypes';
+	import type { safe_user_data_type } from '$lib/scripts/universal/datatypes';
 	import { Locked, User } from 'carbon-icons-svelte';
 
-	let admins: user_data_type<'admin'>[] | undefined = undefined;
+	let admins: safe_user_data_type<'admin'>[] | undefined = undefined;
 
 	(async () => {
 		admins = await get_admins();
 	})();
 
-	function is_locked(user_data: user_data_type<'admin'>): boolean {
+	function is_locked(user_data: safe_user_data_type<'admin'>): boolean {
 		return user_data.id === 'cl3lwm64k000473wpz1alp5di' || user_data.id === $user_datas_store?.id;
 	}
 

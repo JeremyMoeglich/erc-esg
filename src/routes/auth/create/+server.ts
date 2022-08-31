@@ -7,7 +7,7 @@ import { z } from 'zod';
 import { error, json } from '@sveltejs/kit';
 import type { JsonObject } from 'type-fest';
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const { email, password, name } = await get_request_body(
 		request,
 		z.object({

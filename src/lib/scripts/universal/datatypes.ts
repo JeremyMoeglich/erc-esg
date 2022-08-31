@@ -5,7 +5,7 @@ export const ROLES = ['user', 'admin', 'root'] as const;
 
 export const role_schema = z.union([z.literal('user'), z.literal('admin'), z.literal('root')]);
 
-export type user_data_type<R extends Role = Role> = Omit<User, 'password_hash' | 'role'> & {
+export type safe_user_data_type<R extends Role = Role> = Omit<User, 'password_hash' | 'role'> & {
 	role: R;
 };
 
@@ -16,6 +16,14 @@ export const user_data_schema = z.object({
 	password_hash: z.string(),
 	role: role_schema,
 	tag: z.string()
+});
+
+export const safe_user_data_schema = z.object({
+	id: z.string(),
+	name: z.string(),
+	email: z.string(),
+	tag: z.string(),
+	role: role_schema
 });
 
 export const article_preview_schema = z.object({

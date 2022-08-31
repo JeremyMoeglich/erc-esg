@@ -4,5 +4,5 @@ import { json } from '@sveltejs/kit';
 
 export const GET: RequestHandler = async ({ request }) => {
 	const user_data = await get_auth_user_data(request);
-	return json(user_data);
+	return json({ user_data });
 };

@@ -2,7 +2,7 @@ import { current_auth_state } from './auth_state';
 import { get_login_token, remove_login_token, set_login_token } from './login_token';
 import { user_datas_store } from '../data/user_data';
 import { z } from 'zod';
-import { user_data_schema } from '$lib/scripts/universal/datatypes';
+import { safe_user_data_schema } from '$lib/scripts/universal/datatypes';
 
 export async function check_token_and_login() {
 	const token = get_login_token();
@@ -45,7 +45,7 @@ export async function token_login(token: string, validate = true) {
 
 	const { user_data } = z
 		.object({
-			user_data: user_data_schema
+			user_data: safe_user_data_schema
 		})
 		.parse(response);
 

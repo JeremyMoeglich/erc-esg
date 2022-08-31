@@ -1,5 +1,5 @@
 import { parse } from 'cookie';
-import type { user_data_type } from '../universal/datatypes';
+import type { safe_user_data_type } from '../universal/datatypes';
 import { prisma_client } from './db/prisma_client';
 import type { JsonValue } from 'type-fest';
 import type { z } from 'zod';
@@ -33,7 +33,7 @@ export async function get_body(request: Request): Promise<JsonValue> {
 	}
 }
 
-export async function get_auth_user_data(request: Request): Promise<user_data_type> {
+export async function get_auth_user_data(request: Request): Promise<safe_user_data_type> {
 	const cookies = parse(request.headers.get('cookie') ?? '');
 	if (!cookies.login_token) {
 		throw error(401, 'Not logged in');

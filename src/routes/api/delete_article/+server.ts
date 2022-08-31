@@ -5,7 +5,7 @@ import type { JsonObject } from 'type-fest';
 import { z } from 'zod';
 import type { RequestHandler } from './$types';
 
-export const post: RequestHandler = async ({ request }) => {
+export const POST: RequestHandler = async ({ request }) => {
 	const { id } = await validate_get_admin_body(
 		request,
 		z.object({

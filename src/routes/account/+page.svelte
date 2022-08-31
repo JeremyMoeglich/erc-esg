@@ -1,8 +1,8 @@
 <script lang="ts">
 	import { user_datas_store } from '$lib/scripts/frontend/data/user_data';
-	import type { user_data_type } from '$lib/scripts/universal/datatypes';
+	import type { safe_user_data_type } from '$lib/scripts/universal/datatypes';
 
-	let user_data: user_data_type | undefined;
+	let user_data: safe_user_data_type | undefined;
 	$: user_data = $user_datas_store;
 </script>
 
