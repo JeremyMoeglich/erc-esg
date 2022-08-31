@@ -36,10 +36,7 @@
 				{required}
 				{placeholder}
 				on:input={() => {
-					if (typeof input_element.value === 'string') {
-						value = input_element.value;
-					}
-					throw new Error('input_field.svelte: input_element.value is not a string');
+					value = input_element.value;
 				}}
 			/>
 		{/if}

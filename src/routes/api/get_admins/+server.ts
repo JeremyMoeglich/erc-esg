@@ -1,20 +1,14 @@
-import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
+import { has_admin_access } from '$lib/scripts/backend/endpoint_utils';
+import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
 import type { user_data_type } from '$lib/scripts/universal/datatypes';
-import { json } from '@sveltejs/kit';
+import { error, json } from '@sveltejs/kit';
+import type { JsonObject } from 'type-fest';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ request }) => {
-	const body = await validate_get_admin_body(request, []);
-	if (body instanceof Error) {
-		return {
-			status: 401,
-			body: {
-				error: body.message
-			}
-		};
+	if (!(await has_admin_access(request))) {
+		throw error(403, 'Not authorized');
 	}
-
 	const admins = await prisma_client.user.findMany({
 		where: {
 			role: 'admin'
@@ -31,5 +25,5 @@ export const GET: RequestHandler = async ({ request }) => {
 
 	return json({
 		admins_data
-	});
+	} as JsonObject);
 };

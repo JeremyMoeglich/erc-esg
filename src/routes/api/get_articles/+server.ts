@@ -1,66 +1,30 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { is_filter, type article_preview_data } from '$lib/scripts/universal/datatypes';
+import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
+import { filter_schema } from '$lib/scripts/universal/datatypes';
 import type { RequestHandler } from './$types';
-import type { Jsonify } from 'type-fest';
+import { z } from 'zod';
+import { error, json } from '@sveltejs/kit';
+import type { JsonObject } from 'type-fest';
 
-export const post: RequestHandler = async ({ request }) => {
-	const body = await get_request_body(request, ['start', 'end', 'filter']);
-	if (body instanceof Error) {
-		return {
-			status: 401,
-			body: {
-				error: body.message
-			}
-		};
-	}
-	if (
-		!body ||
-		typeof body.start !== 'number' ||
-		typeof body.end !== 'number' ||
-		!is_filter(body.filter)
-	) {
-		return {
-			status: 400,
-			body: {
-				error: 'Field datatypes invalid'
-			}
-		};
-	}
-	const { start, end, filter } = body;
+export const POST: RequestHandler = async ({ request }) => {
+	const { start, end, filter } = await get_request_body(
+		request,
+		z.object({
+			start: z.number().int().nonnegative(),
+			end: z.number().int().nonnegative(),
+			filter: filter_schema
+		})
+	);
 
 	if (start > end) {
-		return {
-			status: 400,
-			body: {
-				error: 'start must be less than end'
-			}
-		};
-	}
-	if (start < 0 || end < 0) {
-		return {
-			status: 400,
-			body: {
-				error: 'start and end must be positive integers'
-			}
-		};
+		throw error(400, 'start must be less than end');
 	}
 	const max_amount = 40;
 	if (end - start > max_amount) {
-		return {
-			status: 403,
-			body: {
-				error: `maximum number of items is ${max_amount}`
-			}
-		};
+		throw error(400, `end - start must be less than ${max_amount}`);
 	}
 	if (start > 500) {
-		return {
-			status: 403,
-			body: {
-				error: 'start must be less than 500'
-			}
-		};
+		throw error(400, 'start must be less than 500');
 	}
 	const query = filter.search
 		? {
@@ -102,13 +66,10 @@ export const post: RequestHandler = async ({ request }) => {
 			createdAt: 'desc'
 		}
 	});
-	return {
-		body: {
-			articles: response.map((article) => ({
-				...article,
-				createdAt: JSON.stringify(article.createdAt)
-			}))
-		},
-		status: 200
-	};
+	return json({
+		articles: response.map((article) => ({
+			...article,
+			createdAt: JSON.stringify(article.createdAt)
+		}))
+	} as JsonObject);
 };

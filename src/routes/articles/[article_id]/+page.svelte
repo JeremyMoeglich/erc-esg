@@ -5,8 +5,7 @@
 	import { articles_cache_store } from '$lib/scripts/frontend/data/articles';
 	import { load_article } from '$lib/scripts/frontend/fetch/load_detailed_article';
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
-	import type { article, article_preview } from '$lib/scripts/universal/datatypes';
-	import { hasProperty } from 'functional-utilities';
+	import type { article_type, article_preview_type } from '$lib/scripts/universal/datatypes';
 	import { get } from 'svelte/store';
 	import cuid from 'cuid';
 	import { Editor, Viewer } from 'bytemd';
@@ -45,11 +44,11 @@
 		is_loading.set(false);
 		state = undefined;
 	}
-	let article_obj: article_preview | article | undefined = undefined;
+	let article_obj: article_preview_type | article_type | undefined = undefined;
 	$: article_obj = $articles_cache_store?.[article_id];
 
 	import gfm from '@bytemd/plugin-gfm';
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import Button from '$lib/components/elements/button.svelte';
 	import Inplaceedit from '$lib/components/elements/inplaceedit.svelte';
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
@@ -59,7 +58,7 @@
 	const plugins = [gfm()];
 
 	function content_change(e: CustomEvent<{ value: string }>) {
-		if (!hasProperty(article_obj, 'content')) {
+		if (!article_obj || !('content' in article_obj)) {
 			throw new Error('article has no content, but content is shown');
 		}
 		article_obj.content = e.detail.value;
@@ -119,7 +118,7 @@
 					{/if}
 				{/if}
 			</h1>
-			{#if hasProperty(article_obj, 'content')}
+			{#if 'content' in article_obj}
 				<div>
 					{#if $admin_mode}
 						<div class="editor">
@@ -137,7 +136,10 @@
 							<Button
 								text={'Speichern'}
 								onclick={async () => {
-									if (!hasProperty(article_obj, 'content')) {
+									if (article_obj === undefined) {
+										throw new Error('article_obj became undefined during save');
+									}
+									if (!('content' in article_obj)) {
 										throw new Error('article has no content, but content is shown');
 									}
 									update_article(article_obj);

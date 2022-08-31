@@ -1,5 +1,4 @@
-import type { JSONValue } from '@sveltejs/kit/types/private';
-import { hasProperty } from 'functional-utilities';
+import { z } from 'zod';
 
 const toBase64 = (file: File) =>
 	new Promise<string | ArrayBuffer | null>((resolve, reject) => {
@@ -25,23 +24,13 @@ export async function upload_image(id: string, file: File): Promise<string | Err
 		}
 	});
 
-	const body: JSONValue = await response.json();
-
-	if (hasProperty(body, 'error')) {
-		if (typeof body.error !== 'string') {
-			return new Error('Invalid error message');
-		}
-		return new Error(body.error);
-	}
-	if (!hasProperty(body, 'image_url')) {
-		return new Error('Invalid response');
-	}
-	const url = body.image_url;
-	if (typeof url !== 'string') {
-		return new Error('Invalid url');
-	}
+	const { image_url } = z
+		.object({
+			image_url: z.string()
+		})
+		.parse(await response.json());
 
 	//const new_url = url.replace('ik.imagekit.io', 'img.moeglich.dev');
 	//return new_url;
-	return url;
+	return image_url;
 }

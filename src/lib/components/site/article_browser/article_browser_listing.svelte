@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { admin_mode } from '$lib/scripts/frontend/auth/auth_state';
-	import type { article_preview } from '$lib/scripts/universal/datatypes';
+	import type { article_preview_type } from '$lib/scripts/universal/datatypes';
 	import { Add } from 'carbon-icons-svelte';
 
 	import ArticleBrowserItem from './article_browser_item.svelte';
@@ -8,7 +8,7 @@
 	import cuid from 'cuid';
 	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
 
-	export let articles: article_preview[];
+	export let articles: article_preview_type[];
 </script>
 
 <div class="listing">

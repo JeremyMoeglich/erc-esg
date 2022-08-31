@@ -37,7 +37,7 @@
 	{#each typed_entries(routes) as [route, name], i}
 		<a
 			class:desktop={!navigation_open}
-			sveltekit:prefetch
+			data-sveltekit-prefetch
 			in:fly={{ duration: 500, y: -30, delay: i * 100 }}
 			href={route}
 			class:current_route={$page.url.pathname === route}>{name}</a

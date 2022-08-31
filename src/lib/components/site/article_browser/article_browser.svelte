@@ -1,8 +1,8 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 	import { update_index } from '$lib/scripts/frontend/data/local_changes';
 	import { get_articles } from '$lib/scripts/frontend/fetch/get_articles';
-	import type { article_preview, filter_type } from '$lib/scripts/universal/datatypes';
+	import type { article_preview_type, filter_type } from '$lib/scripts/universal/datatypes';
 	import ArticleBrowserListing from './article_browser_listing.svelte';
 	import SearchBar from './search_bar.svelte';
 
@@ -16,7 +16,7 @@
 
 	const articles_per_page = 12;
 
-	let articles: article_preview[] | undefined = undefined;
+	let articles: article_preview_type[] | undefined = undefined;
 
 	async function update_items(filter: filter_type | undefined, page: number) {
 		if (!filter) {

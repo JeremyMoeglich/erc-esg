@@ -1,28 +1,18 @@
 import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { is_article } from '$lib/scripts/universal/datatypes';
+import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
+import { article_schema } from '$lib/scripts/universal/datatypes';
+import { json } from '@sveltejs/kit';
+import type { JsonObject } from 'type-fest';
+import { z } from 'zod';
 import type { RequestHandler } from './$types';
 
-export const post: RequestHandler = async ({ request }) => {
-	const body = await validate_get_admin_body(request, ['article']);
-	if (body instanceof Error) {
-		return {
-			status: 401,
-			body: {
-				error: body.message
-			}
-		};
-	}
-	if (!is_article(body.article)) {
-		return {
-			status: 400,
-			body: {
-				error: 'Field datatypes invalid'
-			}
-		};
-	}
-
-	const { article } = body;
+export const POST: RequestHandler = async ({ request }) => {
+	const { article } = await validate_get_admin_body(
+		request,
+		z.object({
+			article: article_schema
+		})
+	);
 
 	await prisma_client.imageLink.upsert({
 		where: {
@@ -52,7 +42,5 @@ export const post: RequestHandler = async ({ request }) => {
 		}
 	});
 
-	return {
-		status: 200
-	};
+	return json({} as JsonObject);
 };

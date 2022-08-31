@@ -1,38 +1,19 @@
 import { validate_get_admin_body } from '$lib/scripts/backend/endpoint_utils';
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import { is_role } from '$lib/scripts/universal/datatypes';
+import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
+import { role_schema } from '$lib/scripts/universal/datatypes';
+import { json } from '@sveltejs/kit';
+import type { JsonObject } from 'type-fest';
+import { z } from 'zod';
 import type { RequestHandler } from './$types';
 
-export const post: RequestHandler = async ({ request }) => {
-	const body = await validate_get_admin_body(request, ['email', 'role']);
-	if (body instanceof Error) {
-		return {
-			status: 401,
-			body: {
-				error: body.message
-			}
-		};
-	}
-
-	if (typeof body.email !== 'string' || typeof body.role !== 'string') {
-		return {
-			status: 400,
-			body: {
-				error: 'Field datatypes invalid'
-			}
-		};
-	}
-
-	if (!is_role(body.role)) {
-		return {
-			status: 400,
-			body: {
-				error: 'Invalid role'
-			}
-		};
-	}
-
-	const { email, role } = body;
+export const POST: RequestHandler = async ({ request }) => {
+	const { email, role } = await validate_get_admin_body(
+		request,
+		z.object({
+			email: z.string(),
+			role: role_schema
+		})
+	);
 
 	await prisma_client.user.update({
 		where: {
@@ -43,7 +24,5 @@ export const post: RequestHandler = async ({ request }) => {
 		}
 	});
 
-	return {
-		status: 200
-	};
+	return json({} as JsonObject);
 };

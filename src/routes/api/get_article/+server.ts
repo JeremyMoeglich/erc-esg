@@ -1,28 +1,17 @@
 import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
-import type { article_data } from '$lib/scripts/universal/datatypes';
+import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
 import type { RequestHandler } from './$types';
-import type { Jsonify } from 'type-fest';
+import { z } from 'zod';
+import { error, json } from '@sveltejs/kit';
+import type { JsonObject } from 'type-fest';
 
-export const post: RequestHandler = async ({ request }) => {
-	const body = await get_request_body(request, ['id']);
-	if (body instanceof Error) {
-		return {
-			status: 401,
-			body: {
-				error: body.message
-			}
-		};
-	}
-	if (!body || !body.id || !(typeof body.id === 'string')) {
-		return {
-			status: 400,
-			body: {
-				error: 'Field datatypes invalid'
-			}
-		};
-	}
-	const { id } = body;
+export const POST: RequestHandler = async ({ request }) => {
+	const { id } = await get_request_body(
+		request,
+		z.object({
+			id: z.string()
+		})
+	);
 	try {
 		const response = await prisma_client.article
 			.findUnique({
@@ -44,29 +33,16 @@ export const post: RequestHandler = async ({ request }) => {
 			})
 			.catch(() => undefined);
 		if (!response) {
-			return {
-				status: 404,
-				body: {
-					error: 'Article not found'
-				}
-			};
+			throw error(404, 'article not found');
 		}
 		const serialized_response = {
 			...response,
 			createdAt: JSON.stringify(response.createdAt)
 		};
-		return {
-			body: {
-				item: serialized_response
-			},
-			status: 200
-		};
-	} catch (error) {
-		return {
-			status: 500,
-			body: {
-				error: 'Internal server error'
-			}
-		};
+		return json({
+			item: serialized_response
+		} as JsonObject);
+	} catch (e) {
+		throw error(500, 'Internal server error');
 	}
 };

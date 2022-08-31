@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
@@ -108,7 +108,11 @@
 				Registrieren
 			{/if}
 		</h3>
-		<div class="inputs" style:--distance={page_mode === 'login' ? '25px' : '0px'}>
+		<form
+			class="inputs"
+			style:--distance={page_mode === 'login' ? '25px' : '0px'}
+			on:submit|preventDefault
+		>
 			{#each typed_entries(required_fields[page_mode]) as required_field}
 				{@const type = required_field[1].type}
 				{@const text = required_field[0]}
@@ -134,7 +138,7 @@
 					onclick={run_page_mode}
 				/>
 			</div>
-		</div>
+		</form>
 		<p class="register">
 			{page_mode === 'login' ? 'Noch keinen Account?' : 'Bereits ein Account?'}
 			<Button

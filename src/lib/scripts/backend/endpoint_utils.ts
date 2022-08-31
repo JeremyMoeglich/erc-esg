@@ -33,10 +33,10 @@ export async function get_body(request: Request): Promise<JsonValue> {
 	}
 }
 
-export async function get_auth_user_data(request: Request): Promise<user_data_type | Error> {
+export async function get_auth_user_data(request: Request): Promise<user_data_type> {
 	const cookies = parse(request.headers.get('cookie') ?? '');
 	if (!cookies.login_token) {
-		return new Error('Not logged in');
+		throw error(401, 'Not logged in');
 	}
 	const user_id = (
 		await prisma_client.loginToken.findUnique({
@@ -50,7 +50,7 @@ export async function get_auth_user_data(request: Request): Promise<user_data_ty
 	)?.userId;
 
 	if (!user_id) {
-		return new Error('Invalid login token');
+		throw error(401, 'User not found');
 	}
 
 	const user = await prisma_client.user.findUnique({
@@ -72,7 +72,7 @@ export async function get_auth_user_data(request: Request): Promise<user_data_ty
 				value: cookies.login_token
 			}
 		});
-		return new Error('Invalid login token');
+		throw error(401, 'Invalid login token');
 	}
 	return user;
 }
@@ -87,7 +87,7 @@ export async function has_admin_access(request: Request): Promise<boolean> {
 
 export async function validate_get_admin_body<T extends ZodObjectAny>(request: Request, schema: T) {
 	const body = await get_request_body(request, schema);
-	if (!has_admin_access(request)) {
+	if (!(await has_admin_access(request))) {
 		throw error(403, 'Not authorized');
 	}
 	if (!body) {

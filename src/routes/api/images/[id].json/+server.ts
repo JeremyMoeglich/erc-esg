@@ -1,4 +1,6 @@
-import { prisma_client } from '$lib/scripts/backend/prisma_client';
+import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
+import { error, json } from '@sveltejs/kit';
+import type { JsonObject } from 'type-fest';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async ({ params }) => {
@@ -15,25 +17,14 @@ export const GET: RequestHandler = async ({ params }) => {
 			})
 			.catch(() => undefined);
 		if (!response) {
-			return {
-				status: 200,
-				body: {
-					image_url: 'https://ik.imagekit.io/p6h71lfbt/nutzungsverhalten_analyse_uQC0Zauvv'
-				}
-			};
+			return json({
+				image_url: 'https://ik.imagekit.io/p6h71lfbt/nutzungsverhalten_analyse_uQC0Zauvv'
+			});
 		}
-		return {
-			body: {
-				image_url: response.image_url
-			},
-			status: 200
-		};
-	} catch (error) {
-		return {
-			status: 500,
-			body: {
-				error: 'Internal server error'
-			}
-		};
+		return json({
+			image_url: response.image_url
+		} as JsonObject);
+	} catch (e) {
+		throw error(500, 'Internal server error');
 	}
 };

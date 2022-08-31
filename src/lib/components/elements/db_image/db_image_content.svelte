@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { browser } from '$app/env';
+	import { browser } from '$app/environment';
 
 	import { image_cache_store } from '$lib/scripts/frontend/data/image';
 	import { get_image_url } from '$lib/scripts/frontend/fetch/get_image_url';

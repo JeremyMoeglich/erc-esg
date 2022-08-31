@@ -1,32 +1,24 @@
-import type { JSONValue } from '@sveltejs/kit/types/private';
-import { hasProperty } from 'functional-utilities';
 import { get } from 'svelte/store';
+import { z } from 'zod';
 import { image_cache_store } from '../data/image';
 
 export async function get_image_url(id: string): Promise<string | Error> {
 	let current_cache = get(image_cache_store);
-	if (hasProperty(current_cache, id)) {
+	if (id in current_cache) {
 		return current_cache[id];
 	}
 	const url = `/api/images/${id}.json`;
 	const response = await fetch(url);
-	const body: JSONValue = await response.json();
-	if (hasProperty(body, 'error')) {
-		if (typeof body.error !== 'string') {
-			return new Error('Invalid error message');
-		}
-		return new Error(body.error);
-	}
-	if (!hasProperty(body, 'image_url')) {
-		return new Error('Invalid response');
-	}
-	if (typeof body.image_url !== 'string') {
-		return new Error('Invalid url');
-	}
+	const { image_url } = z
+		.object({
+			image_url: z.string()
+		})
+		.parse(await response.json());
+
 	current_cache = get(image_cache_store);
 	image_cache_store.set({
 		...current_cache,
-		[id]: body.image_url
+		[id]: image_url
 	});
-	return body.image_url;
+	return image_url;
 }

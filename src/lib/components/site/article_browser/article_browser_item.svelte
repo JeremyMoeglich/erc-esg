@@ -3,9 +3,9 @@
 	import DbImage from '$lib/components/elements/db_image/db_image.svelte';
 	import { admin_mode } from '$lib/scripts/frontend/auth/auth_state';
 
-	import type { article_preview } from '$lib/scripts/universal/datatypes';
+	import type { article_preview_type } from '$lib/scripts/universal/datatypes';
 	import { delete_article } from '$lib/scripts/frontend/fetch/delete_article';
-	export let article: article_preview;
+	export let article: article_preview_type;
 
 	let hidden = false;
 </script>
