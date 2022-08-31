@@ -1,8 +1,8 @@
 import { get_auth_user_data, get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
 import type { RequestHandler } from './$types';
-import { hash } from 'bcryptjs';
-import { z } from 'zod';
+import pkg from 'bcryptjs';
+const { hash } = pkgimport { z } from 'zod';
 import { error, json } from '@sveltejs/kit';
 import type { JsonObject } from 'type-fest';
 
