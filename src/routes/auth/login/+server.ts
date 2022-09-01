@@ -2,7 +2,7 @@ import { get_request_body } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
 import type { RequestHandler } from './$types';
 import pkg from 'bcryptjs';
-const { compare } = pkg
+const { compare } = pkg;
 import cuid from 'cuid';
 import { z } from 'zod';
 import { error, json } from '@sveltejs/kit';

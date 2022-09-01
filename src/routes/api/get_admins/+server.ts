@@ -15,13 +15,15 @@ export const GET: RequestHandler = async ({ request }) => {
 		}
 	});
 
-	const admins_data: Array<safe_user_data_type<'admin'>> = admins.map(({ id, email, name, tag }) => ({
-		id,
-		email,
-		name,
-		role: 'admin',
-		tag
-	}));
+	const admins_data: Array<safe_user_data_type<'admin'>> = admins.map(
+		({ id, email, name, tag }) => ({
+			id,
+			email,
+			name,
+			role: 'admin',
+			tag
+		})
+	);
 
 	return json({
 		admins_data

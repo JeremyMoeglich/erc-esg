@@ -5,7 +5,7 @@ const config: PlaywrightTestConfig = {
 		command: 'npm run build && npm run preview',
 		port: 4173,
 		reuseExistingServer: true,
-		timeout: 120000,
+		timeout: 120000
 	}
 };
 

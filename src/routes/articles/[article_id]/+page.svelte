@@ -12,6 +12,13 @@
 	import 'bytemd/dist/index.css';
 	import de from 'bytemd/locales/de.json';
 	import type { EditorConfiguration } from 'codemirror';
+	import gfm from '@bytemd/plugin-gfm';
+	import { browser } from '$app/environment';
+	import Button from '$lib/components/elements/button.svelte';
+	import Inplaceedit from '$lib/components/elements/inplaceedit.svelte';
+	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
+	import { goto } from '$app/navigation';
+	import { upload_image } from '$lib/scripts/frontend/fetch/upload_image';
 
 	const sanitize: <T>(v: T) => T = (v) => v;
 
@@ -46,14 +53,6 @@
 	}
 	let article_obj: article_preview_type | article_type | undefined = undefined;
 	$: article_obj = $articles_cache_store?.[article_id];
-
-	import gfm from '@bytemd/plugin-gfm';
-	import { browser } from '$app/environment';
-	import Button from '$lib/components/elements/button.svelte';
-	import Inplaceedit from '$lib/components/elements/inplaceedit.svelte';
-	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
-	import { goto } from '$app/navigation';
-	import { upload_image } from '$lib/scripts/frontend/fetch/upload_image';
 
 	const plugins = [gfm()];
 
