@@ -23,8 +23,8 @@
 			</p>
 		</div>
 		<img
-			src="/images/solar.svg"
-			alt="Haus mit Solar"
+			src="/images/showcase.jpeg"
+			alt="Erc-esg"
 			in:fly={{ x: 50, y: -20, ...$in_delay }}
 			out:fly={{ x: 50, y: -20, ...$out_delay }}
 		/>
@@ -59,7 +59,7 @@
 	.main {
 		position: relative;
 		display: flex;
-		width: 120vw;
+		width: 60vw;
 		padding: $main-padding;
 	}
 
@@ -99,7 +99,7 @@
 		width: 100%;
 		$m-width: 1200px;
 		min-width: $m-width;
-		right: min(-100px, calc(50vw - ($m-width / 2)));
+		right: min(-600px, calc(50vw - ($m-width / 2)));
 		top: 50px;
 	}
 	.more {
