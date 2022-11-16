@@ -27,14 +27,14 @@
 			font-size: large;
 			width: 100%;
 			height: 100%;
-			transition-duration: 200ms;
-			background-color: var(--gray200);
-			border: 2px solid var(--secondary-color);
+			transition-duration: 500ms;
+			background-color: var(--primary-color);
+			//border: 2px solid var(--secondary-color);
 			box-shadow: 0px 2px 10px -5px var(--secondary-color);
-			border-radius: 3px;
+			border-radius: 10px;
 			&:hover {
-				background-color: var(--gray000);
-				box-shadow: 0px 2px 10px -1px var(--secondary-color);
+				background-color: #cdffff;
+				box-shadow: 0px 2px 17px -1px var(--primary-color);
 				cursor: pointer;
 			}
 		}
