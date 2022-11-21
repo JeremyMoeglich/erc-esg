@@ -17,8 +17,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		width: 200px;
-		padding: 20px;
+		padding: 20px 30px;
 		text-align: center;
 		background-color: var(--gray000);
 		border-radius: 10px;

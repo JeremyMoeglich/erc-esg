@@ -12,7 +12,8 @@
 		'/': 'Startseite',
 		'/blog': 'Blog',
 		'/about': 'Über uns',
-		'/contact': 'Kontakt'
+		'/leistungen': 'Leistungen',
+		'/contact': 'Kontakt',
 	};
 
 	let navigation_open = false;
@@ -73,7 +74,6 @@
 		color: red;
 	}
 	.main {
-		position: sticky;
 		display: flex;
 		gap: 20px;
 		align-items: center;

@@ -1,14 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Roboto+Flex:opsz,wght@8..144,300&display=swap');
 
 :root {
+	--primary-hint: #BBEBCE;
 	--primary-color: #0fc736;
-	--secondary-color: #034a75;
-	--primary-hint: #72db88;
-	--secondary-hint: #5e7998;
-	--primary-dark: #25491c;
-	--secondary-dark: #002135;
-	--primary-hint-dark: #39523d;
+	--primary-dark: #006436;
+	--primary-hint-dark: #008D35;
+
 	--secondary-hint-dark: #0f202b;
+	--secondary-color: #034a75;
+	--secondary-hint: #5e7998;
+	--secondary-dark: #002135;
 	--light-color: #d8f3ff;
 	--gray000: #fafafa;
 	--gray100: #f5f5f5;
@@ -24,7 +25,6 @@
 
 body {
 	margin: 0px;
-	background: linear-gradient(to right, var(--light-color), rgb(201, 255, 230));
 	min-height: 100vh;
 	overflow-x: hidden;
 	overflow-y: scroll;
