@@ -4,7 +4,7 @@ generator client {
 }
 
 datasource db {
-    provider = "postgresql"
+    provider = "postgres"
     url      = env("DATABASE_URL")
 }
 
@@ -18,33 +18,33 @@ model ContactForm {
 }
 
 model User {
-    id            String @id @default(cuid()) @db.VarChar(255)
-    name          String @db.VarChar(24)
-    email         String @unique @db.VarChar(255)
-    password_hash String @db.VarChar(255)
+    id            String @id @default(cuid())
+    name          String
+    email         String @unique
+    password_hash String
     role          Role   @default(user)
-    tag           String @db.VarChar(255) @default("")
+    tag           String @default("")
 }
 
 model LoginToken {
-    id     String   @id @default(cuid()) @db.VarChar(255)
-    userId String   @unique @db.VarChar(255)
+    id     String   @id @default(cuid())
+    userId String   @unique
     time   DateTime @default(now())
-    value  String   @unique @db.VarChar(255)
+    value  String   @unique
 }
 
 model imageLink {
-    id        String    @id @unique @db.VarChar(255)
-    image_url String    @db.VarChar(255)
+    id        String    @id @unique
+    image_url String
     Article   Article[]
 }
 
 model Article {
     id          String    @id @default(cuid())
-    title       String    @db.VarChar(511)
+    title       String
     content     String
     createdAt   DateTime  @default(now())
-    imageLinkId String    @db.VarChar(255)
+    imageLinkId String
     image_link  imageLink @relation(fields: [imageLinkId], references: [id])
 }
 

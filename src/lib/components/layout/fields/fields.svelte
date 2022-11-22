@@ -15,9 +15,7 @@
 	<h2>{title}</h2>
 	<div class="main">
 		{#each fields as field}
-			<div class="field">
-				<Field title={field.title} image_id={field.image_id} text={field.text} />
-			</div>
+			<Field title={field.title} image_id={field.image_id} text={field.text} />
 		{/each}
 	</div>
 </div>
