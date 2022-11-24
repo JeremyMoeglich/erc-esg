@@ -6,7 +6,7 @@
 		"build": "npm run updateprisma && vite build",
 		"build:static": "cross-env ADAPTER=static npm run build",
 		"build:node": "cross-env ADAPTER=node npm run build",
-		"start": "dotenv -- pm2 reload ./build/index.js --update-env",
+		"start": "dotenv -e .env.serverless -- pm2 reload ./build/index.js --update-env",
 		"preview": "vite preview",
 		"updateprisma": "dotenv -e .env.serverless -- prisma generate --data-proxy",
 		"test": "playwright test",
