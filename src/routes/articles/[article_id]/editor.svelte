@@ -1,7 +1,7 @@
 <script lang="ts">
-	import EditorJS from '@editorjs/editorjs';
-	import Header from '@editorjs/header';
-	import List from '@editorjs/list';
+	import { browser } from '$app/environment';
+	import type EditorJS from '@editorjs/editorjs';
+
 	import { onMount } from 'svelte';
 
 	export let data: Awaited<ReturnType<typeof get_data>>;
@@ -11,16 +11,20 @@
 
 	let editor: EditorJS | undefined = undefined;
 
-	onMount(() => {
-		editor = new EditorJS({
-			holder: editor_id,
-			tools: {
-				header: Header,
-				list: List
-			}
-		});
-		if (data !== '') {
-			editor.render(JSON.parse(data));
+	onMount(async () => {
+		if (browser) {
+			const EditorJS = (await import('@editorjs/editorjs')).default;
+			const Header = (await import('@editorjs/header')).default;
+			const List = (await import('@editorjs/list')).default;
+			editor = new EditorJS({
+				holder: editor_id,
+				tools: {
+					header: Header,
+					list: List
+				},
+				data: data !== undefined ? JSON.parse(data) : undefined,
+				readOnly: !editable
+			});
 		}
 	});
 
@@ -29,8 +33,20 @@
 			console.warn('Editor not initialized');
 			return '';
 		}
+		await editor.isReady;
 		return JSON.stringify(await editor.save());
 	}
 </script>
 
-<div id={editor_id} />
+<div class="editor_outer">
+	<div id={editor_id} />
+</div>
+
+<style>
+	.editor_outer {
+		width: 100%;
+		height: 100%;
+		border: 1px solid rgb(214, 214, 214);
+		border-radius: 10px;
+	}
+</style>

@@ -42,7 +42,7 @@
 		<input bind:value on:blur={submit} {required} use:focus />
 	</form>
 {:else}
-	<div on:click={edit}>
+	<div on:click={edit} on:keypress={edit}>
 		{value}
 	</div>
 {/if}

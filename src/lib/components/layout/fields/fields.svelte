@@ -1,6 +1,6 @@
 <script lang="ts">
 	import Field from './field.svelte';
-	
+
 	export let fields: Array<{
 		title: string;
 		image_id: string;

@@ -5,7 +5,7 @@
 
 	import ArticleBrowserItem from './article_browser_item.svelte';
 
-	import cuid from 'cuid';
+	import { v4 } from 'uuid';
 
 	export let articles: article_preview_type[];
 </script>
@@ -13,7 +13,7 @@
 <div class="listing">
 	{#if $admin_mode}
 		<div class="add">
-			<a class="add_button" href={`/articles/${cuid()}`}><Add size={32} /></a>
+			<a class="add_button" href={`/articles/${v4()}`}><Add size={32} /></a>
 		</div>
 	{/if}
 	{#each articles as article (article)}

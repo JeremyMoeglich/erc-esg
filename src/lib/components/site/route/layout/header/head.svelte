@@ -35,7 +35,7 @@
 			<Hamburger bind:open={navigation_open} />
 		</div>
 	</div>
-	{#each typed_entries(routes) as [route, name], i}
+	{#each typed_entries(routes) as [route, name]}
 		<a
 			class:desktop={!navigation_open}
 			data-sveltekit-prefetch
@@ -44,11 +44,7 @@
 		>
 	{/each}
 	{#if $logged_in}
-		<button
-			class:mobile={true}
-			class:hidden={!navigation_open}
-			on:click={logout}
-		>
+		<button class:mobile={true} class:hidden={!navigation_open} on:click={logout}>
 			Abmelden
 		</button>
 	{/if}

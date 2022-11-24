@@ -12,37 +12,33 @@ export const POST: RequestHandler = async ({ request }) => {
 			id: z.string()
 		})
 	);
-	try {
-		const response = await prisma_client.article
-			.findUnique({
-				where: {
-					id
-				},
-				select: {
-					content: true,
-					title: true,
-					id: true,
-					createdAt: true,
-					image_link: {
-						select: {
-							id: true,
-							image_url: true
-						}
+	const response = await prisma_client.article
+		.findUnique({
+			where: {
+				id
+			},
+			select: {
+				content: true,
+				title: true,
+				id: true,
+				createdAt: true,
+				image_link: {
+					select: {
+						id: true,
+						image_url: true
 					}
 				}
-			})
-			.catch(() => undefined);
-		if (!response) {
-			throw error(404, 'article not found');
-		}
-		const serialized_response = {
-			...response,
-			createdAt: JSON.stringify(response.createdAt)
-		};
-		return json({
-			item: serialized_response
-		} as JsonObject);
-	} catch (e) {
-		throw error(500, 'Internal server error');
+			}
+		})
+		.catch(() => undefined);
+	if (!response) {
+		throw error(404, 'article not found');
 	}
+	const serialized_response = {
+		...response,
+		createdAt: JSON.stringify(response.createdAt)
+	};
+	return json({
+		item: serialized_response
+	} as JsonObject);
 };

@@ -45,7 +45,7 @@
 		border-radius: 25px;
 		overflow: hidden;
 		padding-bottom: 20px;
-		box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.1);
+		box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.418);
 		transition-duration: 200ms;
 		border-bottom: 6px solid var(--secondary-color);
 		backface-visibility: hidden;

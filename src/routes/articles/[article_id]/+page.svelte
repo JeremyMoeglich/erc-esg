@@ -43,6 +43,9 @@
 		is_loading.set(false);
 		state = undefined;
 	}
+
+	let get_article_data: (() => Promise<string>) | undefined;
+
 	let article_obj: article_preview_type | article_type | undefined = undefined;
 	$: article_obj = $articles_cache_store?.[article_id];
 </script>
@@ -74,24 +77,33 @@
 				<div>
 					{#if $admin_mode}
 						<div class="editor">
-							<Editor data={article_obj.content} editable={true} />
+							<Editor data={article_obj.content} editable={true} bind:get_data={get_article_data} />
 						</div>
 						<div class="save_button">
 							<Button
 								text={'Speichern'}
 								onclick={async () => {
+									if (!get_article_data) {
+										throw new Error('get_article_data is undefined');
+									}
 									if (article_obj === undefined) {
 										throw new Error('article_obj became undefined during save');
 									}
 									if (!('content' in article_obj)) {
 										throw new Error('article has no content, but content is shown');
 									}
+									const new_content = await get_article_data();
+									article_obj.content = new_content;
 									update_article(article_obj);
 									await goto('/blog');
 								}}
 							/>
 						</div>
-					{:else}{/if}
+					{:else}
+						<div class="editor">
+							<Editor data={article_obj.content} editable={false} />
+						</div>
+					{/if}
 				</div>
 			{/if}
 		</div>
@@ -116,9 +128,6 @@
 	}
 	.article {
 		width: 100%;
-	}
-	.editor :global(*) {
-		z-index: 3;
 	}
 	.save_button {
 		display: flex;
