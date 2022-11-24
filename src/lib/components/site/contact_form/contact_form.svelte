@@ -48,6 +48,7 @@
 	<div class="top">
 		<Email size={32} />
 		<h2>Kontaktformular</h2>
+		<h3>Bei Interesse schreiben Sie uns gerne eine Nachricht!</h3>
 	</div>
 	<div class="items">
 		{#each typed_keys(contact_form) as text}
@@ -75,6 +76,9 @@
 			is_loading.set(false);
 		}}
 	/>
+	<div>
+		<h5>*Pflichtfeld</h5>
+	</div>
 </div>
 
 <style>
