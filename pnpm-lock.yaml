@@ -13,6 +13,7 @@ specifiers:
   '@types/bcryptjs': ^2.4.2
   '@types/codemirror': ^5.60.5
   '@types/cookie': ^0.5.1
+  '@types/editorjs__header': ^2.6.0
   '@types/js-cookie': ^3.0.2
   '@types/lodash-es': ^4.17.6
   '@types/uuid': ^8.3.4
@@ -23,7 +24,6 @@ specifiers:
   bcryptjs: ^2.4.3
   carbon-icons-svelte: ^11.4.0
   carbon-preprocess-svelte: ^0.9.1
-  cl-editor: ^2.3.0
   cookie: ^0.5.0
   cross-env: ^7.0.3
   cuid: ^2.1.8
@@ -52,7 +52,6 @@ specifiers:
   tslib: ^2.4.1
   type-fest: ^3.2.0
   typescript: ~4.9.3
-  typewriter-editor: ^0.7.15
   vite: ^3.2.4
   zod: ^3.19.1
 
@@ -63,9 +62,9 @@ dependencies:
   '@prisma/client': 4.6.1_prisma@4.6.1
   '@sveltejs/adapter-vercel': 1.0.0-next.84
   '@types/bcryptjs': 2.4.2
+  '@types/editorjs__header': 2.6.0
   '@xobotyi/scrollbar-width': 1.9.5
   bcryptjs: 2.4.3
-  cl-editor: 2.3.0
   cuid: 2.1.8
   editorjs-viewer: 1.1.3
   functional-utilities: 1.18.0_sass@1.56.1
@@ -74,7 +73,6 @@ dependencies:
   svelte-hamburgers: 4.0.1
   svelte-loading-spinners: 0.3.4
   svelte-use-click-outside: 1.0.0
-  typewriter-editor: 0.7.15_svelte@3.53.1
   zod: 3.19.1
 
 devDependencies:
@@ -253,10 +251,6 @@ packages:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
     dev: true
 
-  /@popperjs/core/2.11.6:
-    resolution: {integrity: sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==}
-    dev: false
-
   /@prisma/client/4.6.1_prisma@4.6.1:
     resolution: {integrity: sha512-M1+NNrMzqaOIxT7PBGcTs3IZo7d1EW/+gVQd4C4gUgWBDGgD9AcIeZnUSidgWClmpMSgVUdnVORjsWWGUameYA==}
     engines: {node: '>=14.17'}
@@ -430,6 +424,10 @@ packages:
   /@types/cookie/0.5.1:
     resolution: {integrity: sha512-COUnqfB2+ckwXXSFInsFdOAWQzCCx+a5hq2ruyj+Vjund94RJQd4LG2u9hnvJrTgunKAaax7ancBYlDrNYxA0g==}
     dev: true
+
+  /@types/editorjs__header/2.6.0:
+    resolution: {integrity: sha512-J9TyO/BjNVddi+syyXpvMRMtVz5Z62pwmFKynWsgP+wnJYdWF8ABqgomokIsAvuEwH5NHa/YxsTltYcPPGCRRQ==}
+    dev: false
 
   /@types/estree/1.0.0:
     resolution: {integrity: sha512-WulqXMDUTYAXCjZnk6JtIHPigp55cVtDgDrO2gHRwhyJto21+1zbVCtOYB2L1F9w4qCQ0rOGWBnBe0FNTiEJIQ==}
@@ -613,18 +611,6 @@ packages:
       '@typescript-eslint/types': 5.44.0
       eslint-visitor-keys: 3.3.0
     dev: true
-
-  /@typewriter/delta/1.0.2:
-    resolution: {integrity: sha512-O2KTUYuEdrkhjiwg3eoPCkMCkI9FniT60ev8nd/pe7PkqeLcgDqk1ukjcVHCbPs0ooq2ztZuSuxM4zqAvEqSjg==}
-    dependencies:
-      fast-diff: 1.2.0
-    dev: false
-
-  /@typewriter/document/0.7.4:
-    resolution: {integrity: sha512-FH8oTJxfCBkl9o1RIClLlX8s1tVnInpIW5GZFDdoDG1bZvZtwauNmh5O9UIEnysXXkutNjA90m9C0oOepzfvfA==}
-    dependencies:
-      '@typewriter/delta': 1.0.2
-    dev: false
 
   /@vercel/nft/0.22.1:
     resolution: {integrity: sha512-lYYZIoxRurqDOSoVIdBicGnpUIpfyaS5qVjdPq+EfI285WqtZK3NK/dyCkiyBul+X2U2OEhRyeMdXPCHGJbohw==}
@@ -864,10 +850,6 @@ packages:
   /chownr/2.0.0:
     resolution: {integrity: sha512-bIomtDF5KGpdogkLd9VspvFzk9KfpyyGlS8YFVZl7TGPBHL5snIOnxeshwVgPteQ9b4Eydl+pVbIyE1DcvCWgQ==}
     engines: {node: '>=10'}
-    dev: false
-
-  /cl-editor/2.3.0:
-    resolution: {integrity: sha512-TxTzuL3529Cmnxy4Q9djcKkZUZJLxuFvFomh6pfbAv72nTB4FCZUE7JhEF5PXeAWRstU+u6BD9ZTif9w0hGQfw==}
     dev: false
 
   /codex-notifier/1.1.2:
@@ -1381,10 +1363,6 @@ packages:
   /fast-deep-equal/3.1.3:
     resolution: {integrity: sha512-f3qQ9oQy9j2AhBe/H9VC91wLmKBCCU/gDOnKNAYG5hswO7BLKj09Hc5HYNz9cGI++xlpDCIgDaitVs03ATR84Q==}
     dev: true
-
-  /fast-diff/1.2.0:
-    resolution: {integrity: sha512-xJuoT5+L99XlZ8twedaRf6Ax2TgQVxvgZOYoPKqZufmJib0tL2tegPBOZb1pVNgIhlqDlA0eO0c3wBvQcmzx4w==}
-    dev: false
 
   /fast-glob/3.2.12:
     resolution: {integrity: sha512-DVj4CQIYYow0BlaelwK1pHl5n5cRSJfM60UA0zK891sVInoPri2Ekj7+e1CT3/3qxXenpI+nBBmQAcJPJgaj4w==}
@@ -2412,6 +2390,7 @@ packages:
   /svelte/3.53.1:
     resolution: {integrity: sha512-Q4/hHkktZogGhN5iqxqSi9sjEVoe/NbIxX4hXEHoasTxj+TxEQVAq66LnDMdAZxjmsodkoI5F3slqsS68U7FNw==}
     engines: {node: '>= 8'}
+    dev: true
 
   /tar/6.1.12:
     resolution: {integrity: sha512-jU4TdemS31uABHd+Lt5WEYJuzn+TJTCBLljvIAHZOz6M9Os5pJ4dD+vRFLxPa/n3T0iEFzpi+0x1UfuDZYbRMw==}
@@ -2491,16 +2470,6 @@ packages:
     engines: {node: '>=4.2.0'}
     hasBin: true
     dev: true
-
-  /typewriter-editor/0.7.15_svelte@3.53.1:
-    resolution: {integrity: sha512-LZifY57nMjn8frFRrZsS/fsBqATkvO43iW72WXSwdGMU3T9YFHfenjKkgiDk8/WXS/gEkMmUQm0uLGuIESpF5Q==}
-    peerDependencies:
-      svelte: 3.x
-    dependencies:
-      '@popperjs/core': 2.11.6
-      '@typewriter/document': 0.7.4
-      svelte: 3.53.1
-    dev: false
 
   /undici/5.12.0:
     resolution: {integrity: sha512-zMLamCG62PGjd9HHMpo05bSLvvwWOZgGeiWlN/vlqu3+lRo3elxktVGEyLMX+IO7c2eflLjcW74AlkhEZm15mg==}

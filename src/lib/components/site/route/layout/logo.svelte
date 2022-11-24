@@ -1,9 +1,8 @@
 <script>
-	import { fly } from 'svelte/transition';
 </script>
 
 <a href="/" title="Startseite">
-	<img in:fly={{ duration: 1000, x: -10 }} src="/images/logo.svg" alt="" />
+	<img src="/images/logo.svg" alt="" />
 </a>
 
 <style>

@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Roboto+Flex:opsz,wght@8..144,300&display=swap');
 
 :root {
-	--primary-hint: #BBEBCE;
+	--primary-hint: #bbebce;
 	--primary-color: #0fc736;
 	--primary-dark: #006436;
-	--primary-hint-dark: #008D35;
+	--primary-hint-dark: #008d35;
 
 	--secondary-hint-dark: #0f202b;
 	--secondary-color: #034a75;
@@ -26,8 +26,14 @@
 body {
 	margin: 0px;
 	min-height: 100vh;
+	height: 100%;
 	overflow-x: hidden;
 	overflow-y: scroll;
+}
+
+html {
+	overflow: hidden;
+	height: 100%;
 }
 
 p {

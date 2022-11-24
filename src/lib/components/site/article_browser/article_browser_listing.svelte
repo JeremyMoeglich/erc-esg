@@ -4,9 +4,8 @@
 	import { Add } from 'carbon-icons-svelte';
 
 	import ArticleBrowserItem from './article_browser_item.svelte';
-	import { fly } from 'svelte/transition';
+
 	import cuid from 'cuid';
-	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
 
 	export let articles: article_preview_type[];
 </script>

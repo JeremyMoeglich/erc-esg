@@ -6,10 +6,8 @@
 	import { check_token_and_login } from '$lib/scripts/frontend/auth/token_login';
 	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	import { Circle2 } from 'svelte-loading-spinners';
-	import { onMount } from 'svelte';
 	import Footer from '$lib/components/site/route/layout/footer/foot.svelte';
 	import { scrollbarWidth } from '@xobotyi/scrollbar-width';
-	import { delay } from '$lib/scripts/frontend/data/delay';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -24,28 +22,18 @@
 	(async () => {
 		await check_token_and_login();
 	})();
-
-	let ready = false;
-	onMount(() => {
-		ready = true;
-		setTimeout(() => {
-			delay.set(250);
-		}, 600);
-	});
 </script>
 
 <div class="outer" style:--scrollbar_width={`${scrollbarWidth() ?? 0}px`}>
-	{#if ready}
-		<Header />
+	<Header />
 
-		<div class="content">
-			<slot />
-		</div>
+	<div class="content">
+		<slot />
+	</div>
 
-		<div class="footer">
-			<Footer />
-		</div>
-	{/if}
+	<div class="footer">
+		<Footer />
+	</div>
 	{#if $is_loading}
 		<div class="loading">
 			<div class="spinner">
