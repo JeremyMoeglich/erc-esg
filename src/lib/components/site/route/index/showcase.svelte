@@ -36,11 +36,11 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 27px;
-		width: 500px;
+		width: 400px;
 		max-width: 100%;
 	}
 	.right {
-		width: 1000px;
+		width: 700px;
 	}
 	h1 {
 		font-family: 'Roboto', sans-serif;
