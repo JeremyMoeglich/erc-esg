@@ -1,5 +1,6 @@
 import staticAdapter from '@sveltejs/adapter-static';
 import nodeAdapter from '@sveltejs/adapter-node';
+import vercelAdapter from '@sveltejs/adapter-vercel';
 import preprocess from 'svelte-preprocess';
 import { optimizeImports } from 'carbon-preprocess-svelte';
 
@@ -11,9 +12,14 @@ const adapt = hasAdapter ? hasAdapter : 'node';
 const getAdapters = (adapt) => {
 	switch (adapt) {
 		case 'node':
-			return nodeAdapter;
+			return nodeAdapter();
 		case 'static':
-			return staticAdapter;
+			return staticAdapter();
+		case 'vercel':
+			return vercelAdapter({
+				edge: true,
+				split: true
+			});
 		default:
 			console.warn('unknown adapter, using node');
 			return nodeAdapter;
@@ -36,7 +42,7 @@ const config = {
 	],
 
 	kit: {
-		adapter: adapter(),
+		adapter: adapter,
 		prerender: {
 			crawl: true,
 			enabled: true,

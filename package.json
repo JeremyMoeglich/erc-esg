@@ -6,6 +6,7 @@
 		"build": "npm run updateprisma && vite build",
 		"build:static": "cross-env ADAPTER=static npm run build",
 		"build:node": "cross-env ADAPTER=node npm run build",
+		"build:vercel": "cross-env ADAPTER=vercel npm run build",
 		"start": "dotenv -e .env.serverless -- pm2 reload ./build/index.js --update-env",
 		"preview": "vite preview",
 		"updateprisma": "dotenv -e .env.serverless -- prisma generate --data-proxy",
@@ -16,7 +17,6 @@
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
 		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
 		"migrate:dev": "dotenv -e .env.node -- prisma migrate dev --name"
-
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.25.1",
@@ -61,6 +61,7 @@
 	"dependencies": {
 		"@bytemd/plugin-gfm": "^1.17.2",
 		"@prisma/client": "^4.3.0",
+		"@sveltejs/adapter-vercel": "1.0.0-next.84",
 		"@types/bcryptjs": "^2.4.2",
 		"@xobotyi/scrollbar-width": "^1.9.5",
 		"bcryptjs": "^2.4.3",
