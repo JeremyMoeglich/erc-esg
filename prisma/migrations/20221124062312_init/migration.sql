@@ -3,11 +3,11 @@ CREATE TYPE "Role" AS ENUM ('root', 'admin', 'user');
 
 -- CreateTable
 CREATE TABLE "ContactForm" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "phone" TEXT,
-    "message" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
+    "email" STRING NOT NULL,
+    "phone" STRING,
+    "message" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "ContactForm_pkey" PRIMARY KEY ("id")
@@ -15,41 +15,41 @@ CREATE TABLE "ContactForm" (
 
 -- CreateTable
 CREATE TABLE "User" (
-    "id" TEXT NOT NULL,
-    "name" TEXT NOT NULL,
-    "email" TEXT NOT NULL,
-    "password_hash" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "name" STRING NOT NULL,
+    "email" STRING NOT NULL,
+    "password_hash" STRING NOT NULL,
     "role" "Role" NOT NULL DEFAULT 'user',
-    "tag" TEXT NOT NULL DEFAULT '',
+    "tag" STRING NOT NULL DEFAULT '',
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "LoginToken" (
-    "id" TEXT NOT NULL,
-    "userId" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "userId" STRING NOT NULL,
     "time" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "value" TEXT NOT NULL,
+    "value" STRING NOT NULL,
 
     CONSTRAINT "LoginToken_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "imageLink" (
-    "id" TEXT NOT NULL,
-    "image_url" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "image_url" STRING NOT NULL,
 
     CONSTRAINT "imageLink_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
 CREATE TABLE "Article" (
-    "id" TEXT NOT NULL,
-    "title" TEXT NOT NULL,
-    "content" TEXT NOT NULL,
+    "id" STRING NOT NULL,
+    "title" STRING NOT NULL,
+    "content" STRING NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "imageLinkId" TEXT NOT NULL,
+    "imageLinkId" STRING NOT NULL,
 
     CONSTRAINT "Article_pkey" PRIMARY KEY ("id")
 );

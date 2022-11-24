@@ -8,13 +8,15 @@
 		"build:node": "cross-env ADAPTER=node npm run build",
 		"start": "dotenv -- pm2 reload ./build/index.js --update-env",
 		"preview": "vite preview",
-		"updateprisma": "prisma generate",
+		"updateprisma": "dotenv -e .env.serverless -- prisma generate --data-proxy",
 		"test": "playwright test",
 		"checkup": "npm run updateprisma && npm run format && npm run lint && npm run check && npm run test",
 		"check": "svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. .",
+		"migrate:dev": "dotenv -e .env.node -- prisma migrate dev --name"
+
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.25.1",
