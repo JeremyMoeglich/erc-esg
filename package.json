@@ -6,8 +6,6 @@
 		"build": "npm run updateprisma && vite build",
 		"build:static": "cross-env ADAPTER=static npm run build",
 		"build:node": "cross-env ADAPTER=node npm run build",
-		"complete_build": "npm run checkup && npm run build",
-		"server_setup": "pnpm install --frozen-lockfile && npx playwright install && npx playwright install-deps && npm run complete_build",
 		"start": "dotenv -- pm2 reload ./build/index.js --update-env",
 		"preview": "vite preview",
 		"updateprisma": "prisma generate",
