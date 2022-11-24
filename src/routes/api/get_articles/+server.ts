@@ -26,27 +26,22 @@ export const POST: RequestHandler = async ({ request }) => {
 	if (start > 500) {
 		throw error(400, 'start must be less than 500');
 	}
-	const query = filter.search
-		? {
-				search: filter.search
-					.split(' ')
-					.filter(Boolean)
-					.map((word) => `${word}`)
-					.join(' & ')
-		  }
-		: undefined;
 
 	const response = await prisma_client.article.findMany({
-		where: query
+		where: filter.search
 			? {
-					OR: [
+					OR: filter.search.split(' ').flatMap((word) => [
 						{
-							content: query
+							title: {
+								contains: word
+							}
 						},
 						{
-							title: query
+							content: {
+								contains: word
+							}
 						}
-					]
+					])
 			  }
 			: undefined,
 		skip: start,

@@ -1,0 +1,131 @@
+{
+  "version": 3,
+  "routes": [
+    {
+      "src": "/_app/.+",
+      "headers": {
+        "cache-control": "public, immutable, max-age=31536000"
+      }
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "^/?(?:/__data.json)?$",
+      "dest": "/index"
+    },
+    {
+      "src": "^/about/?(?:/__data.json)?$",
+      "dest": "/about"
+    },
+    {
+      "src": "^/account/?(?:/__data.json)?$",
+      "dest": "/account"
+    },
+    {
+      "src": "^/admin/?(?:/__data.json)?$",
+      "dest": "/admin"
+    },
+    {
+      "src": "^/admin/admin_user/?(?:/__data.json)?$",
+      "dest": "/admin/admin_user"
+    },
+    {
+      "src": "^/admin/contacts/?(?:/__data.json)?$",
+      "dest": "/admin/contacts"
+    },
+    {
+      "src": "^/api/change_user_role/?(?:/__data.json)?$",
+      "dest": "/api/change_user_role"
+    },
+    {
+      "src": "^/api/contacts/?(?:/__data.json)?$",
+      "dest": "/api/contacts"
+    },
+    {
+      "src": "^/api/delete_article/?(?:/__data.json)?$",
+      "dest": "/api/delete_article"
+    },
+    {
+      "src": "^/api/get_admins/?(?:/__data.json)?$",
+      "dest": "/api/get_admins"
+    },
+    {
+      "src": "^/api/get_articles/?(?:/__data.json)?$",
+      "dest": "/api/get_articles"
+    },
+    {
+      "src": "^/api/get_article/?(?:/__data.json)?$",
+      "dest": "/api/get_article"
+    },
+    {
+      "src": "^/api/get_own_user_data/?(?:/__data.json)?$",
+      "dest": "/api/get_own_user_data"
+    },
+    {
+      "src": "^/api/images/([^/]+?)\\.json/?(?:/__data.json)?$",
+      "dest": "/api/images/[id].json"
+    },
+    {
+      "src": "^/api/update_article/?(?:/__data.json)?$",
+      "dest": "/api/update_article"
+    },
+    {
+      "src": "^/api/upload_image/?(?:/__data.json)?$",
+      "dest": "/api/upload_image"
+    },
+    {
+      "src": "^/articles/([^/]+?)/?(?:/__data.json)?$",
+      "dest": "/articles/[article_id]"
+    },
+    {
+      "src": "^/auth/create/?(?:/__data.json)?$",
+      "dest": "/auth/create"
+    },
+    {
+      "src": "^/auth/delete_token/?(?:/__data.json)?$",
+      "dest": "/auth/delete_token"
+    },
+    {
+      "src": "^/auth/login/?(?:/__data.json)?$",
+      "dest": "/auth/login"
+    },
+    {
+      "src": "^/auth/token_login/?(?:/__data.json)?$",
+      "dest": "/auth/token_login"
+    },
+    {
+      "src": "^/auth/update_profile/?(?:/__data.json)?$",
+      "dest": "/auth/update_profile"
+    },
+    {
+      "src": "^/blog/?(?:/__data.json)?$",
+      "dest": "/blog"
+    },
+    {
+      "src": "^/contact/?(?:/__data.json)?$",
+      "dest": "/contact"
+    },
+    {
+      "src": "^/datenschutz/?(?:/__data.json)?$",
+      "dest": "/datenschutz"
+    },
+    {
+      "src": "^/impressum/?(?:/__data.json)?$",
+      "dest": "/impressum"
+    },
+    {
+      "src": "^/kontakt/?(?:/__data.json)?$",
+      "dest": "/kontakt"
+    },
+    {
+      "src": "^/leistungen/?(?:/__data.json)?$",
+      "dest": "/leistungen"
+    },
+    {
+      "src": "^/login/?(?:/__data.json)?$",
+      "dest": "/login"
+    }
+  ],
+  "overrides": {}
+}

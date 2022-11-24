@@ -1,0 +1,1 @@
+import{w as e}from"./index-674a61bc.js";const o=e("none"),a=e(!1),i=e(!1),n=e(!1);o.subscribe(s=>{s==="admin"||s==="root"?a.set(!0):a.set(!1),s==="none"?n.set(!1):n.set(!0)});export{a,o as c,i,n as l};
