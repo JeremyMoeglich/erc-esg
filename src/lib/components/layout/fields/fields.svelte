@@ -1,7 +1,5 @@
 <script lang="ts">
 	import Field from './field.svelte';
-	import { fly } from 'svelte/transition';
-	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
 
 	export let fields: Array<{
 		title: string;
@@ -11,7 +9,7 @@
 	export let title: string;
 </script>
 
-<div class="outer" in:fly={{ ...in_delay, y: 20 }} out:fly={{ ...out_delay, y: 20 }}>
+<div class="outer">
 	<h2>{title}</h2>
 	<div class="main">
 		{#each fields as field}

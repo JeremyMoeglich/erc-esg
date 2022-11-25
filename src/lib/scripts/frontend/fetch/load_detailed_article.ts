@@ -16,7 +16,7 @@ export async function load_article(id: string): Promise<article_type | undefined
 			return cached_item.data;
 		}
 	}
-	const response: Response | undefined = await fetch('/api/get_article', {
+	const response = await fetch('/api/get_article', {
 		method: 'POST',
 		headers: {
 			'Content-Type': 'application/json'
@@ -26,7 +26,7 @@ export async function load_article(id: string): Promise<article_type | undefined
 		})
 	});
 
-	if (!response) {
+	if (!response.ok) {
 		return undefined;
 	}
 

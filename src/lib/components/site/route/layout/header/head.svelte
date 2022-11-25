@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/stores';
 	import { typed_entries } from 'functional-utilities';
-	import { fly } from 'svelte/transition';
+
 	import Account from './account.svelte';
 	import Logo from '../logo.svelte';
 	import { Hamburger } from 'svelte-hamburgers';
@@ -13,7 +13,7 @@
 		'/blog': 'Blog',
 		'/about': 'Über uns',
 		'/leistungen': 'Leistungen',
-		'/contact': 'Kontakt',
+		'/contact': 'Kontakt'
 	};
 
 	let navigation_open = false;
@@ -23,7 +23,7 @@
 	});
 </script>
 
-<div class="main" in:fly|local={{ duration: 1000, y: -30 }} class:opened={navigation_open}>
+<div class="main" class:opened={navigation_open}>
 	<div class="logo_navigator">
 		<div class="logo">
 			<Logo />
@@ -35,22 +35,16 @@
 			<Hamburger bind:open={navigation_open} />
 		</div>
 	</div>
-	{#each typed_entries(routes) as [route, name], i}
+	{#each typed_entries(routes) as [route, name]}
 		<a
 			class:desktop={!navigation_open}
 			data-sveltekit-prefetch
-			in:fly={{ duration: 500, y: -30, delay: i * 100 }}
 			href={route}
 			class:current_route={$page.url.pathname === route}>{name}</a
 		>
 	{/each}
 	{#if $logged_in}
-		<button
-			in:fly={{ duration: 500, y: -30, delay: Object.keys(routes).length * 100 }}
-			class:mobile={true}
-			class:hidden={!navigation_open}
-			on:click={logout}
-		>
+		<button class:mobile={true} class:hidden={!navigation_open} on:click={logout}>
 			Abmelden
 		</button>
 	{/if}

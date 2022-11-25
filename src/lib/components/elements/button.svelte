@@ -4,7 +4,7 @@
 	export let onclick: string | ((event: MouseEvent) => void | Promise<void>);
 </script>
 
-<div class:important class="main" on:click|stopPropagation>
+<div class:important class="main" on:click|stopPropagation on:keypress|stopPropagation>
 	{#if typeof onclick === 'function'}
 		<button on:click={onclick} class="btn">
 			{text}

@@ -1,8 +1,5 @@
 <script lang="ts">
-	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
-
 	import { Search } from 'carbon-icons-svelte';
-	import { fly } from 'svelte/transition';
 
 	export let value = '';
 	export let on_search: () => Promise<void>;
@@ -14,7 +11,7 @@
 	}
 </script>
 
-<div in:fly={{ ...$in_delay, y: -40 }} out:fly={{ ...$out_delay, y: -40 }}>
+<div>
 	<input placeholder="Suche" type="search" bind:value on:keypress={keypress} />
 	<button title="Suchen" on:click={on_search}
 		><Search fill={'var(--primary-color)'} size={32} /></button

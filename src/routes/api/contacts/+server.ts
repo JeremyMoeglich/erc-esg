@@ -1,7 +1,7 @@
 import { get_request_body, has_admin_access } from '$lib/scripts/backend/endpoint_utils';
 import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
 import type { RequestHandler } from './$types';
-import cuid from 'cuid';
+import { v4 } from 'uuid';
 import { contact_form_schema } from '$lib/scripts/universal/datatypes';
 import { error, json } from '@sveltejs/kit';
 import type { JsonObject } from 'type-fest';
@@ -26,7 +26,7 @@ export const POST: RequestHandler = async ({ request }) => {
 
 	await prisma_client.contactForm.create({
 		data: {
-			id: id ?? cuid(),
+			id: id ?? v4(),
 			name,
 			email,
 			message,

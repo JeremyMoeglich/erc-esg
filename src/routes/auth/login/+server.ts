@@ -3,7 +3,7 @@ import { prisma_client } from '$lib/scripts/backend/db/prisma_client';
 import type { RequestHandler } from './$types';
 import pkg from 'bcryptjs';
 const { compare } = pkg;
-import cuid from 'cuid';
+import { v4 } from 'uuid';
 import { z } from 'zod';
 import { error, json } from '@sveltejs/kit';
 import type { JsonObject } from 'type-fest';
@@ -56,7 +56,7 @@ export const POST: RequestHandler = async ({ request }) => {
 	const new_token = await prisma_client.loginToken.create({
 		data: {
 			userId: userId,
-			value: cuid()
+			value: v4()
 		}
 	});
 	return json({

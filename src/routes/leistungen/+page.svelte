@@ -17,7 +17,7 @@
 			auch Ihrem Geldbeutel zu Gute kommt.
 		</p>
 	</div>
-    <IndexFields />
+	<IndexFields />
 </div>
 
 <style>

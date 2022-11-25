@@ -4,9 +4,8 @@
 	import { Add } from 'carbon-icons-svelte';
 
 	import ArticleBrowserItem from './article_browser_item.svelte';
-	import { fly } from 'svelte/transition';
-	import cuid from 'cuid';
-	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
+
+	import { v4 } from 'uuid';
 
 	export let articles: article_preview_type[];
 </script>
@@ -14,7 +13,7 @@
 <div class="listing">
 	{#if $admin_mode}
 		<div class="add">
-			<a class="add_button" href={`/articles/${cuid()}`}><Add size={32} /></a>
+			<a class="add_button" href={`/articles/${v4()}`}><Add size={32} /></a>
 		</div>
 	{/if}
 	{#each articles as article (article)}

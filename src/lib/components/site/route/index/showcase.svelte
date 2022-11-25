@@ -1,10 +1,8 @@
 <script lang="ts">
 	import DbImage from '$lib/components/elements/db_image/db_image.svelte';
-	import { in_delay, out_delay } from '$lib/scripts/frontend/data/delay';
-	import { fly } from 'svelte/transition';
 </script>
 
-<div class="main" in:fly={{ x: 0, y: -50, ...$in_delay }} out:fly={{ x: 0, y: -50, ...$out_delay }}>
+<div class="main">
 	<div class="left">
 		<h1>Ecological Revolutionary Company</h1>
 		<p>

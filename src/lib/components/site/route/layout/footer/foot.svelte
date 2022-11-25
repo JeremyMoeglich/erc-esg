@@ -1,5 +1,24 @@
+<script lang="ts">
+	import LogoFacebook from 'carbon-icons-svelte/lib/LogoFacebook.svelte';
+	import LogoInstagram from 'carbon-icons-svelte/lib/LogoInstagram.svelte';
+	import LogoYoutube from 'carbon-icons-svelte/lib/LogoYoutube.svelte';
+
+	const logo_size = 24;
+</script>
+
 <div class="outer">
-	<div>© 2022 ERC eSG</div>
+	<div class="left_content">
+		<div>© 2022 ERC eSG</div>
+		<div>
+			<LogoFacebook size={logo_size} />
+		</div>
+		<div>
+			<LogoInstagram size={logo_size} />
+		</div>
+		<div>
+			<LogoYoutube size={logo_size} />
+		</div>
+	</div>
 	<a href="/impressum">Impressum</a>
 	<a href="/datenschutz">Datenschutz</a>
 </div>
@@ -7,13 +26,19 @@
 <style>
 	.outer {
 		display: flex;
-		gap: 30px;
+		gap: 25px;
 		align-items: center;
-		padding: 20px;
+		padding: 15px;
 		background-color: rgba(255, 255, 255, 0.281);
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(8.7px);
 	}
+	.left_content {
+		display: flex;
+		gap: 13px;
+		align-items: center;
+	}
+	
 	a:hover {
 		color: var(--secondary-color);
 		text-decoration: underline;
