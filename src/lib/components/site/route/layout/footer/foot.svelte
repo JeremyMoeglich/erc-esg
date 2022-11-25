@@ -9,15 +9,15 @@
 <div class="outer">
 	<div class="left_content">
 		<div>© 2022 ERC eSG</div>
-		<div>
+		<a href="https://de-de.facebook.com/ERC.eSG/">
 			<LogoFacebook size={logo_size} />
-		</div>
-		<div>
+		</a>
+		<a href="https://www.instagram.com/erc.esg/?hl=de">
 			<LogoInstagram size={logo_size} />
-		</div>
-		<div>
+		</a>
+		<a href="https://www.youtube.com/@ecologicalrevolutionarycom3571">
 			<LogoYoutube size={logo_size} />
-		</div>
+		</a>
 	</div>
 	<a href="/impressum">Impressum</a>
 	<a href="/datenschutz">Datenschutz</a>
