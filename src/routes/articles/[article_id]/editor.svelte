@@ -16,14 +16,22 @@
 			const EditorJS = (await import('@editorjs/editorjs')).default;
 			const Header = (await import('@editorjs/header')).default;
 			const List = (await import('@editorjs/list')).default;
+			const editor_data = (() => {
+				try {
+					return JSON.parse(data);
+				} catch (e) {
+					return undefined;
+				}
+			})()
 			editor = new EditorJS({
 				holder: editor_id,
 				tools: {
 					header: Header,
 					list: List
 				},
-				data: data !== undefined ? JSON.parse(data) : undefined,
-				readOnly: !editable
+				data: editor_data,
+				readOnly: !editable,
+				placeholder: editable ? 'Start writing...' : undefined
 			});
 		}
 	});

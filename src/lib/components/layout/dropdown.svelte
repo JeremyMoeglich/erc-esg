@@ -17,7 +17,7 @@
 	<slot name="wrapped" />
 	<div class="dropdown_top">
 		{#if active && !disabled}
-			<div class="dropdown" transition:fly|local={{ y: 20 }}>
+			<div class="dropdown" transition:fly|local={{ y: -20 }}>
 				<slot name="content" />
 			</div>
 		{/if}
