@@ -80,7 +80,7 @@
 		z-index: 2;
 		min-height: 70px;
 
-		background-color: rgba(255, 255, 255, 0.281);
+		background-color: rgb(141, 170, 179);
 		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
 		backdrop-filter: blur(8.7px);
 
