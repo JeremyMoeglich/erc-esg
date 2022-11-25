@@ -32,11 +32,11 @@
 		align-items: center;
 		justify-content: center;
 		font-size: 27px;
-		width: 400px;
+		width: 20%;
 		max-width: 100%;
 	}
 	.right {
-		width: 700px;
+		width: 60%;
 	}
 	h1 {
 		font-family: 'Roboto', sans-serif;
