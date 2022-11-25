@@ -5,5 +5,4 @@
 </script>
 
 <Showcase />
-<IndexFields />
 <ArticleBrowser />

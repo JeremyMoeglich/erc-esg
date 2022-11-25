@@ -7,14 +7,7 @@
 		<h1>Unsere Leistungen</h1>
 		<h2>Wir für Sie</h2>
 		<p>
-			Die ERC eSG berät Sie gerne in puncto Energieeinsparung. Wir sind unabhängig, kompetent und
-			motiviert, zusammen mit Ihnen einen Beitrag zur Rettung unseres Planeten zu leisten. Anders
-			als unsere Mitbewerber sind wir nicht auf externe Firmen angewiesen und beraten Sie völlig
-			objektiv. Außerdem sind wir nicht so kostenintensiv wie unsere Konkurrenten. Langfristig
-			werden die Energiekosten immer teurer. Mit unseren praktischen Tipps können Sie die Kosten
-			senken. Unser Angebot richtet sich primär an Privathaushalte sowie kleine Betriebe. Unser Ziel
-			ist die Senkung des Energieverbrauchs und eine damit verbundene Entlastung der Umwelt, die
-			auch Ihrem Geldbeutel zu Gute kommt.
+			Wir helfen Ihnen <br>- Energie zu sparen <br>- Kosten zu senken <br>- Die Umwelt zu schützen
 		</p>
 	</div>
 	<IndexFields />

@@ -13,12 +13,12 @@
 		<p>Die Schüler des Schloss Heessen in Hamm</p>
 	</div>
 	<div>
-		<h3>Aufsichtsvorsitzende:</h3>
-		<p>Mats Funke und Paul Dufhues</p>
+		<h3>Aufsichtsratvorsitzender:</h3>
+		<p>Mats Funke </p>
 	</div>
 	<div>
 		<h3>Kontakt:</h3>
-		<p>ercesg.schlossheessen@gmail.com</p>
+		<p>info@erc-heessen.de</p>
 	</div>
 	<div>
 		<h3>Registereintrag</h3>
