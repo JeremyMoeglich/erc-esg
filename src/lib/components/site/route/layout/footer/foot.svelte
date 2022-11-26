@@ -2,6 +2,7 @@
 	import LogoFacebook from 'carbon-icons-svelte/lib/LogoFacebook.svelte';
 	import LogoInstagram from 'carbon-icons-svelte/lib/LogoInstagram.svelte';
 	import LogoYoutube from 'carbon-icons-svelte/lib/LogoYoutube.svelte';
+	import Account from './account.svelte';
 
 	const logo_size = 24;
 </script>
@@ -21,6 +22,9 @@
 	</div>
 	<a href="/impressum">Impressum</a>
 	<a href="/datenschutz">Datenschutz</a>
+	<div class="account">
+		<Account />
+	</div>
 </div>
 
 <style>
@@ -38,7 +42,10 @@
 		gap: 13px;
 		align-items: center;
 	}
-	
+	.account {
+		margin-left: auto;
+	}
+
 	a:hover {
 		color: var(--secondary-color);
 		text-decoration: underline;

@@ -2,9 +2,10 @@
 	import Dropdown from './dropdown.svelte';
 
 	export let disabled = false;
+	export let direction: 'top' | 'bottom' = 'bottom';
 </script>
 
-<Dropdown {disabled}>
+<Dropdown {disabled} {direction}>
 	<div slot="wrapped">
 		<slot name="wrapped" />
 	</div>

@@ -4,7 +4,6 @@
 	"scripts": {
 		"dev": "dotenv -e .env.serverless -- vite dev",
 		"build": "npm run updateprisma && vite build",
-		"build:static": "cross-env ADAPTER=static dotenv -e .env.serverless -- npm run build",
 		"build:node": "cross-env ADAPTER=node npm run build",
 		"build:vercel": "cross-env ADAPTER=vercel dotenv -e .env.serverless -- npm run build",
 		"start": "dotenv -e .env.serverless -- pm2 reload ./build/index.js --update-env",
@@ -23,7 +22,7 @@
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-node": "1.0.0-next.101",
 		"@sveltejs/adapter-static": "1.0.0-next.48",
-		"@sveltejs/kit": "1.0.0-next.560",
+		"@sveltejs/kit": "1.0.0-next.561",
 		"@types/codemirror": "^5.60.5",
 		"@types/cookie": "^0.5.1",
 		"@types/js-cookie": "^3.0.2",

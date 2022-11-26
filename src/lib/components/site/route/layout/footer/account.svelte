@@ -36,7 +36,7 @@
 	onDestroy(unsubscribe);
 </script>
 
-<ItemDropdown disabled={simple}>
+<ItemDropdown disabled={simple} direction="top">
 	<div slot="wrapped">
 		<div class="outer">
 			<a

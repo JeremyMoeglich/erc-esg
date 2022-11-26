@@ -2,7 +2,6 @@
 	import { page } from '$app/stores';
 	import { typed_entries } from 'functional-utilities';
 
-	import Account from './account.svelte';
 	import Logo from '../logo.svelte';
 	import { Hamburger } from 'svelte-hamburgers';
 	import { logged_in } from '$lib/scripts/frontend/auth/auth_state';
@@ -28,9 +27,6 @@
 		<div class="logo">
 			<Logo />
 		</div>
-		<div class="mobile account">
-			<Account simple={true} />
-		</div>
 		<div class="navigator mobile">
 			<Hamburger bind:open={navigation_open} />
 		</div>
@@ -48,9 +44,6 @@
 			Abmelden
 		</button>
 	{/if}
-	<div class="desktop account">
-		<Account />
-	</div>
 </div>
 
 <style lang="scss">
@@ -86,7 +79,6 @@
 
 		border-bottom: 7px solid var(--primary-color);
 	}
-	.account,
 	.navigator {
 		margin-left: auto;
 	}
@@ -106,7 +98,6 @@
 		.mobile {
 			display: block;
 		}
-		.account,
 		.navigator {
 			margin-left: 0px;
 		}

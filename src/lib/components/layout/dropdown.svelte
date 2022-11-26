@@ -4,6 +4,9 @@
 	let active = false;
 
 	export let disabled = false;
+	export let direction: 'top' | 'bottom' = 'bottom';
+
+	const transition_amount = 20;
 </script>
 
 <div
@@ -14,14 +17,25 @@
 		active = false;
 	}}
 >
-	<slot name="wrapped" />
+	{#if direction === 'bottom'}
+		<slot name="wrapped" />
+	{/if}
 	<div class="dropdown_top">
 		{#if active && !disabled}
-			<div class="dropdown" transition:fly|local={{ y: -20 }}>
+			<div
+				class="dropdown"
+				class:top_direction={direction === 'top'}
+				transition:fly|local={{
+					y: direction === 'bottom' ? -transition_amount : transition_amount
+				}}
+			>
 				<slot name="content" />
 			</div>
 		{/if}
 	</div>
+	{#if direction === 'top'}
+		<slot name="wrapped" />
+	{/if}
 </div>
 
 <style>
@@ -38,5 +52,8 @@
 		height: fit-content;
 		background-color: var(--gray000);
 		padding: 10px;
+	}
+	.top_direction {
+		transform: translateY(-100%);
 	}
 </style>
