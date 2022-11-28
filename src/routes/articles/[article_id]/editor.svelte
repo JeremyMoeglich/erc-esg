@@ -54,7 +54,6 @@
 	.editor_outer {
 		width: 100%;
 		height: 100%;
-		border: 1px solid rgb(214, 214, 214);
 		border-radius: 10px;
 	}
 </style>
