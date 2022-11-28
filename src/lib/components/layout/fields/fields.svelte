@@ -17,7 +17,7 @@
 <style>
 	.main {
 		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+		grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
 		gap: 10px;
 		padding: 30px 60px;
 		width: 100%;
