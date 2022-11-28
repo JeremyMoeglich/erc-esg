@@ -55,8 +55,9 @@
 <SectionFields />
 
 <style lang="scss">
-	@import './src/mixins.scss';
 	.outer {
-		@include simple_text();
+		font-size: 20px;
+		padding: 30px;
+		font-family: "Raleway", Arial, Helvetica, sans-serif;
 	}
 </style>

@@ -6,15 +6,19 @@
 	<div class="page">
 		<h1>Unsere Leistungen</h1>
 		<h2>Wir für Sie</h2>
-		<p>
-			Wir helfen Ihnen <br>- Energie zu sparen <br>- Kosten zu senken <br>- Die Umwelt zu schützen
-		</p>
+		<div>
+			<h3>Wir helfen Ihnen</h3>
+			<ul>
+				<li>Energie zu sparen</li>
+				<li>Kosten zu senken</li>
+				<li>Die Umwelt zu schützen</li>
+			</ul>
+		</div>
 	</div>
 	<IndexFields />
 </div>
 
 <style>
-	@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 	h1 {
 		text-align: center;
 		font-size: 70px;
@@ -23,7 +27,11 @@
 		font-size: 35px;
 	}
 	.page {
-		width: 1300px;
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		width: 100%;
+		padding: 30px;
 	}
 	.outer {
 		display: flex;
@@ -31,9 +39,12 @@
 		align-items: center;
 		width: 100%;
 	}
-	p {
+	ul,  h3 {
 		font-size: 25px;
 		font-family: 'Raleway', sans-serif;
+	}
+	li {
+		margin-left: 8px;
 	}
 	h2,
 	h1 {

@@ -69,14 +69,6 @@
 		width: 100vw;
 		position: relative;
 		padding-right: var(--scrollbar_width);
-		padding-bottom: 60px;
 	}
 
-	.footer {
-		position: absolute;
-		bottom: 0;
-		left: 0;
-		right: 0;
-		height: fit-content;
-	}
 </style>
