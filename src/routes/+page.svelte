@@ -30,6 +30,6 @@
 		align-items: center;
 	}
 	iframe {
-  border: 16px solid rgb(147,196,178);
+  border: 16px solid var(--primary-hint-grey);
 }
 </style>
