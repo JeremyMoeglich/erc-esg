@@ -3,7 +3,7 @@
 
 	export let fields: Array<{
 		title: string;
-		image_id: string;
+		id: string;
 		text: string;
 	}>;
 	export let title: string;
@@ -13,7 +13,7 @@
 	<h2>{title}</h2>
 	<div class="main">
 		{#each fields as field}
-			<Field title={field.title} image_id={field.image_id} text={field.text} />
+			<Field id={field.id} text={field.text} />
 		{/each}
 	</div>
 </div>

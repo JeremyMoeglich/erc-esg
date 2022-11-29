@@ -25,14 +25,13 @@
 
 body {
 	margin: 0px;
-	min-height: 100vh;
 	height: 100%;
-	overflow-x: hidden;
-	overflow-y: scroll;
 }
 
 html {
-	overflow: hidden;
+	overflow-x: hidden;
+	min-height: 100vh;
+	overflow-y: scroll;
 	height: 100%;
 }
 

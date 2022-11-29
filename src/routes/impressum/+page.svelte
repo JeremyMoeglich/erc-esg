@@ -14,7 +14,7 @@
 	</div>
 	<div>
 		<h3>Aufsichtsratvorsitzender:</h3>
-		<p>Mats Funke </p>
+		<p>Mats Funke</p>
 	</div>
 	<div>
 		<h3>Kontakt:</h3>

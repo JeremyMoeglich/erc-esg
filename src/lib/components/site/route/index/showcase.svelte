@@ -6,7 +6,8 @@
 	<div class="left">
 		<h1>Ecological Revolutionary Company</h1>
 		<p>
-			Wir sind ein junges und kreatives Team, welches sich für Nachhaltigkeit einsetzt. <br> Damit wollen wir unseren Teil dazu beitragen, die Umwelt zu verbessern.
+			Wir sind ein junges und kreatives Team, welches sich für Nachhaltigkeit einsetzt. <br /> Damit
+			wollen wir unseren Teil dazu beitragen, die Umwelt zu verbessern.
 		</p>
 	</div>
 	<div class="right">

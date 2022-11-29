@@ -7,7 +7,8 @@
 		<h1>Unsere Leistungen</h1>
 		<h2>Wir für Sie</h2>
 		<p>
-			Wir helfen Ihnen <br>- Energie zu sparen <br>- Kosten zu senken <br>- Die Umwelt zu schützen
+			Wir helfen Ihnen <br />- Energie zu sparen <br />- Kosten zu senken <br />- Die Umwelt zu
+			schützen
 		</p>
 	</div>
 	<IndexFields />

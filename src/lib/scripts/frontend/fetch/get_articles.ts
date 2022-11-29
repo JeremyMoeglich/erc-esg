@@ -35,7 +35,8 @@ export async function get_articles(
 		id: article.id,
 		title: article.title,
 		createdAt: article.createdAt,
-		image_link_id: article.image_link.id
+		image_link_id: article.image_link.id,
+		hidden: article.hidden
 	}));
 
 	const article_cache = get(articles_cache_store);

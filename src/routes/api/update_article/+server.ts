@@ -32,13 +32,15 @@ export const POST: RequestHandler = async ({ request }) => {
 		update: {
 			title: article.title,
 			content: article.content,
-			imageLinkId: article.image_link_id
+			imageLinkId: article.image_link_id,
+			hidden: article.hidden
 		},
 		create: {
 			title: article.title,
 			content: article.content,
 			imageLinkId: article.image_link_id,
-			createdAt: new Date()
+			createdAt: new Date(),
+			hidden: article.hidden
 		}
 	});
 

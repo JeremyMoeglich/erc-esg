@@ -22,7 +22,7 @@
 				} catch (e) {
 					return undefined;
 				}
-			})()
+			})();
 			editor = new EditorJS({
 				holder: editor_id,
 				tools: {

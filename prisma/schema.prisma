@@ -45,6 +45,7 @@ model Article {
     content     String
     createdAt   DateTime  @default(now())
     imageLinkId String
+    hidden      Boolean   @default(false)
     image_link  imageLink @relation(fields: [imageLinkId], references: [id])
 }
 
