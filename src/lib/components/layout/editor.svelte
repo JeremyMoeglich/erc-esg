@@ -1,13 +1,15 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
+	import type { OutputData } from '@editorjs/editorjs';
 	import type EditorJS from '@editorjs/editorjs';
 
 	import { onMount } from 'svelte';
+	import { v4 } from 'uuid';
 
 	export let data: Awaited<ReturnType<typeof get_data>>;
 	export let editable: boolean;
 
-	const editor_id = 'editorjs';
+	const editor_id = v4();
 
 	let editor: EditorJS | undefined = undefined;
 
@@ -16,7 +18,7 @@
 			const EditorJS = (await import('@editorjs/editorjs')).default;
 			const Header = (await import('@editorjs/header')).default;
 			const List = (await import('@editorjs/list')).default;
-			const editor_data = (() => {
+			const editor_data: OutputData | undefined = (() => {
 				try {
 					return JSON.parse(data);
 				} catch (e) {

@@ -12,6 +12,7 @@
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
 	import { goto } from '$app/navigation';
 	import Editor from './editor.svelte';
+	import LeftCenter from './left_center.svelte';
 
 	export let article_id: string;
 	export let hidden: boolean;
@@ -50,22 +51,17 @@
 
 	let article_obj: article_preview_type | article_type | undefined = undefined;
 	$: article_obj = $articles_cache_store?.[article_id];
+
+	const shrink_left_to = '250px';
 </script>
 
-<div class="outer">
+<div class="outer" style:padding={compact ? '0px 50px' : '0px 90px'}>
 	{#if article_obj}
-		<div class="image">
-			<DbImage
-				id={article_obj?.image_link_id ?? article_id}
-				width={'100%'}
-				attr={'w-200,ar-1-1,fo-auto'}
-			/>
-		</div>
-		<div class="article">
-			<h1>
+		<div>
+			<div class="title">
 				{#if state !== 'loading'}
 					{#if $admin_mode}
-						<div class="title">
+						<div>
 							<Inplaceedit
 								value={article_obj.title}
 								on:submit={({ detail: value }) => {
@@ -81,73 +77,102 @@
 						{article_obj.title}
 					{/if}
 				{/if}
-			</h1>
-			{#if 'content' in article_obj}
-				<div>
-					{#if $admin_mode}
-						<div class="editor">
-							<Editor data={article_obj.content} editable={true} bind:get_data={get_article_data} />
-						</div>
-						<div class="save_button">
-							<Button
-								text={'Speichern'}
-								onclick={async () => {
-									if (!get_article_data) {
-										throw new Error('get_article_data is undefined');
-									}
-									if (article_obj === undefined) {
-										throw new Error('article_obj became undefined during save');
-									}
-									if (!('content' in article_obj)) {
-										throw new Error('article has no content, but content is shown');
-									}
-									const new_content = await get_article_data();
-									article_obj.content = new_content;
-									update_article(article_obj);
-									await goto('/blog');
-								}}
-							/>
-						</div>
-					{:else}
-						<div class="editor">
-							<Editor data={article_obj.content} editable={false} />
-						</div>
-					{/if}
-				</div>
-			{/if}
+			</div>
+			<div class="side_alignment">
+				<LeftCenter
+					position={compact ? 'center' : 'left'}
+					transition_time={500}
+					shrink_to={shrink_left_to}
+				>
+					<div class="image">
+						<DbImage
+							id={article_obj?.image_link_id ?? article_id}
+							width={'200px'}
+							attr={'w-200,ar-1-1,fo-auto'}
+						/>
+					</div>
+				</LeftCenter>
+				{#if 'content' in article_obj}
+					<div class="content">
+						{#if $admin_mode && !compact}
+							<div class="editor">
+								<Editor
+									data={article_obj.content}
+									editable={true}
+									bind:get_data={get_article_data}
+								/>
+							</div>
+							<div class="save_button">
+								<Button
+									text={'Speichern'}
+									onclick={async () => {
+										if (!get_article_data) {
+											throw new Error('get_article_data is undefined');
+										}
+										if (article_obj === undefined) {
+											throw new Error('article_obj became undefined during save');
+										}
+										if (!('content' in article_obj)) {
+											throw new Error('article has no ctitleontent, but content is shown');
+										}
+										const new_content = await get_article_data();
+										article_obj.content = new_content;
+										update_article(article_obj);
+										await goto('/blog');
+									}}
+								/>
+							</div>
+						{:else}
+							<div class="editor">
+								<Editor data={article_obj.content} editable={false} />
+							</div>
+						{/if}
+					</div>
+				{/if}
+			</div>
 		</div>
 	{/if}
 </div>
 
 <style>
-	h1 {
-		margin: 0px;
-		font-size: 1.5em;
-		max-width: fit-content;
-	}
 	.id {
 		font-size: 0.8em;
 		color: gray;
+	}
+	.image {
+		position: relative;
+		width: 100%;
 	}
 	.title {
 		display: flex;
 		flex-direction: row;
 		gap: 1em;
 		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
+		text-align: center;
+		transition-duration: 500ms;
+		transition-property: width;
+		font-size: 20px;
+	}
+	.side_alignment {
+		display: flex;
+		flex-wrap: wrap;
 	}
 	.outer {
 		display: flex;
-		flex-wrap: wrap-reverse;
-		justify-content: center;
-		width: 90%;
-		gap: 40px;
-	}
-	.article {
+		flex-direction: column;
+		gap: 20px;
 		width: 100%;
+		flex-wrap: wrap;
 	}
 	.save_button {
 		display: flex;
 		justify-content: center;
 		margin-top: 2rem;
+	}
+	.content {
+		flex-grow: 1;
+		
 	}
 </style>

@@ -1,20 +1,20 @@
 <script lang="ts">
 	import Fullscreen from '../fullscreen.svelte';
 	import Article from '../article.svelte';
-	
+
 	export let id: string;
 
 	let expanded = false;
 
-	function toggle() {
-		expanded = !expanded;
+	function expand() {
+		expanded = true;
 	}
 </script>
 
 <div class="outer">
-	<Fullscreen fullscreen={expanded} transition_time={500}>
-		<div class="inner" on:click={toggle} on:keypress={toggle}>
-			<Article article_id={id} hidden={true} compact={!expanded}/>
+	<Fullscreen bind:fullscreen={expanded} transition_time={500} edge_width={50}>
+		<div class="inner" on:click={expand} on:keypress={expand}>
+			<Article article_id={id} hidden={true} compact={!expanded} />
 		</div>
 	</Fullscreen>
 </div>

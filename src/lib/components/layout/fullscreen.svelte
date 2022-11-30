@@ -5,13 +5,16 @@
 
 	export let fullscreen: boolean;
 	export let transition_time: number;
+	export let edge_width: number;
 
 	let current_transition_time = transition_time;
 
 	let placeholder_element: HTMLElement;
 	let scroll_y: number;
 	let scroll_x: number;
-	let transition_state: 'small' | 'small_to_large' | 'large' | 'large_to_small' = fullscreen ? 'large' : 'small';
+	let transition_state: 'small' | 'small_to_large' | 'large' | 'large_to_small' = fullscreen
+		? 'large'
+		: 'small';
 
 	let state: {
 		width: string;
@@ -24,7 +27,7 @@
 		height: '100vh',
 		top: '0px',
 		left: '0px',
-		z_index: -1,
+		z_index: -1
 	};
 
 	async function sleep(time: number) {
@@ -32,8 +35,6 @@
 			setTimeout(resolve, time);
 		});
 	}
-		
-
 
 	async function set_placeholder_position() {
 		if (!browser || !placeholder_element) {
@@ -49,7 +50,7 @@
 			height: `${height}px`,
 			top: `${top}px`,
 			left: `${left}px`,
-			z_index: state.z_index,
+			z_index: state.z_index
 		};
 		await sleep(current_transition_time);
 	}
@@ -59,11 +60,11 @@
 		const parent = placeholder_element.offsetParent ?? document.body;
 		const parent_rect = parent.getBoundingClientRect();
 		state = {
-			width: '100vw',
-			height: '100vh',
-			top: `${-parent_rect.top}px`,
-			left: `${-parent_rect.left}px`,
-			z_index: state.z_index,
+			width: `calc(100vw - ${2 * edge_width}px)`,
+			height: `calc(100vh - ${2 * edge_width}px)`,
+			top: `${-parent_rect.top + edge_width}px`,
+			left: `${-parent_rect.left + edge_width}px`,
+			z_index: state.z_index
 		};
 		await sleep(current_transition_time);
 	}
@@ -78,7 +79,10 @@
 			if (transition_state === 'small_to_large') {
 				transition_state = 'large';
 			}
-		} else if (!fullscreen && (transition_state === 'large' || transition_state === 'small_to_large')) {
+		} else if (
+			!fullscreen &&
+			(transition_state === 'large' || transition_state === 'small_to_large')
+		) {
 			current_transition_time = transition_time;
 			disableScroll.off();
 			state.z_index = 50;
@@ -99,9 +103,9 @@
 
 	$: scroll_x, scroll_y, update(fullscreen);
 
-	let interval: ReturnType<typeof setInterval>; 
+	let interval: ReturnType<typeof setInterval>;
 	let resize_observer: ResizeObserver;
-	
+
 	onMount(() => {
 		interval = setInterval(() => {
 			update(fullscreen);
@@ -111,7 +115,7 @@
 		});
 		resize_observer.observe(placeholder_element);
 		resize_observer.observe(document.body);
-	})
+	});
 
 	onDestroy(() => {
 		disableScroll.off();
@@ -123,28 +127,39 @@
 		}
 	});
 
-	
+	function collapse() {
+		if (fullscreen) {
+			fullscreen = false;
+		}
+	}
 </script>
 
 <svelte:window bind:scrollY={scroll_y} bind:scrollX={scroll_x} />
 
-<div
-	class="placeholder"
-	bind:this={placeholder_element}
->
+<div class="placeholder" bind:this={placeholder_element}>
 	<slot />
 </div>
 <div
-		class="fullscreen_element"
-		style:transition-duration={`${current_transition_time}ms`}
-		style:top={state.top}
-		style:left={state.left}
-		style:width={state.width}
-		style:height={state.height}
-		style:z-index={state.z_index}
-	>
-		<slot />
-	</div>
+	class="fullscreen_element"
+	style:transition-duration={`${current_transition_time}ms`}
+	style:top={state.top}
+	style:left={state.left}
+	style:width={state.width}
+	style:height={state.height}
+	style:z-index={state.z_index}
+>
+	{#if fullscreen}
+		<div class="close_relative">
+			<div class="close" on:click={collapse} on:keypress={collapse}>X</div>
+		</div>
+	{/if}
+	<slot />
+</div>
+<div
+	class="background_gray"
+	style:display={transition_state === 'small' ? 'none' : 'block'}
+	style:opacity={['small_to_large', 'large'].includes(transition_state) ? '0.3' : '0'}
+/>
 
 <style>
 	.placeholder {
@@ -158,5 +173,23 @@
 		background-color: white;
 		transition: top 0.5s ease-in-out, left 0.5s ease-in-out, width 0.5s ease-in-out,
 			height 0.5s ease-in-out;
+	}
+	.close_relative {
+		position: relative;
+	}
+	.close {
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		width: 0px;
+		height: 0px;
+		font-size: 30px;
+		cursor: pointer;
+	}
+	.background_gray {
+		position: fixed;
+		top: 0px;
+		left: 0px;
+		background-color: gray;
 	}
 </style>

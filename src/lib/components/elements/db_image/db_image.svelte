@@ -77,6 +77,8 @@
 		position: relative;
 		height: fit-content;
 		width: fit-content;
+		transition-property: width;
+		transition-duration: 500ms;
 	}
 	.content {
 		height: fit-content;
