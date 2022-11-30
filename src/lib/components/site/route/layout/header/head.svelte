@@ -12,7 +12,8 @@
 		'/blog': 'Aktuelles',
 		'/about': 'Über uns',
 		'/leistungen': 'Leistungen',
-		'/contact': 'Kontakt'
+		'/contact': 'Kontakt',
+		'/gallery': "Gallerie"
 	};
 
 	let navigation_open = false;
