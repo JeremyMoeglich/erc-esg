@@ -9,7 +9,7 @@
 
 	const routes: Record<string, string> = {
 		'/': 'Startseite',
-		'/blog': 'Blog',
+		'/blog': 'Aktuelles',
 		'/about': 'Über uns',
 		'/leistungen': 'Leistungen',
 		'/contact': 'Kontakt'

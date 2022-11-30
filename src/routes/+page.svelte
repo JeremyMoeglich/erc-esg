@@ -10,7 +10,7 @@
 	<div>
 		<iframe
 		width="680"
-		height="425"
+		height="425" 
 		src="https://www.youtube.com/embed/MmgB1lPEuVQ"
 		title="YouTube video player"
 		frameborder="1"
@@ -25,6 +25,7 @@
 
 <style>
 	.imagefilm {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
