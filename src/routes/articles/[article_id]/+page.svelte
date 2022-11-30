@@ -7,4 +7,4 @@
 	$: article_id = $page.params.article_id;
 </script>
 
-<Article {article_id} hidden={false} />
+<Article {article_id} hidden={false} compact={false} />

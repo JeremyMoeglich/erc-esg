@@ -1,19 +1,15 @@
 <script lang="ts">
 	import Field from './field.svelte';
 
-	export let fields: Array<{
-		title: string;
-		id: string;
-		text: string;
-	}>;
+	export let ids: Array<string>;
 	export let title: string;
 </script>
 
 <div class="outer">
 	<h2>{title}</h2>
 	<div class="main">
-		{#each fields as field}
-			<Field id={field.id} text={field.text} />
+		{#each ids as id}
+			<Field {id} />
 		{/each}
 	</div>
 </div>

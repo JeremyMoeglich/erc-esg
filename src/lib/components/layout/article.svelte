@@ -15,6 +15,8 @@
 
 	export let article_id: string;
 	export let hidden: boolean;
+	export let compact: boolean;
+
 	let state: 'loading' | 'not_found' | 'loaded' | undefined = 'loading';
 
 	async function load(article_id: string) {
@@ -53,21 +55,28 @@
 <div class="outer">
 	{#if article_obj}
 		<div class="image">
-			<DbImage id={article_obj?.image_link_id ?? article_id} width={'300px'} />
+			<DbImage
+				id={article_obj?.image_link_id ?? article_id}
+				width={'100%'}
+				attr={'w-200,ar-1-1,fo-auto'}
+			/>
 		</div>
 		<div class="article">
 			<h1>
 				{#if state !== 'loading'}
 					{#if $admin_mode}
-						<Inplaceedit
-							value={article_obj.title}
-							on:submit={({ detail: value }) => {
-								if (!article_obj?.title) {
-									throw new Error('article has no title, but title is shown');
-								}
-								article_obj.title = value;
-							}}
-						/>
+						<div class="title">
+							<Inplaceedit
+								value={article_obj.title}
+								on:submit={({ detail: value }) => {
+									if (!article_obj?.title) {
+										throw new Error('article has no title, but title is shown');
+									}
+									article_obj.title = value;
+								}}
+							/>
+							<p class="id">ID: {article_obj.id}</p>
+						</div>
 					{:else}
 						{article_obj.title}
 					{/if}
@@ -111,20 +120,27 @@
 </div>
 
 <style>
+	h1 {
+		margin: 0px;
+		font-size: 1.5em;
+		max-width: fit-content;
+	}
+	.id {
+		font-size: 0.8em;
+		color: gray;
+	}
+	.title {
+		display: flex;
+		flex-direction: row;
+		gap: 1em;
+		align-items: center;
+	}
 	.outer {
 		display: flex;
+		flex-wrap: wrap-reverse;
+		justify-content: center;
 		width: 90%;
-		margin: 50px auto;
 		gap: 40px;
-	}
-
-	@media (max-width: 1200px) {
-		.outer {
-			flex-direction: column;
-		}
-		.image {
-			align-self: center;
-		}
 	}
 	.article {
 		width: 100%;
