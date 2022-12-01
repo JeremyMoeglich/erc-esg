@@ -9,7 +9,7 @@
 	type States = Positions | 'left_center' | 'center_left';
 
 	let state: States = position;
-	let shrunk: boolean = false;
+	let shrunk: boolean = state === 'left'
 
 	function update_state() {
 		if (state === position) {

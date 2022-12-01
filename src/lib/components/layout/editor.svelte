@@ -1,60 +1,60 @@
 <script lang="ts">
+	import CKEditor from "ckeditor5-svelte";
+	import ClassicEditor from '@ckeditor/ckeditor5-editor-classic/src/classiceditor.js';
+
 	import { browser } from '$app/environment';
-	import type { OutputData } from '@editorjs/editorjs';
-	import type EditorJS from '@editorjs/editorjs';
+	import { onDestroy, onMount } from 'svelte';
 
-	import { onMount } from 'svelte';
-	import { v4 } from 'uuid';
+	let element: HTMLElement;
+	let editor: Awaited<ReturnType<typeof ClassicEditor.create>> | undefined;
 
-	export let data: Awaited<ReturnType<typeof get_data>>;
-	export let editable: boolean;
-
-	const editor_id = v4();
-
-	let editor: EditorJS | undefined = undefined;
+	export let content: string;
 
 	onMount(async () => {
-		if (browser) {
-			const EditorJS = (await import('@editorjs/editorjs')).default;
-			const Header = (await import('@editorjs/header')).default;
-			const List = (await import('@editorjs/list')).default;
-			const editor_data: OutputData | undefined = (() => {
-				try {
-					return JSON.parse(data);
-				} catch (e) {
-					return undefined;
+		const ClassicEditor = (await import('@ckeditor/ckeditor5-editor-classic/src/classiceditor.js'))
+			.default;
+		editor = await ClassicEditor.create(element, {
+			plugins: await Promise.all([
+				import('@ckeditor/ckeditor5-alignment/src/alignment.js'),
+				import('@ckeditor/ckeditor5-autoformat/src/autoformat.js'),
+				import('@ckeditor/ckeditor5-block-quote/src/blockquote.js'),
+				import('@ckeditor/ckeditor5-basic-styles/src/bold.js'),
+				import('@ckeditor/ckeditor5-essentials/src/essentials.js'),
+				import('@ckeditor/ckeditor5-heading/src/heading.js'),
+				import('@ckeditor/ckeditor5-indent/src/indent.js'),
+				import('@ckeditor/ckeditor5-basic-styles/src/italic.js'),
+				import('@ckeditor/ckeditor5-link/src/link.js'),
+				import('@ckeditor/ckeditor5-list/src/list.js'),
+				import('@ckeditor/ckeditor5-media-embed/src/mediaembed.js'),
+				import('@ckeditor/ckeditor5-paragraph/src/paragraph.js'),
+				import('@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice.js'),
+				import('@ckeditor/ckeditor5-table/src/table.js'),
+				import('@ckeditor/ckeditor5-table/src/tabletoolbar.js'),
+				import('@ckeditor/ckeditor5-autosave/src/autosave.js')
+			]).then((modules) => modules.map((module) => module.default)),
+			autosave: {
+				save(editor) {
+					return (async () => {
+						content = editor.data.get();
+					})();
 				}
-			})();
-			editor = new EditorJS({
-				holder: editor_id,
-				tools: {
-					header: Header,
-					list: List
-				},
-				data: editor_data,
-				readOnly: !editable,
-				placeholder: editable ? 'Start writing...' : undefined
+			}
+		})
+			.then((editor) => {
+				if (browser) {
+					window.editor = editor;
+				}
+				return editor;
+			})
+			.catch((error) => {
+				console.error('There was a problem initializing the editor.', error);
+				return undefined;
 			});
-		}
 	});
 
-	export async function get_data() {
-		if (!editor) {
-			console.warn('Editor not initialized');
-			return '';
-		}
-		await editor.isReady;
-		return JSON.stringify(await editor.save());
-	}
+	onDestroy(() => {
+		editor?.destroy();
+	});
 </script>
 
-<div class="editor_outer">
-	<div id={editor_id} />
-</div>
-
-<style>
-	.editor_outer {
-		width: 100%;
-		height: 100%;
-	}
-</style>
+<div bind:this={element} />

@@ -10,7 +10,7 @@
 			{text}
 		</button>
 	{:else}
-		<a href={onclick} class="btn" data-sveltekit-prefetch>
+		<a href={onclick} class="btn" >
 			{text}
 		</a>
 	{/if}

@@ -11,8 +11,8 @@
 	import { browser } from '$app/environment';
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
 	import { goto } from '$app/navigation';
-	import Editor from './editor.svelte';
 	import LeftCenter from './left_center.svelte';
+	import TextBox from './text_box.svelte';
 
 	export let article_id: string;
 	export let hidden: boolean;
@@ -47,12 +47,11 @@
 		state = undefined;
 	}
 
-	let get_article_data: (() => Promise<string>) | undefined;
-
 	let article_obj: article_preview_type | article_type | undefined = undefined;
 	$: article_obj = $articles_cache_store?.[article_id];
 
-	const shrink_left_to = '250px';
+	const compact_image_width = 200;
+	const large_image_width = 300;
 </script>
 
 <div class="outer" style:padding={compact ? '0px 50px' : '0px 90px'}>
@@ -82,13 +81,13 @@
 				<LeftCenter
 					position={compact ? 'center' : 'left'}
 					transition_time={500}
-					shrink_to={shrink_left_to}
+					shrink_to={`${compact_image_width}px`}
 				>
 					<div class="image">
 						<DbImage
 							id={article_obj?.image_link_id ?? article_id}
-							width={'200px'}
-							attr={'w-200,ar-1-1,fo-auto'}
+							width={`${compact_image_width}px`}
+							attr={`w-${compact_image_width},ar-1-1,fo-auto`}
 						/>
 					</div>
 				</LeftCenter>
@@ -96,27 +95,18 @@
 					<div class="content">
 						{#if $admin_mode && !compact}
 							<div class="editor">
-								<Editor
-									data={article_obj.content}
-									editable={true}
-									bind:get_data={get_article_data}
-								/>
+								<TextBox content={article_obj.content} editable={true} />
 							</div>
 							<div class="save_button">
 								<Button
 									text={'Speichern'}
 									onclick={async () => {
-										if (!get_article_data) {
-											throw new Error('get_article_data is undefined');
-										}
 										if (article_obj === undefined) {
 											throw new Error('article_obj became undefined during save');
 										}
 										if (!('content' in article_obj)) {
 											throw new Error('article has no ctitleontent, but content is shown');
 										}
-										const new_content = await get_article_data();
-										article_obj.content = new_content;
 										update_article(article_obj);
 										await goto('/blog');
 									}}
@@ -124,7 +114,7 @@
 							</div>
 						{:else}
 							<div class="editor">
-								<Editor data={article_obj.content} editable={false} />
+								<TextBox bind:content={article_obj.content} editable={false} />
 							</div>
 						{/if}
 					</div>
@@ -173,6 +163,5 @@
 	}
 	.content {
 		flex-grow: 1;
-		
 	}
 </style>

@@ -159,6 +159,8 @@
 	class="background_gray"
 	style:display={transition_state === 'small' ? 'none' : 'block'}
 	style:opacity={['small_to_large', 'large'].includes(transition_state) ? '0.3' : '0'}
+	on:click={collapse}
+	on:keypress={() => {}}
 />
 
 <style>
@@ -190,6 +192,8 @@
 		position: fixed;
 		top: 0px;
 		left: 0px;
+		width: 100vw;
+		height: 100vh;
 		background-color: gray;
 	}
 </style>
