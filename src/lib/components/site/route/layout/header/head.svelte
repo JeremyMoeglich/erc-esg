@@ -13,7 +13,7 @@
 		'/about': 'Über uns',
 		'/leistungen': 'Leistungen',
 		'/contact': 'Kontakt',
-		'/gallery': "Gallerie"
+		'/gallery': "Galerie"
 	};
 
 	let navigation_open = false;
