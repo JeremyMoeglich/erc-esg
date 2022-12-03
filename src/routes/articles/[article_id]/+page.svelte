@@ -7,4 +7,14 @@
 	$: article_id = $page.params.article_id;
 </script>
 
-<Article {article_id} hidden={false} compact={false} />
+<div class="outer">
+	<Article {article_id} hidden={false} compact={false} />
+</div>
+
+<style>
+	.outer {
+		width: 100%;
+		height: 100%;
+		padding: 20px 30px;
+	}
+</style>

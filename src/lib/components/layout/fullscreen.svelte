@@ -194,6 +194,7 @@
 		left: 0px;
 		width: 100vw;
 		height: 100vh;
+		z-index: 40;
 		background-color: gray;
 	}
 </style>

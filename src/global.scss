@@ -1,9 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300&family=Roboto+Flex:opsz,wght@8..144,300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway&display=swap');
 
 :root {
 	--primary-hint: #bbebce;
 	--primary-color: #0fc736;
 	--primary-dark: #006436;
+	--primary-hint-grey: rgb(141, 170, 179);
 	--primary-hint-dark: #008d35;
 
 	--secondary-hint-dark: #0f202b;
@@ -68,3 +70,4 @@ textarea {
 	width: 100%;
 	height: 100%;
 }
+

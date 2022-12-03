@@ -9,10 +9,15 @@
 	type States = Positions | 'left_center' | 'center_left';
 
 	let state: States = position;
-	let shrunk: boolean = state === 'left'
+	export let shrunk: boolean = state === 'left';
 
 	function update_state() {
 		if (state === position) {
+			if (state === 'left') {
+				shrunk = true;
+			} else {
+				shrunk = false;
+			}
 			return;
 		}
 
@@ -38,7 +43,11 @@
 	$: state, position, update_state();
 </script>
 
-<div class="outer_position_alignment" style:width={shrunk && shrink_to ? shrink_to : '100%'}>
+<div
+	class="outer_position_alignment"
+	style:width={shrunk && shrink_to ? shrink_to : '100%'}
+	style:transition-duration={`${transition_time}ms`}
+>
 	<div
 		class="position_alignment"
 		style:width={position === 'left' ? '0px' : '100%'}
@@ -55,6 +64,9 @@
 </div>
 
 <style>
+	.outer_position_alignment {
+		transition-property: width;
+	}
 	.position_alignment {
 		display: flex;
 		justify-content: center;

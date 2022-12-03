@@ -1,7 +1,5 @@
 <script lang="ts">
 	import { browser } from '$app/environment';
-	import { crossfade } from '$lib/scripts/frontend/crossfade';
-	const [send, receive] = crossfade;
 	import { image_cache_store } from '$lib/scripts/frontend/data/image';
 	import { get_image_url } from '$lib/scripts/frontend/fetch/get_image_url';
 
@@ -24,8 +22,6 @@
 	<img
 		src={`${$image_cache_store[id]}?tr=${attr}`}
 		alt={id}
-		in:receive={{ key: id }}
-		out:send={{ key: id }}
 	/>
 {/if}
 

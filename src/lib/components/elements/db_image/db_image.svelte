@@ -46,7 +46,7 @@
 				<DbImageContent {id} {attr} />
 			</button>
 		{:else if typeof click === 'string'}
-			<a href={click} data-sveltekit-prefetch>
+			<a href={click}>
 				<DbImageContent {id} {attr} />
 			</a>
 		{:else}
