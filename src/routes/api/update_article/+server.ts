@@ -36,6 +36,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			hidden: article.hidden
 		},
 		create: {
+			id: article.id,
 			title: article.title,
 			content: article.content,
 			imageLinkId: article.image_link_id,

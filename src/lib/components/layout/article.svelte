@@ -134,18 +134,23 @@
 								<Button
 									text={'Speichern'}
 									onclick={async () => {
-										if (article_obj === undefined) {
-											throw new Error('article_obj became undefined during save');
+										is_loading.set(true);
+										try {
+											if (article_obj === undefined) {
+												throw new Error('article_obj became undefined during save');
+											}
+											if (!('content' in article_obj)) {
+												throw new Error('article has no ctitleontent, but content is shown');
+											}
+											update_article(article_obj);
+										} finally {
+											is_loading.set(false);
 										}
-										if (!('content' in article_obj)) {
-											throw new Error('article has no ctitleontent, but content is shown');
-										}
-										console.log('saving article');
-										console.log(article_obj);
-										update_article(article_obj);
-										await goto('/blog');
 									}}
 								/>
+								{#if !isEqual(article_obj, initial_article_obj)}
+									<p class="unsaved">Es gibt ungespeicherte Änderungen.</p>
+								{/if}
 							</div>
 						{:else}
 							<div class="editor">
@@ -196,7 +201,9 @@
 	}
 	.save_button {
 		display: flex;
-		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		gap: 20px;
 		margin-top: 2rem;
 	}
 	.content {

@@ -31,9 +31,7 @@
 		<slot />
 	</div>
 
-	<div class="footer">
-		<Footer />
-	</div>
+	<Footer />
 	{#if $is_loading}
 		<div class="loading">
 			<div class="spinner">
@@ -61,10 +59,11 @@
 		background-color: rgba(128, 128, 128, 0.308);
 	}
 	.content {
-		z-index: -4;
 		width: calc(100vw - var(--scrollbar_width));
 	}
 	.outer {
+		display: flex;
+		flex-direction: column;
 		min-height: 100vh;
 		width: 100vw;
 		position: relative;
