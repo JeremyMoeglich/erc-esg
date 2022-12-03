@@ -30,7 +30,8 @@ export const article_preview_schema = z.object({
 	id: z.string(),
 	title: z.string(),
 	createdAt: z.string(),
-	image_link_id: z.string()
+	image_link_id: z.string(),
+	hidden: z.boolean().optional()
 });
 
 export type article_preview_type = z.infer<typeof article_preview_schema>;
@@ -44,7 +45,8 @@ export const article_preview_data_schema = z.object({
 	id: z.string(),
 	title: z.string(),
 	createdAt: z.string(),
-	image_link: imageLink_schema
+	image_link: imageLink_schema,
+	hidden: z.boolean().optional()
 });
 
 export type article_preview_data_type = z.infer<typeof article_preview_data_schema>;

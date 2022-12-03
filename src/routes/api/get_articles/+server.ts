@@ -55,16 +55,19 @@ export const POST: RequestHandler = async ({ request }) => {
 					id: true,
 					image_url: true
 				}
-			}
+			},
+			hidden: true
 		},
 		orderBy: {
 			createdAt: 'desc'
 		}
 	});
 	return json({
-		articles: response.map((article) => ({
-			...article,
-			createdAt: JSON.stringify(article.createdAt)
-		}))
+		articles: response
+			.map((article) => ({
+				...article,
+				createdAt: JSON.stringify(article.createdAt)
+			}))
+			.filter((article) => !article.hidden)
 	} as JsonObject);
 };

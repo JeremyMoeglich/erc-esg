@@ -1,6 +1,5 @@
 <script lang="ts">
 	import ArticleBrowser from '$lib/components/site/article_browser/article_browser.svelte';
-	import IndexFields from '$lib/components/site/fields/action_fields.svelte';
 	import Showcase from '$lib/components/site/route/index/showcase.svelte';
 </script>
 
@@ -9,16 +8,15 @@
 	<h1>Unser Imagefilm</h1>
 	<div>
 		<iframe
-		width="680"
-		height="425" 
-		src="https://www.youtube.com/embed/MmgB1lPEuVQ"
-		title="YouTube video player"
-		frameborder="1"
-		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-		allowfullscreen
-	/>
+			width="680"
+			height="425"
+			src="https://www.youtube.com/embed/MmgB1lPEuVQ"
+			title="YouTube video player"
+			frameborder="1"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+			allowfullscreen
+		/>
 	</div>
-	
 </div>
 
 <ArticleBrowser />
@@ -31,6 +29,6 @@
 		align-items: center;
 	}
 	iframe {
-  border: 16px solid var(--primary-hint-grey);
-}
+		border: 16px solid var(--primary-hint-grey);
+	}
 </style>

@@ -35,7 +35,6 @@
 	{#each typed_entries(routes) as [route, name]}
 		<a
 			class:desktop={!navigation_open}
-			data-sveltekit-prefetch
 			href={route}
 			class:current_route={$page.url.pathname === route}>{name}</a
 		>

@@ -1,19 +1,26 @@
 <script lang="ts">
-	import DbImage from '$lib/components/elements/db_image/db_image.svelte';
+	import Fullscreen from '../fullscreen.svelte';
+	import Article from '../article.svelte';
 
-	export let title: string;
-	export let image_id: string;
-	export let text: string;
+	export let id: string;
+
+	let expanded = false;
+
+	function expand() {
+		expanded = true;
+	}
 </script>
 
 <div class="outer">
-	<h3>{title}</h3>
-	<DbImage id={image_id} attr={'w-200,ar-1-1,fo-auto'} />
-	<p>{text}</p>
+	<Fullscreen bind:fullscreen={expanded} transition_time={500} edge_width={50}>
+		<div class="inner" on:click={expand} on:keypress={expand}>
+			<Article article_id={id} hidden={true} compact={!expanded} />
+		</div>
+	</Fullscreen>
 </div>
 
 <style>
-	.outer {
+	.inner {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
@@ -22,8 +29,12 @@
 		background-color: var(--gray000);
 		border-radius: 10px;
 		box-shadow: 0px 2px 10px -5px var(--secondary-color);
+		width: 100%;
+		height: 100%;
 	}
-	h3 {
-		margin-top: 0px;
+	.outer {
+		width: 100%;
+		height: 100%;
+		max-height: 350px;
 	}
 </style>
