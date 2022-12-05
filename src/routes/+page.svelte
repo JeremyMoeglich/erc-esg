@@ -6,17 +6,13 @@
 <Showcase />
 <div class="imagefilm">
 	<h1>Unser Imagefilm</h1>
-	<div>
-		<iframe
-			width="680"
-			height="425"
-			src="https://www.youtube.com/embed/MmgB1lPEuVQ"
-			title="YouTube video player"
-			frameborder="1"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-			allowfullscreen
-		/>
-	</div>
+	<iframe
+		src="https://www.youtube.com/embed/MmgB1lPEuVQ"
+		title="YouTube video player"
+		frameborder="1"
+		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+		allowfullscreen
+	/>
 </div>
 
 <ArticleBrowser />
@@ -30,5 +26,7 @@
 	}
 	iframe {
 		border: 16px solid var(--primary-hint-grey);
+		width: 100%;
+		aspect-ratio: 16 / 9;
 	}
 </style>

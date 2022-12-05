@@ -69,5 +69,4 @@
 		position: relative;
 		padding-right: var(--scrollbar_width);
 	}
-
 </style>

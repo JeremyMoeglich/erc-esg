@@ -19,7 +19,7 @@
 	{#if images}
 		{#each images as image_id}
 			<div class="image">
-				<DbImage id={image_id} width={'300px'} gallery={true} />
+				<DbImage id={image_id} width={'400px'} gallery={true} attr={`w-400`} />
 			</div>
 		{/each}
 		{#if $admin_mode}
@@ -50,6 +50,5 @@
 
 	.image {
 		border: 2px solid var(--primary-hint-dark);
-
 	}
 </style>

@@ -41,7 +41,7 @@
 </script>
 
 <div class="outer" style:width={str_width}>
-	<div class="content">
+	<div>
 		{#if typeof click === 'function'}
 			<button on:click={click}>
 				<DbImageContent {id} {attr} />
@@ -74,15 +74,11 @@
 
 <style>
 	.outer {
-		display: inline-block;
 		position: relative;
 		height: fit-content;
 		width: fit-content;
 		transition-property: width;
 		transition-duration: 500ms;
-	}
-	.content {
-		height: fit-content;
 	}
 	.overlay {
 		position: absolute;

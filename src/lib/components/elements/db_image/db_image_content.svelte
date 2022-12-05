@@ -19,16 +19,11 @@
 </script>
 
 {#if $image_cache_store?.[id]}
-	<img
-		src={`${$image_cache_store[id]}?tr=${attr}`}
-		alt={id}
-	/>
+	<img src={`${$image_cache_store[id]}?tr=${attr}`} alt={id} />
 {/if}
 
 <style>
 	img {
 		width: 100%;
-		height: 100%;
-		object-fit: cover;
 	}
 </style>

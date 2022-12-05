@@ -39,7 +39,8 @@
 		align-items: center;
 		width: 100%;
 	}
-	ul,  h3 {
+	ul,
+	h3 {
 		font-size: 25px;
 		font-family: 'Raleway', sans-serif;
 	}

@@ -58,6 +58,6 @@
 	.outer {
 		font-size: 20px;
 		padding: 30px;
-		font-family: "Raleway", Arial, Helvetica, sans-serif;
+		font-family: 'Raleway', Arial, Helvetica, sans-serif;
 	}
 </style>

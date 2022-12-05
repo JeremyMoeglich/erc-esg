@@ -4,12 +4,5 @@
 
 <Fields
 	title={'Unsere Abteilungen'}
-	ids={[
-		'beratung',
-		'kundenzufriedenheit',
-		'marketing',
-		'buchhaltung',
-		'it',
-		'wettbewerbe'
-	]}
+	ids={['beratung', 'kundenzufriedenheit', 'marketing', 'buchhaltung', 'it', 'wettbewerbe']}
 />

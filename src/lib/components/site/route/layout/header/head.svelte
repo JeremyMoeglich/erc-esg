@@ -13,7 +13,7 @@
 		'/about': 'Über uns',
 		'/leistungen': 'Leistungen',
 		'/contact': 'Kontakt',
-		'/gallery': "Galerie"
+		'/gallery': 'Galerie'
 	};
 
 	let navigation_open = false;
@@ -54,7 +54,6 @@
 		padding: 10px;
 		&:hover {
 			color: var(--primary-dark);
-			
 		}
 	}
 	button {
