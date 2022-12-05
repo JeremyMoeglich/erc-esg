@@ -9,7 +9,7 @@ datasource db {
 }
 
 model ContactForm {
-    id        String   @id @default(cuid())
+    id        String   @id @default(uuid())
     name      String
     email     String
     phone     String?
@@ -18,7 +18,7 @@ model ContactForm {
 }
 
 model User {
-    id            String @id @default(cuid())
+    id            String @id @default(uuid())
     name          String
     email         String @unique
     password_hash String
@@ -27,25 +27,32 @@ model User {
 }
 
 model LoginToken {
-    id     String   @id @default(cuid())
+    id     String   @id @default(uuid())
     userId String   @unique
     time   DateTime @default(now())
     value  String   @unique
 }
 
 model imageLink {
-    id        String    @id @unique
-    image_url String
-    Article   Article[]
+    id          String        @id @unique
+    image_url   String
+    Article     Article[]
+    GaleryImage GaleryImage[]
 }
 
 model Article {
-    id          String    @id @default(cuid())
+    id          String    @id @default(uuid())
     title       String
     content     String
     createdAt   DateTime  @default(now())
     imageLinkId String
     hidden      Boolean   @default(false)
+    image_link  imageLink @relation(fields: [imageLinkId], references: [id])
+}
+
+model GaleryImage {
+    id          String    @id @default(uuid())
+    imageLinkId String
     image_link  imageLink @relation(fields: [imageLinkId], references: [id])
 }
 
