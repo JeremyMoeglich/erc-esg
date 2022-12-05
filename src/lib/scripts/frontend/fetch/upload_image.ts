@@ -8,7 +8,7 @@ const toBase64 = (file: File) =>
 		reader.onerror = (error) => reject(error);
 	});
 
-export async function upload_image(id: string, file: File): Promise<string | Error> {
+export async function upload_image(id: string, file: File, show_in_gallery: boolean): Promise<string | Error> {
 	console.log('upload_image', id, file);
 	if (!file.type.startsWith('image/')) {
 		return Promise.reject(new Error('Invalid file type'));
@@ -17,6 +17,7 @@ export async function upload_image(id: string, file: File): Promise<string | Err
 		method: 'POST',
 		body: JSON.stringify({
 			image: await toBase64(file),
+			show_in_gallery,
 			id
 		}),
 		headers: {

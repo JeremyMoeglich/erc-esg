@@ -10,6 +10,7 @@
 	export let id: string;
 	export let click: string | (() => void) | undefined = undefined;
 	export let width: number | string | undefined = undefined;
+	export let gallery = false;
 	export let attr = '';
 
 	let loading = false;
@@ -24,7 +25,7 @@
 			try {
 				loading = true;
 				const file = files[0];
-				const image_url = await upload_image(id, file);
+				const image_url = await upload_image(id, file, gallery);
 				if (image_url instanceof Error) {
 					throw image_url;
 				}

@@ -7,11 +7,12 @@ import { z } from 'zod';
 import type { RequestHandler } from './$types';
 
 export const POST: RequestHandler = async ({ request }) => {
-	const { id, image } = await validate_get_admin_body(
+	const { id, image, show_in_gallery } = await validate_get_admin_body(
 		request,
 		z.object({
 			id: z.string(),
-			image: z.string()
+			image: z.string(),
+			show_in_gallery: z.boolean().optional()
 		})
 	);
 
@@ -25,10 +26,12 @@ export const POST: RequestHandler = async ({ request }) => {
 		},
 		create: {
 			id,
-			image_url: url
+			image_url: url,
+			show_in_gallery: show_in_gallery ?? false
 		},
 		update: {
-			image_url: url
+			image_url: url,
+			show_in_gallery: show_in_gallery ?? false
 		}
 	});
 
