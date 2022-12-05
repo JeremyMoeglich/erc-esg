@@ -53,8 +53,8 @@
 		text-decoration: none;
 		padding: 10px;
 		&:hover {
-			border: 1px solid #000;
-			padding: 9px;
+			color: var(--primary-dark);
+			
 		}
 	}
 	button {
