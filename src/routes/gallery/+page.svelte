@@ -18,7 +18,9 @@
 <div class="main">
 	{#if images}
 		{#each images as image_id}
-			<DbImage id={image_id} width={'400px'} gallery={true} />
+			<div class="image">
+				<DbImage id={image_id} width={'400px'} gallery={true} />
+			</div>
 		{/each}
 		{#if $admin_mode}
 			<div class="add">
@@ -44,5 +46,10 @@
 		width: 100%;
 		align-items: center;
 		justify-items: center;
+	}
+
+	.image {
+		border: 3px solid black;
+
 	}
 </style>
