@@ -34,10 +34,10 @@ model LoginToken {
 }
 
 model imageLink {
-    id          String        @id @unique
-    image_url   String
-    Article     Article[]
-    GaleryImage GaleryImage[]
+    id              String    @id @unique
+    image_url       String
+    show_in_gallery Boolean   @default(false)
+    Article         Article[]
 }
 
 model Article {
@@ -47,12 +47,6 @@ model Article {
     createdAt   DateTime  @default(now())
     imageLinkId String
     hidden      Boolean   @default(false)
-    image_link  imageLink @relation(fields: [imageLinkId], references: [id])
-}
-
-model GaleryImage {
-    id          String    @id @default(uuid())
-    imageLinkId String
     image_link  imageLink @relation(fields: [imageLinkId], references: [id])
 }
 
