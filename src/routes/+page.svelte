@@ -28,5 +28,6 @@
 		border: 16px solid var(--primary-hint-grey);
 		width: 100%;
 		aspect-ratio: 16 / 9;
+		max-width: 800px;
 	}
 </style>
