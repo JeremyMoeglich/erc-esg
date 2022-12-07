@@ -2,7 +2,10 @@
 	import Fullscreen from '../fullscreen.svelte';
 	import Article from '../article.svelte';
 
-	export let id: string;
+	export let field: {
+		id: string;
+		preview: string;
+	};
 
 	let expanded = false;
 
@@ -14,7 +17,7 @@
 <div class="outer">
 	<Fullscreen bind:fullscreen={expanded} transition_time={500} edge_width={50}>
 		<div class="inner" on:click={expand} on:keypress={expand}>
-			<Article article_id={id} hidden={true} compact={!expanded} />
+			<Article article_id={field.id} hidden={true} compact={!expanded} />
 		</div>
 	</Fullscreen>
 </div>
