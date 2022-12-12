@@ -1,6 +1,7 @@
 <script>
 	import ActionFields from '$lib/components/site/fields/action_fields.svelte';
 	import SectionFields from '$lib/components/site/fields/section_fields.svelte';
+	import Button from '$lib/components/elements/button.svelte';
 </script>
 
 <div class="outer">
@@ -52,6 +53,10 @@
 	</div>
 </div>
 
+<div class="mitglieder">
+	<Button text={'Mitgliederliste'} onclick={`mitglieder`} />
+</div>
+
 <SectionFields />
 
 <style lang="scss">
@@ -59,5 +64,11 @@
 		font-size: 20px;
 		padding: 30px;
 		font-family: 'Raleway', Arial, Helvetica, sans-serif;
+	}
+
+	.mitglieder{
+		display: flex;
+		justify-content: center;
+		align-items: center;
 	}
 </style>
