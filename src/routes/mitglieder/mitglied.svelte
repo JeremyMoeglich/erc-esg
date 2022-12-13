@@ -9,29 +9,34 @@
 </script>
 
 <div class="outer">
-	<DbImage id={`mitglied-${vorname}-${nachname}`} width={"100px"}/>
+	<DbImage id={`mitglied-${vorname}-${nachname}`} width={'100px'} />
 	<div>
-		<u>Vorname:</u> <br /> {vorname}
+		<u>Vorname:</u> <br />
+		{vorname}
 	</div>
 	<div>
-		<u>Nachname:</u> <br /> {nachname}
+		<u>Nachname:</u> <br />
+		{nachname}
 	</div>
 	<div>
-		<u>Alter:</u> <br /> {alter}
+		<u>Alter:</u> <br />
+		{alter}
 	</div>
 	<div>
-		<u>Beitrittsdatum:</u> <br /> {beitrittsdatum.toLocaleDateString('de')}
+		<u>Beitrittsdatum:</u> <br />
+		{beitrittsdatum.toLocaleDateString('de')}
 	</div>
 	<div>
-		<u>Abteilung:</u> <br /> {abteilung}
+		<u>Abteilung:</u> <br />
+		{abteilung}
 	</div>
 </div>
 
 <style>
-    .outer {
-        display: flex;
-        gap: 20px;
-        align-items: center;
-        font-size: 20px;
-    }
+	.outer {
+		display: flex;
+		gap: 20px;
+		align-items: center;
+		font-size: 20px;
+	}
 </style>

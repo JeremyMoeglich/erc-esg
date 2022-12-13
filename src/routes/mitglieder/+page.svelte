@@ -31,7 +31,7 @@
 			beitrittsdatum: new Date('May 30, 2022'),
 			abteilung: 'Beratung / Buchhaltung',
 			alter: 15
-		},	
+		},
 		{
 			vorname: 'Cedric',
 			nachname: 'Haasz',
@@ -95,7 +95,7 @@
 			abteilung: 'Buchhaltung',
 			alter: 17
 		},
-	
+
 		{
 			vorname: 'Julius',
 			nachname: 'Thormann',
@@ -113,7 +113,7 @@
 		{
 			vorname: 'Antonia',
 			nachname: 'Richter',
-			beitrittsdatum: new Date('june 1, 2022'),
+			beitrittsdatum: new Date('June 1, 2022'),
 			abteilung: 'Protokollantin',
 			alter: 15
 		},
@@ -141,14 +141,14 @@
 		{
 			vorname: 'Connor',
 			nachname: 'Schindler',
-			beitrittsdatum: new Date('september 1, 2022'),
+			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 14
 		},
 		{
 			vorname: 'Felix',
 			nachname: 'Pruchhorst',
-			beitrittsdatum: new Date('september 1, 2022'),
+			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 14
 		},
@@ -169,7 +169,7 @@
 		{
 			vorname: 'Jan',
 			nachname: 'Jesper',
-			beitrittsdatum: new Date('september 1, 2022'),
+			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 14
 		},
@@ -193,7 +193,7 @@
 			beitrittsdatum: new Date('June 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 15
-		},
+		}
 	];
 </script>
 
