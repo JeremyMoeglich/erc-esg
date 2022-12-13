@@ -9,21 +9,21 @@
 </script>
 
 <div class="outer">
-	<DbImage id={`mitglied-${vorname}-${nachname}`} width={"200px"}/>
+	<DbImage id={`mitglied-${vorname}-${nachname}`} width={"100px"}/>
 	<div>
-		Vorname: {vorname}
+		<u>Vorname:</u> <br /> {vorname}
 	</div>
 	<div>
-		Nachname: {nachname}
+		<u>Nachname:</u> <br /> {nachname}
 	</div>
 	<div>
-		Alter: {alter}
+		<u>Alter:</u> <br /> {alter}
 	</div>
 	<div>
-		Beitrittsdatum: {beitrittsdatum.toLocaleDateString('de')}
+		<u>Beitrittsdatum:</u> <br /> {beitrittsdatum.toLocaleDateString('de')}
 	</div>
 	<div>
-		Abteilung: {abteilung}
+		<u>Abteilung:</u> <br /> {abteilung}
 	</div>
 </div>
 
