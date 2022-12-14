@@ -19,6 +19,7 @@
 	export let article_id: string;
 	export let hidden: boolean;
 	export let compact: boolean;
+	export let compact_text: string;
 
 	let state: 'loading' | 'not_found' | 'loaded' | undefined = 'loading';
 
@@ -126,36 +127,40 @@
 				</LeftCenter>
 				{#if 'content' in article_obj}
 					<div class="content">
-						{#if shrunk && $admin_mode && !compact}
-							<div class="editor">
-								<TextBox bind:content={article_obj.content} editable={true} />
-							</div>
-							<div class="save_button">
-								<Button
-									text={'Speichern'}
-									onclick={async () => {
-										is_loading.set(true);
-										try {
-											if (article_obj === undefined) {
-												throw new Error('article_obj became undefined during save');
+						{#if shrunk && !compact}
+							{#if $admin_mode}
+								<div class="editor">
+									<TextBox bind:content={article_obj.content} editable={true} />
+								</div>
+								<div class="save_button">
+									<Button
+										text={'Speichern'}
+										onclick={async () => {
+											is_loading.set(true);
+											try {
+												if (article_obj === undefined) {
+													throw new Error('article_obj became undefined during save');
+												}
+												if (!('content' in article_obj)) {
+													throw new Error('article has no ctitleontent, but content is shown');
+												}
+												update_article(article_obj);
+											} finally {
+												is_loading.set(false);
 											}
-											if (!('content' in article_obj)) {
-												throw new Error('article has no ctitleontent, but content is shown');
-											}
-											update_article(article_obj);
-										} finally {
-											is_loading.set(false);
-										}
-									}}
-								/>
-								{#if !isEqual(article_obj, initial_article_obj)}
-									<p class="unsaved">Es gibt ungespeicherte Änderungen.</p>
-								{/if}
-							</div>
+										}}
+									/>
+									{#if !isEqual(article_obj, initial_article_obj)}
+										<p class="unsaved">Es gibt ungespeicherte Änderungen.</p>
+									{/if}
+								</div>
+							{:else}
+								<div class="editor">
+									<TextBox bind:content={article_obj.content} editable={false} />
+								</div>
+							{/if}
 						{:else}
-							<div class="editor">
-								<TextBox bind:content={article_obj.content} editable={false} />
-							</div>
+							{@html compact_text}
 						{/if}
 					</div>
 				{/if}
