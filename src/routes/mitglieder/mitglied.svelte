@@ -32,6 +32,8 @@
         display: flex;
         gap: 20px;
         align-items: center;
+		padding-left: 250px;
         font-size: 20px;
+		padding-bottom: 5px;
     }
 </style>

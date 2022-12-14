@@ -31,13 +31,13 @@
 			beitrittsdatum: new Date('May 30, 2022'),
 			abteilung: 'Beratung / Buchhaltung',
 			alter: 15
-		},	
+		},
 		{
 			vorname: 'Cedric',
 			nachname: 'Haasz',
 			beitrittsdatum: new Date('June 1, 2022'),
 			abteilung: 'Beratung',
-			alter: 15
+			alter: 18
 		},
 		{
 			vorname: 'Emanuel',
@@ -95,7 +95,7 @@
 			abteilung: 'Buchhaltung',
 			alter: 17
 		},
-	
+
 		{
 			vorname: 'Julius',
 			nachname: 'Thormann',
@@ -114,7 +114,7 @@
 			vorname: 'Antonia',
 			nachname: 'Richter',
 			beitrittsdatum: new Date('june 1, 2022'),
-			abteilung: 'Protokollantin',
+			abteilung: 'Protokollantin / Marketing',
 			alter: 15
 		},
 		{
@@ -136,7 +136,7 @@
 			nachname: 'Prior',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Social Media',
-			alter: 15
+			alter: 14
 		},
 		{
 			vorname: 'Connor',
@@ -178,25 +178,28 @@
 			nachname: 'Jesper',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
-			alter: 15
+			alter: 14
 		},
 		{
 			vorname: 'Jakob',
 			nachname: 'Schmauch',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
-			alter: 15
+			alter: 16
 		},
 		{
 			vorname: 'Henry',
 			nachname: 'Siatecki',
 			beitrittsdatum: new Date('June 1, 2022'),
-			abteilung: 'Azubi',
-			alter: 15
-		},
+			abteilung: 'Marketing',
+			alter: 16
+		}
 	];
 </script>
 
+<div class="main">
+	<h1><u>Unsere Mitglieder</u></h1>
+</div>
 {#each mitglieder as mitglied}
 	<Mitglied
 		vorname={mitglied.vorname}
@@ -206,3 +209,12 @@
 		nachname={mitglied.nachname}
 	/>
 {/each}
+
+<style>
+	.main {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: x-large;
+	}
+</style>
