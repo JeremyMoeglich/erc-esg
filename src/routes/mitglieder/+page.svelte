@@ -37,7 +37,7 @@
 			nachname: 'Haasz',
 			beitrittsdatum: new Date('June 1, 2022'),
 			abteilung: 'Beratung',
-			alter: 15
+			alter: 18
 		},
 		{
 			vorname: 'Emanuel',
@@ -113,8 +113,8 @@
 		{
 			vorname: 'Antonia',
 			nachname: 'Richter',
-			beitrittsdatum: new Date('June 1, 2022'),
-			abteilung: 'Protokollantin',
+			beitrittsdatum: new Date('june 1, 2022'),
+			abteilung: 'Protokollantin / Marketing',
 			alter: 15
 		},
 		{
@@ -136,19 +136,19 @@
 			nachname: 'Prior',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Social Media',
-			alter: 15
+			alter: 14
 		},
 		{
 			vorname: 'Connor',
 			nachname: 'Schindler',
-			beitrittsdatum: new Date('September 1, 2022'),
+			beitrittsdatum: new Date('september 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 14
 		},
 		{
 			vorname: 'Felix',
 			nachname: 'Pruchhorst',
-			beitrittsdatum: new Date('September 1, 2022'),
+			beitrittsdatum: new Date('september 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 14
 		},
@@ -169,7 +169,7 @@
 		{
 			vorname: 'Jan',
 			nachname: 'Jesper',
-			beitrittsdatum: new Date('September 1, 2022'),
+			beitrittsdatum: new Date('september 1, 2022'),
 			abteilung: 'Azubi',
 			alter: 14
 		},
@@ -178,25 +178,28 @@
 			nachname: 'Jesper',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
-			alter: 15
+			alter: 14
 		},
 		{
 			vorname: 'Jakob',
 			nachname: 'Schmauch',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
-			alter: 15
+			alter: 16
 		},
 		{
 			vorname: 'Henry',
 			nachname: 'Siatecki',
 			beitrittsdatum: new Date('June 1, 2022'),
-			abteilung: 'Azubi',
-			alter: 15
+			abteilung: 'Marketing',
+			alter: 16
 		}
 	];
 </script>
 
+<div class="main">
+	<h1><u>Unsere Mitglieder</u></h1>
+</div>
 {#each mitglieder as mitglied}
 	<Mitglied
 		vorname={mitglied.vorname}
@@ -206,3 +209,12 @@
 		nachname={mitglied.nachname}
 	/>
 {/each}
+
+<style>
+	.main {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-size: x-large;
+	}
+</style>
