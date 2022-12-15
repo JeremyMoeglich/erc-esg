@@ -1,5 +1,4 @@
 <script lang="ts">
-	import { unknown } from 'zod';
 	import Mitglied from './mitglied.svelte';
 
 	interface Mitglied {
@@ -199,20 +198,23 @@
 
 <div class="main">
 	<h1><u>Unsere Mitglieder</u></h1>
+	<div>
+		{#each mitglieder as mitglied}
+			<Mitglied
+				vorname={mitglied.vorname}
+				abteilung={mitglied.abteilung}
+				alter={mitglied.alter}
+				beitrittsdatum={mitglied.beitrittsdatum}
+				nachname={mitglied.nachname}
+			/>
+		{/each}
+	</div>
 </div>
-{#each mitglieder as mitglied}
-	<Mitglied
-		vorname={mitglied.vorname}
-		abteilung={mitglied.abteilung}
-		alter={mitglied.alter}
-		beitrittsdatum={mitglied.beitrittsdatum}
-		nachname={mitglied.nachname}
-	/>
-{/each}
 
 <style>
 	.main {
 		display: flex;
+		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		font-size: x-large;

@@ -10,7 +10,6 @@
 	import { get } from 'svelte/store';
 	import { browser } from '$app/environment';
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
-	import { goto } from '$app/navigation';
 	import LeftCenter from './left_center.svelte';
 	import TextBox from './text_box.svelte';
 	import { onDestroy, onMount } from 'svelte';

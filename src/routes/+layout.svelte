@@ -8,6 +8,9 @@
 	import { Circle2 } from 'svelte-loading-spinners';
 	import Footer from '$lib/components/site/route/layout/footer/foot.svelte';
 	import { scrollbarWidth } from '@xobotyi/scrollbar-width';
+	import { asks_store } from '$lib/scripts/frontend/data/asks';
+	import Ask from './ask.svelte';
+	import { get } from 'svelte/store';
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
@@ -22,6 +25,16 @@
 	(async () => {
 		await check_token_and_login();
 	})();
+
+	function ask_callback(resp: string) {
+		const current_store = get(asks_store);
+		const question = current_store.shift();
+		if (!question) {
+			return;
+		}
+		question.callback(resp);
+		asks_store.set(current_store);
+	}
 </script>
 
 <div class="outer" style:--scrollbar_width={`${scrollbarWidth() ?? 0}px`}>
@@ -33,9 +46,16 @@
 
 	<Footer />
 	{#if $is_loading}
-		<div class="loading">
+		<div class="full">
 			<div class="spinner">
 				<Circle2 />
+			</div>
+		</div>
+	{/if}
+	{#if $asks_store.length !== 0}
+		<div class="full">
+			<div>
+				<Ask question={$asks_store[0]} done={ask_callback} />
 			</div>
 		</div>
 	{/if}
@@ -46,7 +66,7 @@
 </svelte:head>
 
 <style>
-	.loading {
+	.full {
 		display: flex;
 		justify-content: center;
 		align-items: center;

@@ -1,5 +1,4 @@
 <script>
-	import ActionFields from '$lib/components/site/fields/action_fields.svelte';
 	import SectionFields from '$lib/components/site/fields/section_fields.svelte';
 	import Button from '$lib/components/elements/button.svelte';
 </script>
@@ -66,7 +65,7 @@
 		font-family: 'Raleway', Arial, Helvetica, sans-serif;
 	}
 
-	.mitglieder{
+	.mitglieder {
 		display: flex;
 		justify-content: center;
 		align-items: center;

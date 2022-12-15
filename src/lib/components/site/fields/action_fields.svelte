@@ -1,6 +1,5 @@
 <script>
 	import Fields from '$lib/components/layout/fields/fields.svelte';
-	import Account from '../route/layout/footer/account.svelte';
 </script>
 
 <Fields

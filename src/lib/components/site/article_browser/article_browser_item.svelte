@@ -5,9 +5,25 @@
 
 	import type { article_preview_type } from '$lib/scripts/universal/datatypes';
 	import { delete_article } from '$lib/scripts/frontend/fetch/delete_article';
+	import { ask } from '$lib/scripts/frontend/data/asks';
+	import { is_loading } from '$lib/scripts/frontend/loading_store';
 	export let article: article_preview_type;
 
 	let hidden = false;
+
+	async function delete_click() {
+		const responses = ['Ja, endgültig löschen', 'Nein'];
+		const response = await ask('Soll der Artikel wirklich gelöscht werden?', responses);
+		if (response === 'Ja, endgültig löschen') {
+			is_loading.set(true);
+			try {
+				hidden = true;
+				await delete_article(article.id);
+			} finally {
+				is_loading.set(false);
+			}
+		}
+	}
 </script>
 
 {#if !hidden}
@@ -22,13 +38,7 @@
 		<div class="btns">
 			<Button text={'Öffnen'} onclick={`/articles/${article.id}`} />
 			{#if $admin_mode}
-				<Button
-					text={'Löschen'}
-					onclick={async () => {
-						hidden = true;
-						await delete_article(article.id);
-					}}
-				/>
+				<Button text={'Löschen'} onclick={delete_click} />
 			{/if}
 		</div>
 	</div>
