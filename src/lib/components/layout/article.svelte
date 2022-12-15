@@ -152,9 +152,9 @@
 								{/if}
 							</div>
 						{:else}
-							<div class="editor">
-								<TextBox bind:content={article_obj.content} editable={false} />
-							</div>
+						<div class="editor">
+							<TextBox bind:content={article_obj.content} editable={false} />
+						</div>
 						{/if}
 					</div>
 				{/if}
