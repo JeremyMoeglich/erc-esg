@@ -66,6 +66,7 @@
 		"functional-utilities": "^1.18.1",
 		"js-cookie": "^3.0.1",
 		"lodash-es": "^4.17.21",
+		"svelte-carousel": "^1.0.20",
 		"svelte-hamburgers": "^4.0.1",
 		"svelte-lazy": "^1.1.0",
 		"svelte-loading-spinners": "^0.3.4",

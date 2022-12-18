@@ -1,5 +1,16 @@
 <script lang="ts">
+	import { browser } from '$app/environment';
 	import DbImage from '$lib/components/elements/db_image/db_image.svelte';
+	import { range } from 'functional-utilities';
+	import { onMount } from 'svelte';
+
+	const image_amount = 3;
+
+	let Carousel: ConstructorOfATypedSvelteComponent;
+	onMount(async () => {
+		const module = await import('svelte-carousel');
+		Carousel = module.default;
+	});
 </script>
 
 <div class="main">
@@ -11,7 +22,13 @@
 		</p>
 	</div>
 	<div class="right">
-		<DbImage id={'showcase_image'} width={'100%'} />
+		{#if browser}
+			<svelte:component this={Carousel} autoplay autoplayDuration={3000} autoplayProgressVisible>
+				{#each range(image_amount) as i}
+					<DbImage id={`showcase_image-${i}`} width={'100%'} attr={'w-1000,ar-3-2'} />
+				{/each}
+			</svelte:component>
+		{/if}
 	</div>
 </div>
 

@@ -19,11 +19,12 @@
 </script>
 
 {#if $image_cache_store?.[id]}
-	<img src={`${$image_cache_store[id]}?tr=${attr}`} alt={id} />
+	<img src={`${$image_cache_store[id]}?tr=${attr}`} alt={id} draggable="false"/>
 {/if}
 
 <style>
 	img {
 		width: 100%;
+		user-select: none;
 	}
 </style>
