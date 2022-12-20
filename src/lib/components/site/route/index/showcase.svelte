@@ -54,7 +54,8 @@
 		max-width: 100%;
 	}
 	.right {
-		width: 700px;
+		width: 800px;
+		max-width: 100%;
 	}
 	h1 {
 		font-family: 'Roboto', sans-serif;

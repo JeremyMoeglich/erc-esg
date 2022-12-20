@@ -30,6 +30,7 @@
 <style>
 	.outer {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 25px;
 		align-items: center;
 		padding: 15px;

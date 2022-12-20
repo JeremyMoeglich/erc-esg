@@ -35,6 +35,7 @@
 <style>
 	.outer {
 		display: flex;
+		flex-wrap: wrap;
 		gap: 20px;
 		align-items: center;
 		font-size: 20px;
