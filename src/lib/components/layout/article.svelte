@@ -10,7 +10,6 @@
 	import { get } from 'svelte/store';
 	import { browser } from '$app/environment';
 	import { update_article } from '$lib/scripts/frontend/fetch/update_article';
-	import LeftCenter from './left_center.svelte';
 	import TextBox from './text_box.svelte';
 	import { onDestroy, onMount } from 'svelte';
 	import { isEqual } from 'lodash-es';
@@ -60,7 +59,7 @@
 		})();
 
 	const compact_image_width = 200;
-	const large_image_width = 300;
+	const large_image_width = 100;
 
 	let shrunk: boolean = false;
 
@@ -109,24 +108,17 @@
 					{/if}
 				{/if}
 			</div>
-			<div class="side_alignment" style:margin-top={compact ? '0px' : '50px'}>
-				<LeftCenter
-					position={compact ? 'center' : 'left'}
-					transition_time={500}
-					bind:shrunk
-					shrink_to={`${large_image_width}px`}
-				>
-					<div class="image">
-						<DbImage
-							id={article_obj?.image_link_id ?? article_id}
-							width={`${compact ? compact_image_width : large_image_width}px`}
-							attr={`w-${large_image_width},ar-1-1,fo-auto`}
-						/>
-					</div>
-				</LeftCenter>
+			<div class="side_alignment">
+				<div class="image">
+					<DbImage
+						id={article_obj?.image_link_id ?? article_id}
+						width={`${compact ? compact_image_width : large_image_width}px`}
+						attr={`w-${large_image_width},ar-1-1,fo-auto`}
+					/>
+				</div>
 				{#if 'content' in article_obj}
-					<div class="content">
-					{#if shrunk || !compact}
+					<div class="content" class:left={shrunk || !compact}>
+						{#if shrunk || !compact}
 							{#if $admin_mode}
 								<div class="editor">
 									<TextBox bind:content={article_obj.content} editable={true} />
@@ -176,7 +168,8 @@
 		color: gray;
 	}
 	.image {
-		position: relative;
+		display: flex;
+		justify-content: center;
 		width: 100%;
 	}
 	.title {
@@ -197,7 +190,6 @@
 		justify-content: center;
 		transition-duration: 500ms;
 		transition-property: margin-top;
-		padding-top: 20px;
 	}
 	.outer {
 		display: flex;
@@ -212,7 +204,7 @@
 		gap: 20px;
 		margin-top: 2rem;
 	}
-	.content {
-		flex-grow: 1;
+	.left {
+		text-align: left;
 	}
 </style>
