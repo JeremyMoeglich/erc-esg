@@ -126,7 +126,7 @@
 				</LeftCenter>
 				{#if 'content' in article_obj}
 					<div class="content">
-						{#if shrunk && !compact}
+					{#if shrunk || !compact}
 							{#if $admin_mode}
 								<div class="editor">
 									<TextBox bind:content={article_obj.content} editable={true} />
