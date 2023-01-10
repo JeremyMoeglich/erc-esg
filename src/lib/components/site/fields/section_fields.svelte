@@ -13,7 +13,7 @@
 		{
 			id: 'kundenzufriedenheit',
 			preview:
-				'Die Mitarbeiter der Kundenzufriedenheit kümmern sich um die Optimierung der Prozesse um die Zufriedenhet der Kunden zu Steigern.'
+				'Die Mitarbeiter der Öffentlichkeitsarbeit kümmern sich darum, dass immer neue Artikel auf der Webseite erscheinen und nehmen an Wettbewerben teil um die Firma bekannter zu machen.'
 		},
 		{
 			id: 'marketing',
@@ -33,7 +33,7 @@
 		{
 			id: 'wettbewerbe',
 			preview:
-				'Als Schülerfrima sind Wettbewerbe ein Stetiger Begleiter. Deshalb kümmert sich die Wettbewerbsabteilung um die Bewerbung und Abwicklung von Wettbewerben'
+				'Die Wettbewerbsabteilung kümmer sich um die Bewerbung und Abwicklung von Wettbewerben'
 		}
 	]}
 />
