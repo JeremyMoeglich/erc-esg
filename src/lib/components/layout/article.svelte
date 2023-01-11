@@ -113,7 +113,7 @@
 					<DbImage
 						id={article_obj?.image_link_id ?? article_id}
 						width={`${compact ? compact_image_width : large_image_width}px`}
-						attr={`w-${large_image_width},ar-1-1,fo-auto`}
+						attr={`w-${compact_image_width},ar-1-1,fo-auto`}
 					/>
 				</div>
 				{#if 'content' in article_obj}
