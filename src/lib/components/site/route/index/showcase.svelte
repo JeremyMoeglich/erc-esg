@@ -4,7 +4,7 @@
 	import { range } from 'functional-utilities';
 	import { onMount } from 'svelte';
 
-	const image_amount = 3;
+	const image_amount = 2;
 
 	let Carousel: ConstructorOfATypedSvelteComponent;
 	onMount(async () => {
@@ -23,9 +23,9 @@
 	</div>
 	<div class="right">
 		{#if browser}
-			<svelte:component this={Carousel} autoplay autoplayDuration={3000} autoplayProgressVisible>
+			<svelte:component this={Carousel} autoplay autoplayDuration={3000}>
 				{#each range(image_amount) as i}
-					<DbImage id={`showcase_image-${i}`} width={'100%'} attr={'w-1000,ar-3-2'} />
+					<DbImage id={`showcase_image-${i}`} width={'100%'} attr={'w-1000,ar-16-9'} />
 				{/each}
 			</svelte:component>
 		{/if}
