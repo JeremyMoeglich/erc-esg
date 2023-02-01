@@ -18,8 +18,8 @@
 			alter: 15
 		},
 		{
-			vorname: 'Yannik',
-			nachname: 'Pakkai',
+			vorname: 'Jannik',
+			nachname: 'Pakai',
 			beitrittsdatum: new Date('January 19, 2022'),
 			abteilung: 'Vorstand',
 			alter: 19
@@ -28,7 +28,7 @@
 			vorname: 'David',
 			nachname: 'Hesseler',
 			beitrittsdatum: new Date('May 30, 2022'),
-			abteilung: 'Beratung / Buchhaltung',
+			abteilung: 'Buchhaltung / Vorstand',
 			alter: 15
 		},
 		{
@@ -99,7 +99,7 @@
 			vorname: 'Julius',
 			nachname: 'Thormann',
 			beitrittsdatum: new Date('January 1, 2022'),
-			abteilung: 'Buchhaltung',
+			abteilung: 'Buchhaltung / Vorstand',
 			alter: 15
 		},
 		{
@@ -113,8 +113,8 @@
 			vorname: 'Antonia',
 			nachname: 'Richter',
 			beitrittsdatum: new Date('june 1, 2022'),
-			abteilung: 'Protokollantin / Marketing',
-			alter: 15
+			abteilung: 'Marketing / Protokollantin',
+			alter: 0
 		},
 		{
 			vorname: 'Harald',
@@ -180,7 +180,7 @@
 			alter: 14
 		},
 		{
-			vorname: 'Jakob',
+			vorname: 'Jacob',
 			nachname: 'Schmauch',
 			beitrittsdatum: new Date('September 1, 2022'),
 			abteilung: 'Azubi',
@@ -192,6 +192,20 @@
 			beitrittsdatum: new Date('June 1, 2022'),
 			abteilung: 'Marketing',
 			alter: 16
+		},
+		{
+			vorname: 'Hamid',
+			nachname: 'Mammadli',
+			beitrittsdatum: new Date('June 1, 2022'),
+			abteilung: 'Beratung',
+			alter: 15
+		},
+		{
+			vorname: 'Nicolas',
+			nachname: 'Moszyk',
+			beitrittsdatum: new Date('June 1, 2022'),
+			abteilung: 'Beratung',
+			alter: 21
 		}
 	];
 </script>
