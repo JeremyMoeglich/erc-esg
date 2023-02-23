@@ -14,8 +14,12 @@
 	</div>
 	<div>
 		<h3>Aufsichtsratvorsitzender:</h3>
-		<p>Mats Funke</p>
+		<p>Fabian Kallenbach</p>
 	</div>
+<div>
+	<h3>Vorstand</h3>
+	<p>Leonhard Spielhoff, Jannik Pakai, David Hesseler, Julius Thormann</p>
+</div>
 	<div>
 		<h3>Kontakt:</h3>
 		<p>info@erc-heessen.de</p>

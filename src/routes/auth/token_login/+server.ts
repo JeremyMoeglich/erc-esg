@@ -18,13 +18,17 @@ export const POST: RequestHandler = async ({ request }) => {
 		select: { userId: true, time: true }
 	});
 	if (!loginToken) {
-		throw error(400, 'Invalid token');
+		return json({
+			valid: false
+		})
 	}
 	if (loginToken.time.getTime() < Date.now() - 1000 * 60 * 60 * 24 * 7) {
 		await prisma_client.loginToken.delete({
 			where: { value: token }
 		});
-		throw error(400, 'Token expired');
+		return json({
+			valid: true
+		})
 	}
 	return json({
 		valid: true

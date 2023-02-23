@@ -3,16 +3,11 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 
 export const GET: RequestHandler = async () => {
-	const images = await prisma_client.imageLink.findMany({
-		where: {
-			show_in_gallery: true
-		},
-		select: {
-			id: true
-		}
+	const categories = await prisma_client.galeryCategory.findMany({
+		where: {}
 	});
 
 	return json({
-		images: images.map((image) => image.id)
+		images: categories
 	});
 };

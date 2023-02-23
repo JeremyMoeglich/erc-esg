@@ -40,6 +40,12 @@ model imageLink {
     Article         Article[]
 }
 
+model GaleryCategory {
+    id     String @id @default(uuid())
+    name   String
+    images String[]
+}
+
 model Article {
     id          String    @id @default(uuid())
     title       String
