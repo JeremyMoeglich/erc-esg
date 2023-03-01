@@ -67,7 +67,7 @@
 						{/if}
 					</button>
 				{/each}
-				{#if $admin_mode}
+				{#if $admin_mode && category.id !== "all_categories"}
 					<Button
 						text="+"
 						onclick={() => {
