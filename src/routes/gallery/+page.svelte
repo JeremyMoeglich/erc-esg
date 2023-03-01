@@ -8,7 +8,9 @@
 	import { update_category } from '$lib/scripts/frontend/fetch/update_category';
 	import { onMount } from 'svelte';
 	import { v4 } from 'uuid';
-	let categories: Awaited<ReturnType<typeof get_gallery_images>> | undefined = undefined;
+
+	type CategoriesType = Awaited<ReturnType<typeof get_gallery_images>> | undefined;
+	let categories: CategoriesType = undefined;
 
 	onMount(async () => {
 		if (browser) {
@@ -16,11 +18,26 @@
 		}
 	});
 	let is_open: undefined | number = undefined;
+
+	let all_categories: CategoriesType;
+	$: all_categories = categories ? [
+		categories.reduce((acc, category) => ({
+			id: "all_categories",
+			images: acc.images.concat(category.images),
+			name: "Alle Fotos"
+		}), {
+			id: "all_categories",
+			images: [],
+			name: "Alle Fotos (Keine vorhanden)"
+		}),
+		...categories
+		
+	] : undefined
 </script>
 
 <div class="main">
-	{#if categories}
-		{#each categories as category, e}
+	{#if all_categories}
+		{#each all_categories as category, e}
 			<h2>
 				<Inplaceedit
 					value={category.name}
