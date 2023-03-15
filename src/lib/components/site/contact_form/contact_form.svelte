@@ -6,15 +6,19 @@
 	import { Email } from 'carbon-icons-svelte';
 	import { typed_keys } from 'functional-utilities';
 	import { cloneDeep } from 'lodash-es';
+	import Spamfield from './spamfield.svelte';
 
-	async function submit_form(contact_form: contact_form_type): Promise<Response> {
+	async function submit_form(contact_form: contact_form_type): Promise<void> {
+		if (is_spam) {
+			return
+		}
 		if (contact_form.id === '') {
 			delete contact_form.id;
 		}
 		if (contact_form.phone === '') {
 			delete contact_form.phone;
 		}
-		return await fetch('/api/contacts', {
+		await fetch('/api/contacts', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -41,6 +45,7 @@
 		}
 	};
 
+	let is_spam = false;
 	let contact_form: typeof default_form = cloneDeep(default_form);
 </script>
 
@@ -51,6 +56,7 @@
 		<h3>Bei Interesse schreiben Sie uns gerne eine Nachricht!</h3>
 	</div>
 	<div class="items">
+		<Spamfield bind:is_spam/>
 		{#each typed_keys(contact_form) as text}
 			<InputField
 				bind:value={contact_form[text].value}
