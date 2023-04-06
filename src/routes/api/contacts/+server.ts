@@ -8,10 +8,15 @@ import type { JsonObject } from 'type-fest';
 import * as nodemailer from 'nodemailer';
 import type { SendMailOptions } from 'nodemailer';
 import { panic } from "functional-utilities"
+import type { Config } from "@sveltejs/adapter-vercel";
 
 // Read login credentials from environment variables
 const emailUser = process.env.EMAIL_USER ?? panic("EMAIL_USER not set")
 const emailPassword = process.env.EMAIL_PASSWORD ?? panic("EMAIL_PASSWORD not set")
+
+export const config: Config = {
+	runtime: "nodejs18.x"
+};
 
 export const POST: RequestHandler = async ({ request }) => {
 	const { email, name, message, id, phone } = await get_request_body(request, contact_form_schema);
@@ -57,21 +62,21 @@ export const POST: RequestHandler = async ({ request }) => {
 const transporter = nodemailer.createTransport({
 	service: 'gmail',
 	auth: {
-	  user: emailUser,
-	  pass: emailPassword,
+		user: emailUser,
+		pass: emailPassword,
 	},
-  });
+});
 
 
-  
+
 async function sendEmail(mailOptions: SendMailOptions) {
 	try {
-	  const info = await transporter.sendMail(mailOptions);
-	  console.log('Email sent: ' + info.response);
+		const info = await transporter.sendMail(mailOptions);
+		console.log('Email sent: ' + info.response);
 	} catch (error) {
-	  console.error(error);
+		console.error(error);
 	}
-  }
+}
 
 
 export const GET: RequestHandler = async ({ request }) => {
