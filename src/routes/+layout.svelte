@@ -11,6 +11,10 @@
 	import { asks_store } from '$lib/scripts/frontend/data/asks';
 	import Ask from './ask.svelte';
 	import { get } from 'svelte/store';
+	import { dev } from '$app/environment';
+	import { inject } from '@vercel/analytics';
+
+	inject({ mode: dev ? 'development' : 'production' });
 
 	const auth_pages = ['/login', '/register', '/profile'];
 
