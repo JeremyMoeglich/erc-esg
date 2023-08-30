@@ -2,7 +2,7 @@
 	"name": "erc-esg",
 	"version": "0.2.0",
 	"scripts": {
-		"dev": "dotenv -e .env.serverless -- vite dev",
+		"dev": "dotenv -e .env.serverless -- pnpx vite dev",
 		"build": "npm run updateprisma && vite build",
 		"build:node": "cross-env ADAPTER=node dotenv -e .env.serverless -- npm run build",
 		"build:vercel": "cross-env ADAPTER=vercel dotenv -e .env.serverless -- npm run build",

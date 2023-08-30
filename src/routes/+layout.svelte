@@ -83,7 +83,10 @@
 		background-color: rgba(128, 128, 128, 0.308);
 	}
 	.content {
+		display: flex;
+		flex-direction: column;
 		width: calc(100vw - var(--scrollbar_width));
+		flex: auto;
 	}
 	.outer {
 		display: flex;
