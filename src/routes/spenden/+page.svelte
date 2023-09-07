@@ -1,5 +1,5 @@
 <div class="flex">
-    <a href="https://google.com" target="_blank">
+    <a href="https://www.paypal.com/qrcodes/managed/ee22f27d-cc3b-40b4-9a09-d55c92c4c1ad?utm_source=consweb_more" target="_blank">
         <h2>
             Paypal
         </h2>
