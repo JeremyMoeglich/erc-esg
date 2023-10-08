@@ -33,7 +33,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			title: article.title,
 			content: article.content,
 			imageLinkId: article.image_link_id,
-			hidden: article.hidden
+			hidden: article.hidden ?? false
 		},
 		create: {
 			id: article.id,
@@ -41,7 +41,7 @@ export const POST: RequestHandler = async ({ request }) => {
 			content: article.content,
 			imageLinkId: article.image_link_id,
 			createdAt: new Date(),
-			hidden: article.hidden
+			hidden: article.hidden ?? false
 		}
 	});
 
