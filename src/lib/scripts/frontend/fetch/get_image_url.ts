@@ -7,7 +7,7 @@ export async function get_image_url(id: string): Promise<string | Error> {
 	if (id in current_cache) {
 		return current_cache[id];
 	}
-	const url = `/api/images/${id}.json`;
+	const url = `https://erc-heessen.de/api/images/${id}.json`;
 	const response = await fetch(url);
 	const { image_url } = z
 		.object({
