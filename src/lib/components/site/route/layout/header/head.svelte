@@ -13,6 +13,7 @@
 		'/about': 'Über uns',
 		'/leistungen': 'Leistungen',
 		'/contact': 'Kontakt',
+		'/spenden': 'Spenden',
 		'/gallery': 'Galerie'
 	};
 

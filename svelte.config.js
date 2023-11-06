@@ -17,8 +17,7 @@ const getAdapters = (adapt) => {
 			return staticAdapter();
 		case 'vercel':
 			return vercelAdapter({
-				runtime: 'edge',
-				split: true
+				runtime: 'nodejs18.x'
 			});
 		default:
 			console.warn('unknown adapter, using node');

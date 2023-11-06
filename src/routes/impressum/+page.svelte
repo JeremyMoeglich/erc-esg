@@ -23,18 +23,21 @@
 	<div>
 		<h3>Kontakt:</h3>
 		<p>info@erc-heessen.de</p>
-	</div>
-	<div>
-		<h3>Registereintrag</h3>
-		<p>Eintragung im Genossenschaftsregister.</p>
-		<p>Registergericht: RWGV-Münster e.V.</p>
-		<p>Registernummer: 2012 - HAM -004</p>
-	</div>
-	<div>
+		<p><br></p>
 		<p>Harald Hoffmann</p>
 		<p>Schlossstr. 1</p>
 		<p>59073 Hamm</p>
 	</div>
+	<div>
+		<h3>Registereintrag</h3>
+		<p>Eingetragene Schülergenossenschaft. Geführt von <a class="link" href="http://www.schuelergeno.de" >Genossenschaftsverband -- Verband der Region e.V.</a></p>
+		
+		<!-- 
+		<p>Eintragung im Genossenschaftsregister.</p>
+		<p>Registergericht: RWGV-Münster e.V.</p>
+		<p>Registernummer: 2012 - HAM -004</p> -->
+	</div> 
+	
 	<div>
 		<h2>Haftungsausschluss</h2>
 		<div>
@@ -84,5 +87,8 @@
 	@import './src/mixins.scss';
 	.outer {
 		@include simple_text();
+	}
+	.link {
+		color: #008d35;
 	}
 </style>
