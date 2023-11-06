@@ -1,9 +1,5 @@
 lockfileVersion: '6.0'
 
-settings:
-  autoInstallPeers: true
-  excludeLinksFromLockfile: false
-
 dependencies:
   '@effect/platform':
     specifier: ^0.20.0
@@ -33,8 +29,8 @@ dependencies:
     specifier: 2.0.0-next.46
     version: 2.0.0-next.46
   functional-utilities:
-    specifier: ^2.0.1
-    version: 2.0.1
+    specifier: ^3.8.0
+    version: 3.8.0
   imagekit:
     specifier: ^4.1.3
     version: 4.1.3
@@ -195,20 +191,20 @@ packages:
       '@effect/schema': ^0.41.0
       effect: ^2.0.0-next.46
     dependencies:
-      '@effect/schema': 0.41.1(effect@2.0.0-next.46)(fast-check@3.13.1)
+      '@effect/schema': 0.41.1(effect@2.0.0-next.46)(fast-check@3.13.2)
       effect: 2.0.0-next.46
       find-my-way: 7.6.2
       path-browserify: 1.0.1
     dev: false
 
-  /@effect/schema@0.41.1(effect@2.0.0-next.46)(fast-check@3.13.1):
+  /@effect/schema@0.41.1(effect@2.0.0-next.46)(fast-check@3.13.2):
     resolution: {integrity: sha512-v1j+6vK+oWPhyxZ5l1DRZsK604YKcg7VcPDSsSf+kEpndt6CTYGZ7Nl4gRnCT4JWj0BAl3nKPAA4hfxohahO/Q==}
     peerDependencies:
       effect: 2.0.0-next.46
       fast-check: ^3.13.1
     dependencies:
       effect: 2.0.0-next.46
-      fast-check: 3.13.1
+      fast-check: 3.13.2
     dev: false
 
   /@esbuild/android-arm64@0.16.17:
@@ -1759,8 +1755,8 @@ packages:
     engines: {node: '>=0.10.0'}
     dev: true
 
-  /fast-check@3.13.1:
-    resolution: {integrity: sha512-Xp00tFuWd83i8rbG/4wU54qU+yINjQha7bXH2N4ARNTkyOimzHtUBJ5+htpdXk7RMaCOD/j2jxSjEt9u9ZPNeQ==}
+  /fast-check@3.13.2:
+    resolution: {integrity: sha512-ouTiFyeMoqmNg253xqy4NSacr5sHxH6pZpLOaHgaAdgZxFWdtsfxExwolpveoAE9CJdV+WYjqErNGef6SqA5Mg==}
     engines: {node: '>=8.0.0'}
     dependencies:
       pure-rand: 6.0.4
@@ -1905,10 +1901,8 @@ packages:
     resolution: {integrity: sha512-yIovAzMX49sF8Yl58fSCWJ5svSLuaibPxXQJFLmBObTuCr0Mf1KiPopGM9NiFjiYBCbfaa2Fh6breQ6ANVTI0A==}
     dev: true
 
-  /functional-utilities@2.0.1:
-    resolution: {integrity: sha512-9SfbByhD1zdyYG0e730V3lIg0JO8lXR7T//8ETk0gx9GqidvSozNZsQ9jnuYdfrO435U3xCCzWQPSiwd+CYmtw==}
-    dependencies:
-      lodash-es: 4.17.21
+  /functional-utilities@3.8.0:
+    resolution: {integrity: sha512-zsZLmzU8rIjsY3aTcBWOLmWDAurVCMVcA6kbO7os8kJlmH1p3KaofHG4wvr6dqdWbg8fv9zLOCV2Df0o84i+MA==}
     dev: false
 
   /gauge@3.0.2:
@@ -3266,3 +3260,7 @@ packages:
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
     dev: false
+
+settings:
+  autoInstallPeers: true
+  excludeLinksFromLockfile: false

@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { image_cache_store } from '$lib/scripts/frontend/data/image';
 	import { get_image_url } from '$lib/scripts/frontend/fetch/get_image_url';
+	import { browser } from '$app/environment';
 
 	export let id: string;
 	export let attr = '';
@@ -12,7 +13,7 @@
 		}
 	}
 
-	$: update_image_url(id);
+	$: browser && update_image_url(id);
 </script>
 
 {#if $image_cache_store?.[id]}
