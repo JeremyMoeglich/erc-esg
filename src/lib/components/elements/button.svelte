@@ -32,6 +32,8 @@
 			//border: 2px solid var(--secondary-color);
 			box-shadow: 0px 2px 10px -5px var(--secondary-color);
 			border-radius: 10px;
+			white-space: nowrap;
+			min-width: fit-content;
 			&:hover {
 				background-color: #cdffff;
 				box-shadow: 0px 2px 17px -1px var(--primary-color);

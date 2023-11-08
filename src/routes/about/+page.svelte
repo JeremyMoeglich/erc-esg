@@ -53,7 +53,7 @@
 </div>
 
 <div class="mitglieder">
-	<Button text={'Mitgliederliste'} onclick={`mitglieder`} />
+	<Button text={'Aktive Mitarbeiter'} onclick={`mitglieder`} />
 </div>
 
 <SectionFields />
