@@ -61,6 +61,7 @@
 	"dependencies": {
 		"@effect/platform": "^0.20.0",
 		"@prisma/client": "5.4.1",
+		"@prisma/extension-accelerate": "^0.6.2",
 		"@tinymce/tinymce-svelte": "^1.0.1",
 		"@types/nodemailer": "^6.4.7",
 		"@vercel/analytics": "^1.0.1",

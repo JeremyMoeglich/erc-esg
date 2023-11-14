@@ -7,6 +7,9 @@ dependencies:
   '@prisma/client':
     specifier: 5.4.1
     version: 5.4.1(prisma@4.16.2)
+  '@prisma/extension-accelerate':
+    specifier: ^0.6.2
+    version: 0.6.2(@prisma/client@5.4.1)
   '@tinymce/tinymce-svelte':
     specifier: ^1.0.1
     version: 1.0.1
@@ -756,6 +759,15 @@ packages:
   /@prisma/engines@4.16.2:
     resolution: {integrity: sha512-vx1nxVvN4QeT/cepQce68deh/Turxy5Mr+4L4zClFuK1GlxN3+ivxfuv+ej/gvidWn1cE1uAhW7ALLNlYbRUAw==}
     requiresBuild: true
+
+  /@prisma/extension-accelerate@0.6.2(@prisma/client@5.4.1):
+    resolution: {integrity: sha512-KIBVPeWt8qaSg7wQ+TXmCVeUDoW75whtXcdS9dbHxRoO2OWFH5I9+qbkHBhx5Wj/h1wQpS8usuxGnsZqiBjUpQ==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      '@prisma/client': '>=4.16.1'
+    dependencies:
+      '@prisma/client': 5.4.1(prisma@4.16.2)
+    dev: false
 
   /@rollup/plugin-commonjs@24.0.1(rollup@3.19.1):
     resolution: {integrity: sha512-15LsiWRZk4eOGqvrJyu3z3DaBu5BhXIMeWnijSRvd8irrrg9SHpQ1pH+BUK4H6Z9wL9yOxZJMTLU+Au86XHxow==}
