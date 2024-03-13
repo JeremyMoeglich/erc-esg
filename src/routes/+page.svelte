@@ -4,16 +4,7 @@
 </script>
 
 <Showcase />
-<div class="imagefilm">
-	<h1>Unser Imagefilm</h1>
-	<iframe
-		src="https://www.youtube.com/embed/MmgB1lPEuVQ"
-		title="YouTube video player"
-		frameborder="1"
-		allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-		allowfullscreen
-	/>
-</div>
+
 
 <ArticleBrowser />
 
