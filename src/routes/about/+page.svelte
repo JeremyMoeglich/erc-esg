@@ -52,10 +52,6 @@
 	</div>
 </div>
 
-<div class="mitglieder">
-	<Button text={'Aktive Mitarbeiter'} onclick={`mitglieder`} />
-</div>
-
 <SectionFields />
 
 <style lang="scss">
@@ -65,9 +61,4 @@
 		font-family: 'Raleway', Arial, Helvetica, sans-serif;
 	}
 
-	.mitglieder {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
 </style>
