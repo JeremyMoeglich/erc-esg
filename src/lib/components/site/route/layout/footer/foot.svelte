@@ -9,7 +9,7 @@
 
 <div class="outer">
 	<div class="left_content">
-		<div>© 2022 ERC eSG</div>
+		<div>© 2024 ERC eSG</div>
 		<a href="https://de-de.facebook.com/ERC.eSG/">
 			<LogoFacebook size={logo_size} />
 		</a>
